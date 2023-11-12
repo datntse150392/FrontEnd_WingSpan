@@ -1,25 +1,23 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { ContentComponent } from './header/content/content.component';
+import { CommonModule } from '@angular/common';
+import { HomepageRoutingModule } from './homepage-routing.module';
 import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
 @NgModule({
-  declarations: [AppComponent],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+    CommonModule,
+    HomepageRoutingModule,
     AvatarModule,
     AvatarGroupModule,
     ButtonModule,
     FormsModule,
     CarouselModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  declarations: [ContentComponent, HeaderComponent],
 })
-export class AppModule {}
+export class HomePageModule {}
