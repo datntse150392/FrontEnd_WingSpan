@@ -8,6 +8,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
+import { HomepageService } from './homepage.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,5 +20,6 @@ import { CarouselModule } from 'primeng/carousel';
     CarouselModule,
   ],
   declarations: [ContentComponent, HeaderComponent],
+  providers: [HomepageService],
 })
 export class HomePageModule {}
