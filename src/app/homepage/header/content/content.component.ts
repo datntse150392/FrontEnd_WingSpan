@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { BillBoard } from 'src/app/models/BillboardModel';
+import { HomepageService } from '../../homepage.service';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -8,36 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class ContentComponent implements OnInit {
   // Fake data
   responsiveOptions: any[] | undefined;
-  products!: any[];
+  listBillBoard: BillBoard[] = [];
+  constructor(private homepageService: HomepageService) {}
+
   ngOnInit() {
-    this.products = [
-      {
-        title: 'Học FER201m cho người mới',
-        subTitle:
-          'Kết hợp giữa lý thuyết và thực hành là cách tốt để nắm vững ReactJS và trở thành một lập trình viên ReactJS có kỹ năng. Ở khóa này sẽ hướng dẫn bạn cách học cũng như cách làm bài thi và sẽ thực hành trên các bài thi của các kỳ trước.',
-        buttonDes: 'HỌC THỬ MIỄN PHÍ',
-        rightImg:
-          'https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Billboard%2Fimage_transparent_background.png?alt=media&token=21d703a2-c8ff-409e-9703-91516b15dff4',
-        bgColor:
-          'linear-gradient(to right, rgb(118, 18, 255),rgb(5, 178, 255))',
-      },
-      {
-        title: 'Học HTML CSS cho người mới',
-        subTitle:
-          'Thực hành dự án với Figma, hàng trăm bài tập và thử thách, hướng dẫn 100% bởi Sơn Đặng, tặng kèm Flashcards, v.v.',
-        buttonDes: 'HỌC THỬ MIỄN PHÍ',
-        rightImg:
-          'https://files.fullstack.edu.vn/f8-prod/banners/20/6308a6bf603a4.png',
-      },
-      {
-        title: 'Học HTML CSS cho người mới',
-        subTitle:
-          'Thực hành dự án với Figma, hàng trăm bài tập và thử thách, hướng dẫn 100% bởi Sơn Đặng, tặng kèm Flashcards, v.v.',
-        buttonDes: 'HỌC THỬ MIỄN PHÍ',
-        rightImg:
-          'https://files.fullstack.edu.vn/f8-prod/banners/20/6308a6bf603a4.png',
-      },
-    ];
+    this.getAllBillBoard();
     this.responsiveOptions = [
       {
         breakpoint: '1199px',
@@ -55,5 +31,11 @@ export class ContentComponent implements OnInit {
         numScroll: 1,
       },
     ];
+  }
+  getAllBillBoard() {
+    this.homepageService.getAllBillBoards().subscribe((res: any) => {
+      this.listBillBoard = res.data;
+      console.log(this.listBillBoard);
+    });
   }
 }
