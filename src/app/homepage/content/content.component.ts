@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BillBoard } from 'src/app/models/BillboardModel';
-import { HomepageService } from '../../homepage.service';
+import { HomepageService } from '../homepage.service';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -35,7 +35,6 @@ export class ContentComponent implements OnInit {
   getAllBillBoard() {
     this.homepageService.getAllBillBoards().subscribe((res: any) => {
       this.listBillBoard = res.data;
-      console.log(this.listBillBoard);
     });
   }
 }

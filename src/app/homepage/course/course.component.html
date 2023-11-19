@@ -1,0 +1,92 @@
+<div>
+  <!-- Khóa học Pro -->
+  <div class="mb-4">
+    <div class="flex flex-row align-items-center gap-2">
+      <h2 class="font-bold">Khóa học Pro</h2>
+      <p-tag class="mb-3" value="Mới"></p-tag>
+    </div>
+    <div class="grid">
+      <div class="col-3">
+        <img
+          class="border-round-3xl w-full"
+          alt="Card"
+          src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png"
+        />
+        <p class="font-bold">HTML CSS Pro</p>
+        <div>
+          <span [ngStyle]="{ 'text-decoration': 'line-through' }"
+            >2.500.000đ
+          </span>
+          &nbsp;
+          <strong [ngStyle]="{ color: 'red' }"> 1.299.000đ </strong>
+        </div>
+      </div>
+      <div class="col-3">
+        <img
+          class="border-round-3xl w-full"
+          alt="Card"
+          src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png"
+        />
+        <p class="font-bold">HTML CSS Pro</p>
+        <div>
+          <span [ngStyle]="{ 'text-decoration': 'line-through' }"
+            >2.500.000đ
+          </span>
+          &nbsp;
+          <strong [ngStyle]="{ color: 'red' }"> 1.299.000đ </strong>
+        </div>
+      </div>
+      <div class="col-3">
+        <img
+          class="border-round-3xl w-full"
+          alt="Card"
+          src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png"
+        />
+        <p class="font-bold">HTML CSS Pro</p>
+        <div>
+          <span [ngStyle]="{ 'text-decoration': 'line-through' }"
+            >2.500.000đ
+          </span>
+          &nbsp;
+          <strong [ngStyle]="{ color: 'red' }"> 1.299.000đ </strong>
+        </div>
+      </div>
+      <div class="col-3">
+        <img
+          class="border-round-3xl w-full"
+          alt="Card"
+          src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png"
+        />
+        <p class="font-bold">HTML CSS Pro</p>
+        <div>
+          <span [ngStyle]="{ 'text-decoration': 'line-through' }"
+            >2.500.000đ
+          </span>
+          &nbsp;
+          <strong [ngStyle]="{ color: 'red' }"> 1.299.000đ </strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Khóa học Miễn Phí -->
+  <div>
+    <div class="flex flex-row align-items-center gap-2">
+      <h2 class="font-bold">Khóa học miễn phí</h2>
+    </div>
+    <div class="grid">
+      <div *ngFor="let course of listCourses; index as i" class="col-3 mb-">
+        <img
+          class="border-round-3xl w-full h-"
+          alt="Card"
+          src="{{ course.image }}"
+        />
+        <p class="font-bold">{{ course.title }}</p>
+        <p-tag
+          icon="pi pi-user"
+          severity="info"
+          value="{{ course.enrollmentCount }}"
+        ></p-tag>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
+import { ContentComponent } from './content/content.component';
 const routes: Routes = [
   {
     path: '',
-    component: HeaderComponent,
+    component: ContentComponent,
+    // children: [{ path: 'childpath', component: ChildComponent }],
   },
 ];
 
