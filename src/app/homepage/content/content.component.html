@@ -1,26 +1,10 @@
+<app-header></app-header>
+<!-- Danh sách quảng cảo billBoard -->
 <div class="grid p-4">
   <div class="col-1">
-    <div
-      class="flex flex-column align-items-center justify-content-between p-3 border-round-lg cursor-pointer hover:surface-400"
-    >
-      <i class="pi pi-home" style="font-size: 1.3rem"></i>
-      <p class="text-xs font-bold mb-0">Trang chủ</p>
-    </div>
-    <div
-      class="flex flex-column align-items-center justify-content-between p-3 border-round-lg cursor-pointer hover:surface-400"
-    >
-      <i class="pi pi-calendar" style="font-size: 1.3rem"></i>
-      <p class="text-xs font-bold mb-0">Lộ trình</p>
-    </div>
-    <div
-      class="flex flex-column align-items-center justify-content-between p-3 border-round-lg cursor-pointer hover:surface-400"
-    >
-      <i class="pi pi-list" style="font-size: 1.3rem"></i>
-      <p class="text-xs font-bold mb-0">Bài viết</p>
-    </div>
+    <app-sidebar></app-sidebar>
   </div>
   <div class="col-11">
-    <!-- Danh sách quảng cảo billBoard -->
     <div>
       <p-carousel
         [value]="listBillBoard"
@@ -42,10 +26,6 @@
             <div class="col-8 flex flex-column justify-content-center">
               <h1 class="text-white">
                 {{ product.title }}
-                <i
-                  class="pi pi-spin pi-cog"
-                  style="font-size: 2rem; color: '#000'"
-                ></i>
               </h1>
               <p class="text-white w-8">{{ product.subTitle }}</p>
               <p-button class="text-white border-round-lg">{{
@@ -63,6 +43,8 @@
       </p-carousel>
     </div>
     <!-- Danh sách các khóa học miễn phí -->
-    <div></div>
+    <div class="w-full">
+      <app-course></app-course>
+    </div>
   </div>
 </div>
