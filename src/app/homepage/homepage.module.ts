@@ -13,6 +13,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
+import { CourseDetailComponent } from './course/course-detail/course-detail.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -30,6 +31,7 @@ import { TagModule } from 'primeng/tag';
     CourseComponent,
     SidebarComponent,
     HeaderComponent,
+    CourseDetailComponent,
   ],
   providers: [HomepageService],
 })

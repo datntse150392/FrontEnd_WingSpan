@@ -1,4 +1,41 @@
 <div>
+  <div>
+    <p-carousel
+      [value]="listBillBoard"
+      [numVisible]="1"
+      [numScroll]="1"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptions"
+      [showIndicators]="false"
+    >
+      <ng-template let-product pTemplate="item">
+        <div
+          flex
+          flex-column
+          justify-content-center
+          [style.background]="product.bgColor"
+          style="border-radius: 15px"
+          class="grid p-4 m-0 flex flex-row justify-content-center"
+        >
+          <div class="col-8 flex flex-column justify-content-center">
+            <h1 class="text-white">
+              {{ product.title }}
+            </h1>
+            <p class="text-white w-8">{{ product.subTitle }}</p>
+            <p-button class="text-white border-round-lg">{{
+              product.buttonDes
+            }}</p-button>
+          </div>
+          <div class="col-4 flex flex-column justify-content-center">
+            <img
+              style="width: 100%; margin-left: 5%"
+              src="{{ product.rightImg }}"
+            />
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
   <!-- Khóa học Pro -->
   <div class="mb-4">
     <div class="flex flex-row align-items-center gap-2">
@@ -7,56 +44,24 @@
     </div>
     <div class="grid">
       <div class="col-3">
-        <img
-          class="border-round-3xl w-full"
-          alt="Card"
-          src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png"
-        />
-        <p class="font-bold">HTML CSS Pro</p>
-        <div>
-          <span [ngStyle]="{ 'text-decoration': 'line-through' }"
-            >2.500.000đ
-          </span>
-          &nbsp;
-          <strong [ngStyle]="{ color: 'red' }"> 1.299.000đ </strong>
+        <div
+          class="course-container flex flex-wrap align-items-center justify-content-center"
+        >
+          <img
+            class="img-hover border-round-3xl w-full"
+            alt="Card"
+            src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png"
+          />
+          <p-button
+            class="register-button flipup animation-duration-500"
+            [style]="{ background: '#fff', border: '2px solid #fff' }"
+          >
+            <span class="ml-2 font-bold" [style]="{ color: '#000' }"
+              >Xem khóa học</span
+            ></p-button
+          >
         </div>
-      </div>
-      <div class="col-3">
-        <img
-          class="border-round-3xl w-full"
-          alt="Card"
-          src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png"
-        />
-        <p class="font-bold">HTML CSS Pro</p>
-        <div>
-          <span [ngStyle]="{ 'text-decoration': 'line-through' }"
-            >2.500.000đ
-          </span>
-          &nbsp;
-          <strong [ngStyle]="{ color: 'red' }"> 1.299.000đ </strong>
-        </div>
-      </div>
-      <div class="col-3">
-        <img
-          class="border-round-3xl w-full"
-          alt="Card"
-          src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png"
-        />
-        <p class="font-bold">HTML CSS Pro</p>
-        <div>
-          <span [ngStyle]="{ 'text-decoration': 'line-through' }"
-            >2.500.000đ
-          </span>
-          &nbsp;
-          <strong [ngStyle]="{ color: 'red' }"> 1.299.000đ </strong>
-        </div>
-      </div>
-      <div class="col-3">
-        <img
-          class="border-round-3xl w-full"
-          alt="Card"
-          src="https://files.fullstack.edu.vn/f8-prod/courses/15/62f13d2424a47.png"
-        />
+
         <p class="font-bold">HTML CSS Pro</p>
         <div>
           <span [ngStyle]="{ 'text-decoration': 'line-through' }"
@@ -74,12 +79,24 @@
       <h2 class="font-bold">Khóa học miễn phí</h2>
     </div>
     <div class="grid">
-      <div *ngFor="let course of listCourses; index as i" class="col-3 mb-">
-        <img
-          class="border-round-3xl w-full h-"
-          alt="Card"
-          src="{{ course.image }}"
-        />
+      <div *ngFor="let course of listCourses; index as i" class="col-3 mb-2">
+        <div
+          class="course-container flex flex-wrap align-items-center justify-content-center"
+        >
+          <img
+            class="img-hover border-round-3xl w-full"
+            alt="Card"
+            src="{{ course.image }}"
+          />
+          <p-button
+            class="register-button flipup animation-duration-500"
+            [style]="{ background: '#fff', border: '2px solid #fff' }"
+          >
+            <span class="ml-2 font-bold" [style]="{ color: '#000' }"
+              >Xem khóa học</span
+            ></p-button
+          >
+        </div>
         <p class="font-bold">{{ course.title }}</p>
         <p-tag
           icon="pi pi-user"

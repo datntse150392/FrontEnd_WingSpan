@@ -1,0 +1,13 @@
+.register-button {
+  display: none;
+  position: absolute;
+  /* Các thuộc tính khác */
+}
+.course-container:hover {
+  .register-button {
+    display: block;
+  }
+  img {
+    opacity: 0.4; /* Điều chỉnh độ trong suốt của hình ảnh */
+  }
+}
