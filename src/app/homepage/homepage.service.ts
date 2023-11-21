@@ -7,8 +7,8 @@ import { Course } from '../models/CourseModel';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'Application/json' }),
 };
-const apiUrl = 'https://ongbutdicodev1.onrender.com/api/';
-// const apiUrl = 'http://localhost:5000/api/';
+// const apiUrl = 'https://ongbutdicodev1.onrender.com/api/';
+const apiUrl = 'http://localhost:5000/api/';
 @Injectable({
   providedIn: 'root',
 })
@@ -24,6 +24,12 @@ export class HomepageService {
     return this.httpClient
       .get<Course[]>(`${apiUrl}course/getAllCourses`)
       .pipe(catchError(this.handleError<Course[]>('getAllCourses', [])));
+  }
+
+  getCoursebyId(courseId: number): Observable<Course> {
+    return this.httpClient
+      .get<Course>(`${apiUrl}course/${courseId}`)
+      .pipe(catchError(this.handleError<Course>('getAllBillBoards')));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

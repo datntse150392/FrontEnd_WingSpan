@@ -39,6 +39,7 @@ export class CourseComponent implements OnInit {
   getAllCourses() {
     this.homepageService.getAllCourses().subscribe((res: any) => {
       this.listCourses = res.data;
+      console.log(this.listCourses);
     });
   }
   getAllBillBoard() {

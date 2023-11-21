@@ -1,11 +1,106 @@
-<div class="p-4 grid">
-  <div class="col-8"></div>
+<div class="grid">
+  <div class="col-8 flex flex-column gap-5">
+    <!-- Main Title -->
+    <div>
+      <h1>{{ course.title }}</h1>
+      <p [ngStyle]="{ fontSize: '15px' }">
+        {{ course.titleDescription }}
+      </p>
+    </div>
+    <!-- Sub Title -->
+    <div>
+      <h3>Bạn sẽ học được gì?</h3>
+      <div class="grid">
+        <div
+          *ngFor="
+            let subTitleDescription of course.subTitleDescription;
+            index as i
+          "
+          class="col-6"
+        >
+          <i
+            class="pi pi-caret-right mr-2"
+            style="font-size: 1rem"
+            [ngStyle]="{ color: 'red' }"
+          ></i>
+          <span [ngStyle]="{ fontSize: '13px' }">{{
+            subTitleDescription
+          }}</span>
+        </div>
+      </div>
+    </div>
+    <!-- Main Course -->
+    <div>
+      <h2>Nội dung khóa học</h2>
+      <div class="flex flex-row justify-content-between">
+        <ul
+          class="flex flex-row gap-4 no-bullet"
+          [ngStyle]="{ fontSize: '14px', paddingLeft: '0' }"
+        >
+          <li [ngStyle]=""><strong>4</strong> chương</li>
+          <li><strong>12</strong> bài học</li>
+          <li>Thời lượng <strong>03 giờ 26 phút</strong></li>
+        </ul>
+        <ng-container *ngIf="isExpand; else elseNotExpand">
+          <p
+            (click)="collapseAll()"
+            [ngStyle]="{
+              color: 'red',
+              fontSize: '13px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }"
+          >
+            Thu nhỏ tất cả
+          </p>
+        </ng-container>
+        <ng-template #elseNotExpand>
+          <p
+            (click)="expandAll()"
+            [ngStyle]="{
+              color: 'red',
+              fontSize: '13px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }"
+          >
+            Mở rộng tất cả
+          </p>
+        </ng-template>
+      </div>
+      <!-- Các video khóa học -->
+      <p-tree [value]="mainCourse" class="w-full md:w-30rem">
+        <ng-template let-node pTemplate="url">
+          <a
+            [href]="node.data"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-700 hover:text-primary"
+            [ngStyle]="{ 'text-decoration': 'none' }"
+            >{{ node.label }}</a
+          >
+        </ng-template>
+        <ng-template let-node pTemplate="default">
+          <b>{{ node.label }}</b>
+        </ng-template>
+      </p-tree>
+    </div>
+  </div>
   <div class="col-4">
     <div>
-      <img
-        class="img-custom w-full"
-        src="https://files.fullstack.edu.vn/f8-prod/courses/1.png"
-      />
+      <img class="img-custom w-full" src="{{ course.image }}" />
+    </div>
+    <div class="flex flex-column">
+      <h1 class="text-center">Khóa Học Miễn Phí</h1>
+      <p-button
+        class="text-center relative"
+        [style]="{
+          backgroundColor: 'orange',
+          border: 'none',
+          fontWeight: 'bold',
+        }"
+        >Đăng ký học</p-button
+      >
     </div>
   </div>
 </div>
