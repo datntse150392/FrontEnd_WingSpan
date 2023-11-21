@@ -92,7 +92,10 @@
             class="register-button flipup animation-duration-500"
             [style]="{ background: '#fff', border: '2px solid #fff' }"
           >
-            <span class="ml-2 font-bold" [style]="{ color: '#000' }"
+            <span
+              [routerLink]="['/detail/', course._id]"
+              class="ml-2 font-bold"
+              [style]="{ color: '#000' }"
               >Xem khóa học</span
             ></p-button
           >

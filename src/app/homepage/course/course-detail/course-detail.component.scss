@@ -1,3 +1,11 @@
 .img-custom {
   border-radius: 20px;
 }
+ul.no-bullet {
+  list-style-type: none; /* Loại bỏ dấu chấm */
+}
+
+ul.no-bullet li:not(:first-child) {
+  /* Áp dụng cho tất cả các mục trừ mục đầu tiên */
+  list-style-type: disc; /* Có thể thay đổi kiểu hiển thị khác nếu cần */
+}
