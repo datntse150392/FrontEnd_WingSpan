@@ -1,5 +1,5 @@
 # Dự Án Web App Giáo Dục - Angular, NodeJS, MongoDB <WingSpan>
-# https://ong-bui-di-code.vercel.app/
+# https://wingspan-dev-course.vercel.app/
 
 ## Giới Thiệu
 ### Dự án này là sự kết hợp của đam mê và kỹ thuật, hướng đến việc tạo ra một nền tảng giáo dục trực tuyến cho sinh viên trường FPT. Sử dụng công nghệ tiên tiến như Angular, NodeJS, và MongoDB, dự án này cung cấp một trải nghiệm học tập linh hoạt và tương tác cho người dùng.
