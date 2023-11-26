@@ -72,7 +72,11 @@
       <p-tree [value]="mainCourse" class="w-full md:w-30rem">
         <ng-template let-node pTemplate="url">
           <a
-            [href]="node.data"
+            [routerLink]="[
+              '/learning/lessons-for-newbie/',
+              course._id,
+              node.data
+            ]"
             target="_blank"
             rel="noopener noreferrer"
             class="text-700 hover:text-primary"
