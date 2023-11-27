@@ -37,7 +37,9 @@
           class="flex flex-row gap-4 no-bullet"
           [ngStyle]="{ fontSize: '14px', paddingLeft: '0' }"
         >
-          <li [ngStyle]=""><strong>4</strong> chương</li>
+          <li [ngStyle]="">
+            <strong>{{ course.mainCourse.length }}</strong> chương
+          </li>
           <li><strong>12</strong> bài học</li>
           <li>Thời lượng <strong>03 giờ 26 phút</strong></li>
         </ul>
@@ -72,7 +74,11 @@
       <p-tree [value]="mainCourse" class="w-full md:w-30rem">
         <ng-template let-node pTemplate="url">
           <a
-            [href]="node.data"
+            [routerLink]="[
+              '/learning/lessons-for-newbie/',
+              course._id,
+              node.data
+            ]"
             target="_blank"
             rel="noopener noreferrer"
             class="text-700 hover:text-primary"
