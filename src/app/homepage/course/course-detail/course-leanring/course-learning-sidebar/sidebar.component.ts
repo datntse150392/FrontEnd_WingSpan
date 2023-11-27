@@ -16,8 +16,6 @@ export class CourseLeanringSidebarComponent {
   ) {}
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      console.log(params);
-
       this.courseId = params['courseId'];
     });
     this.courseService

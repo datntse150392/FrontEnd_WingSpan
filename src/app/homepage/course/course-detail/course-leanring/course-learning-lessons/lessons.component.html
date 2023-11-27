@@ -1,5 +1,5 @@
 <div class="grid">
-  <div class="col-8 p-0">
+  <div class="col-8 p-3">
     <iframe
       width="100%"
       height="550"
@@ -7,6 +7,35 @@
       frameborder="0"
       allowfullscreen
     ></iframe>
+    <div class="p-6">
+      <h2 class="m-0">{{ course.title }}</h2>
+      <span [ngStyle]="{ fontSize: '10px' }">Cập nhật tháng 11 năm 2022</span>
+      <p>
+        Các vấn đề liên quan đến khóa học các bạn có thể liên hệ mình thông qua
+        các thông tin sau
+      </p>
+      <ul class="contact">
+        <li>
+          Nguyễn Thành Đạt
+          <a href="https://web.facebook.com/ngdat2001"
+            >https://web.facebook.com/ngdat2001</a
+          >
+        </li>
+        <li>
+          GitHub
+          <a href="https://github.com/datntse150392"
+            >https://github.com/datntse150392</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="flex">
+      <span class="text-center w-full p-4" [ngStyle]="{ 'font-size': '12px' }"
+        >Đây làm một dự án cá nhân tìm hiểu về Angular - Giao diện được thiết kế
+        dựa trên F8
+        <i class="pi pi-heart" style="font-size: 1rem; color: red"></i
+      ></span>
+    </div>
   </div>
   <div class="col-4 pr-4 pl-4 pt-0">
     <app-course-learning-sidebar></app-course-learning-sidebar>

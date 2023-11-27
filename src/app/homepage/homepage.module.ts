@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 import { TreeModule } from 'primeng/tree';
+import { InputTextModule } from 'primeng/inputtext';
 import { CourseDetailComponent } from './course/course-detail/course-detail.component';
 import { CourseLearningContentComponent } from './course/course-detail/course-leanring/course-leanring-content/content.component';
 import { CourseLeanringSidebarComponent } from './course/course-detail/course-leanring/course-learning-sidebar/sidebar.component';
@@ -30,6 +31,7 @@ import { CourseLearningLessonsComponent } from './course/course-detail/course-le
     CardModule,
     TagModule,
     TreeModule,
+    InputTextModule,
   ],
   declarations: [
     ContentComponent,
