@@ -11,11 +11,11 @@ Học Tương Tác: Tích hợp Pusher và Firebase để tạo môi trường h
 - Giao Diện Người Dùng Thân Thiện: Giao diện được thiết kế với Angular, tạo trải nghiệm người dùng mượt mà và trực quan.
 
 ## Công Nghệ Sử Dụng
-### Frontend: Angular
-### Backend: NodeJS
-### Database: MongoDB
-### Real-Time Interactions: Pusher, Firebase
-### Containerization: Docker
+- Frontend: Angular
+- Backend: NodeJS
+- Database: MongoDB
+- Real-Time Interactions: Pusher, Firebase
+- Containerization: Docker
 
 ## Mục Tiêu Dự Án
-### Mục tiêu của dự án này là tạo ra một nền tảng giáo dục trực tuyến chất lượng cao, dễ tiếp cận và hữu ích cho sinh viên FPT, đặc biệt là những người có niềm đam mê với lập trình web app.
+Mục tiêu của dự án này là tạo ra một nền tảng giáo dục trực tuyến chất lượng cao, dễ tiếp cận và hữu ích cho sinh viên FPT, đặc biệt là những người có niềm đam mê với lập trình web app.
