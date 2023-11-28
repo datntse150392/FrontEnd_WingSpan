@@ -21,6 +21,7 @@ const routes: Routes = [
       {
         path: 'lessons-for-newbie/:courseId/:videoId',
         component: CourseLearningLessonsComponent,
+        children: [],
       },
     ],
   },

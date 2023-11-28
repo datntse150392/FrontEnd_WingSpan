@@ -1,24 +1,31 @@
-<div
-  [ngClass]="{ active: isHomePage() }"
-  class="flex flex-column align-items-center justify-content-around p-3 border-round-lg cursor-pointer hover:surface-400"
->
-  <i class="pi pi-home" style="font-size: 1.3rem"></i>
-  <a
-    class="text-xs font-bold mb-0"
-    [ngStyle]="{ 'text-decoration': 'none', color: '#000' }"
-    routerLink="/"
-    >Trang chủ</a
+<div class="flex flex-row p-2 ml-4 gap-2">
+  <div
+    [ngClass]="{ active: isHomePage() }"
+    class="flex flex-column align-items-center justify-content-around p-3 border-round-lg cursor-pointer hover:surface-400"
   >
-</div>
-<div
-  class="flex flex-column align-items-center justify-content-between p-3 border-round-lg cursor-pointer hover:surface-400"
->
-  <i class="pi pi-calendar" style="font-size: 1.3rem"></i>
-  <p class="text-xs font-bold mb-0">Lộ trình</p>
-</div>
-<div
-  class="flex flex-column align-items-center justify-content-between p-3 border-round-lg cursor-pointer hover:surface-400"
->
-  <i class="pi pi-list" style="font-size: 1.3rem"></i>
-  <p class="text-xs font-bold mb-0">Bài viết</p>
+    <a
+      class="text-xs font-bold mb-0"
+      [ngStyle]="{ 'text-decoration': 'none', color: '#000' }"
+      routerLink="/"
+      >Trang chủ</a
+    >
+  </div>
+  <div
+    class="flex flex-column align-items-center justify-content-around p-3 border-round-lg cursor-pointer hover:surface-400"
+  >
+    <a
+      class="text-xs font-bold mb-0"
+      [ngStyle]="{ 'text-decoration': 'none', color: '#000' }"
+      >Lộ trình</a
+    >
+  </div>
+  <div
+    class="flex flex-column align-items-center justify-content-around p-3 border-round-lg cursor-pointer hover:surface-400"
+  >
+    <a
+      class="text-xs font-bold mb-0"
+      [ngStyle]="{ 'text-decoration': 'none', color: '#000' }"
+      >Bài viết</a
+    >
+  </div>
 </div>

@@ -1,0 +1,57 @@
+<div
+  class="grid m-0 p-0"
+  [ngStyle]="{ height: '100vh', 'overflow-y': 'hidden' }"
+>
+  <div class="col-4 flex flex-column align-items-center justify-content-center">
+    <form [formGroup]="signInForm">
+      <div class="flex flex-column">
+        <h2 class="text-center">Đăng Nhập</h2>
+        <div class="mb-4">
+          <p class="m-0 mb-2">Tên tài khoản</p>
+          <input formControlName="username" class="w-full" pInputText />
+        </div>
+        <div>
+          <p class="m-0 mb-2">Mật khẩu</p>
+          <p-password
+            formControlName="password"
+            [toggleMask]="true"
+          ></p-password>
+        </div>
+      </div>
+      <div>
+        <button
+        (click)="login()"
+          pButton
+          pRipple
+          label="Đăng nhập "
+          class="p-button-success mt-3 w-full"
+        ></button>
+        <div class="flex flex-row justify-content-between">
+          <p [ngStyle]="{ fontSize: '12px' }">Đăng ký ngay</p>
+          <p [ngStyle]="{ fontSize: '12px' }">Quên mật khẩu?</p>
+        </div>
+      </div>
+    </form>
+    <pre>{{ signInForm.value | json }}</pre>
+    <p-divider align="left">
+      <div class="inline-flex align-items-center">
+        <b>Hoặc</b>
+      </div>
+    </p-divider>
+    <div>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-google"
+        label="Đăng nhập qua Google"
+        class="p-button-success mt-3 w-full btn-gg"
+      ></button>
+    </div>
+  </div>
+  <div class="col-8 h-full p-0">
+    <img
+      [ngStyle]="{ height: '100%', width: '100%' }"
+      src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Auth%2Fpexels-mo-eid-9829615.jpg?alt=media&token=38d46d44-58f3-4171-bfcb-6206d62c7768"
+    />
+  </div>
+</div>

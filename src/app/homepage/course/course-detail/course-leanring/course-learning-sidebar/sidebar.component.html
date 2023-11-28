@@ -4,7 +4,7 @@
     <ng-template let-node pTemplate="url">
       <a
         [ngStyle]="{ 'text-decoration': 'none', 'font-size': '14px' }"
-        [routerLink]="['/leanring/lessons-for-newbie/', courseId, node.data]"
+        [routerLink]="['lessons-for-newbie/', courseId, node.data]"
         target="_blank"
         rel="noopener noreferrer"
         class="text-700 hover:text-primary"

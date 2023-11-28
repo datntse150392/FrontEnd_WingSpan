@@ -1,0 +1,14 @@
+/* Adjust the size of the login button */
+.btn-auth.p-button-success {
+  font-size: 12px; /* Adjust the font size */
+  padding: 8px 12px; /* Adjust the padding */
+}
+
+/* Adjust the size of the register button */
+.btn-auth.p-button-danger {
+  font-size: 12px; /* Adjust the font size */
+  padding: 8px 12px; /* Adjust the padding */
+  background: #fff;
+  border: none;
+  color: #000;
+}

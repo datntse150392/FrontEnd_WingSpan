@@ -2,7 +2,14 @@
   <!-- Header Learning -->
   <app-header></app-header>
   <!-- Content Learning -->
-  <router-outlet></router-outlet>
+  <div class="grid">
+    <div class="col-8 pl-3">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-4">
+      <app-course-learning-sidebar></app-course-learning-sidebar>
+    </div>
+  </div>
   <!-- Footer Learning -->
   <div></div>
 </div>

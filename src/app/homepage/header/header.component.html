@@ -1,4 +1,4 @@
-<div class="flex align-items-center justify-content-between p-2 h-full">
+<div class="flex align-items-center justify-content-between mr-3 ml-3 h-full">
   <div class="flex align-items-center justify-content-between">
     <p-avatar
       [ngStyle]="{ cursor: 'pointer' }"
@@ -7,26 +7,24 @@
       size="xlarge"
     ></p-avatar>
     <h3>WingSpan</h3>
+    <app-sidebar></app-sidebar>
   </div>
-  <div>
-    <span class="p-input-icon-left">
-      <i class="pi pi-search"></i>
-      <input type="text" pInputText />
-    </span>
-  </div>
+
   <div class="flex align-items-center justify-content-start gap-3">
     <button
+      [routerLink]="['/auth/login/']"
       pButton
       pRipple
       label="Đăng nhập"
       class="p-button-success btn-auth"
       icon="pi pi-user"
     ></button>
-    <p-button
-      class="btn-auth"
-      label="Đăng kí"
+    <button
+      pButton
+      pRipple
+      label="Đăng ký"
+      class="p-button-danger btn-auth"
       icon="pi pi-user-plus"
-      badgeClass="p-badge-danger"
-    ></p-button>
+    ></button>
   </div>
 </div>
