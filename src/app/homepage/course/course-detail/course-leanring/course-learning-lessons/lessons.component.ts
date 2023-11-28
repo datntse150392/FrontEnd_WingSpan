@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { TreeNode } from 'primeng/api';
 import { Course } from 'src/app/models/CourseModel';
 import { APIService } from 'src/app/service/APIservice.service';
-import { CourseServiceModule } from '../../../course.service';
 
 @Component({
   selector: 'app-lessons',
@@ -17,11 +16,11 @@ export class CourseLearningLessonsComponent {
   videoUrl!: SafeResourceUrl;
   isExpand!: boolean;
   course!: Course;
-
+  mainCourse!: TreeNode[];
   constructor(
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private courseService: CourseServiceModule
+    private APIservice: APIService
   ) {}
 
   ngOnInit(): void {
@@ -34,8 +33,14 @@ export class CourseLearningLessonsComponent {
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://www.youtube.com/embed/${this.videoId}`
     );
-    this.courseService.getCourseById(this.courseId).subscribe((res: any) => {
+    this.APIservice.getCoursebyId(this.courseId).subscribe((res: any) => {
       this.course = res.data;
     });
+
+    this.APIservice.tranferMainCourseById(this.courseId).subscribe(
+      (transformedData: TreeNode[]) => {
+        this.mainCourse = transformedData;
+      }
+    );
   }
 }

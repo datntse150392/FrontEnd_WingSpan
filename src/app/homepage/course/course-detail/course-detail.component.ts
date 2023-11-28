@@ -2,32 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TreeNode } from 'primeng/api';
 import { Course } from 'src/app/models/CourseModel';
-import { CourseServiceModule } from '../course.service';
+import { ConfigLocal } from 'src/app/models/Config/localState';
+import { APIService } from 'src/app/service/APIservice.service';
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
   styleUrls: ['./course-detail.component.scss'],
 })
 export class CourseDetailComponent implements OnInit {
+  configLocal!: ConfigLocal;
   course!: Course;
   mainCourse!: TreeNode[];
   isExpand!: boolean;
-  constructor(
-    private route: ActivatedRoute,
-    private courseService: CourseServiceModule
-  ) {}
+  constructor(private route: ActivatedRoute, private APIservice: APIService) {}
   ngOnInit() {
     // Lấy giá trị của tham số 'id' từ URL
     const courseId = this.route.snapshot.params['id'];
+    // Lưu courseId vào configCourse và lưu vào localStorage
+    localStorage.setItem('courseId', courseId);
     // Subscribe to the Observable to get the Course data
-    this.courseService.getCourseById(courseId).subscribe((res: any) => {
+    this.APIservice.getCoursebyId(courseId).subscribe((res: any) => {
       this.course = res.data;
     });
-    this.courseService
-      .tranferMainCourseById(courseId)
-      .subscribe((transformedData: TreeNode[]) => {
+    this.APIservice.tranferMainCourseById(courseId).subscribe(
+      (transformedData: TreeNode[]) => {
         this.mainCourse = transformedData;
-      });
+      }
+    );
   }
   expandAll() {
     this.isExpand = true;
