@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/models/CourseModel';
 import { BillBoard } from 'src/app/models/BillboardModel';
-import { HomepageService } from '../homepage.service';
+import { APIService } from 'src/app/service/APIservice.service';
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
@@ -13,7 +13,7 @@ export class CourseComponent implements OnInit {
   listBillBoard: BillBoard[] = [];
   hover: boolean = false;
   listCourses: Course[] = [];
-  constructor(private homepageService: HomepageService) {}
+  constructor(private APIservice: APIService) {}
 
   ngOnInit(): void {
     this.getAllCourses();
@@ -37,13 +37,13 @@ export class CourseComponent implements OnInit {
     ];
   }
   getAllCourses() {
-    this.homepageService.getAllCourses().subscribe((res: any) => {
+    this.APIservice.getAllCourses().subscribe((res: any) => {
       this.listCourses = res.data;
       console.log(this.listCourses);
     });
   }
   getAllBillBoard() {
-    this.homepageService.getAllBillBoards().subscribe((res: any) => {
+    this.APIservice.getAllBillBoards().subscribe((res: any) => {
       this.listBillBoard = res.data;
     });
   }

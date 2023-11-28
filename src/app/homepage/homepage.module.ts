@@ -7,7 +7,6 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
-import { HomepageService } from './homepage.service';
 import { CourseComponent } from './course/course.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
@@ -43,6 +42,6 @@ import { CourseLearningLessonsComponent } from './course/course-detail/course-le
     CourseLeanringSidebarComponent,
     CourseLearningContentComponent,
   ],
-  providers: [HomepageService],
+  providers: [],
 })
 export class HomePageModule {}
