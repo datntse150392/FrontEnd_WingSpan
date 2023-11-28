@@ -2,7 +2,7 @@
 # https://wingspan-dev-course.vercel.app/
 
 ## Giới Thiệu
-### Dự án này là sự kết hợp của đam mê và kỹ thuật, hướng đến việc tạo ra một nền tảng giáo dục trực tuyến cho sinh viên trường FPT. Sử dụng công nghệ tiên tiến như Angular, NodeJS, và MongoDB, dự án này cung cấp một trải nghiệm học tập linh hoạt và tương tác cho người dùng.
+Dự án này là sự kết hợp của đam mê và kỹ thuật, hướng đến việc tạo ra một nền tảng giáo dục trực tuyến cho sinh viên trường FPT. Sử dụng công nghệ tiên tiến như Angular, NodeJS, và MongoDB, dự án này cung cấp một trải nghiệm học tập linh hoạt và tương tác cho người dùng.
 
 ## Tính Năng Chính
 ### Khóa Học Đa Dạng: Cung cấp nhiều khóa học lập trình web app, từ cơ bản đến nâng cao.
