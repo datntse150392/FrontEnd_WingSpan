@@ -9,8 +9,9 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LayoutAuthComponent } from './layout-auth/layout-auth.component';
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent],
+  declarations: [SignInComponent, SignUpComponent, LayoutAuthComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

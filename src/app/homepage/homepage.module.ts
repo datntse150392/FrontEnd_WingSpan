@@ -22,6 +22,7 @@ import { CourseDetailComponent } from './course/course-detail/course-detail.comp
 import { CourseLearningContentComponent } from './course/course-detail/course-leanring/course-leanring-content/content.component';
 import { CourseLeanringSidebarComponent } from './course/course-detail/course-leanring/course-learning-sidebar/sidebar.component';
 import { CourseLearningLessonsComponent } from './course/course-detail/course-leanring/course-learning-lessons/lessons.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { CourseLearningLessonsComponent } from './course/course-detail/course-le
     CourseLearningLessonsComponent,
     CourseLeanringSidebarComponent,
     CourseLearningContentComponent,
+    FooterComponent,
   ],
   providers: [],
 })
