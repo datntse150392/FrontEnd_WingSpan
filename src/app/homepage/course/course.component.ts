@@ -8,15 +8,17 @@ import { APIService } from 'src/app/service/APIservice.service';
   styleUrls: ['./course.component.scss'],
 })
 export class CourseComponent implements OnInit {
-  // Fake data
+  listCourses: Course[] = []; // Danh sách gốc
+  filteredCoursesFree: Course[] = []; // Danh sách đã được lọc và sắp xếp FREE
+  filteredCoursesPE: Course[] = []; // Danh sách đã được lọc và sắp xếp PRO
   responsiveOptions: any[] | undefined;
   listBillBoard: BillBoard[] = [];
   hover: boolean = false;
-  listCourses: Course[] = [];
   constructor(private APIservice: APIService) {}
 
   ngOnInit(): void {
-    this.getAllCourses();
+    this.filterAndSortCoursesFree();
+    this.filterAndSortCoursesPE();
     this.getAllBillBoard();
     this.responsiveOptions = [
       {
@@ -36,12 +38,27 @@ export class CourseComponent implements OnInit {
       },
     ];
   }
-  getAllCourses() {
+
+  // Hàm để lọc và sắp xếp lại danh sách khóa học free
+  filterAndSortCoursesFree() {
     this.APIservice.getAllCourses().subscribe((res: any) => {
       this.listCourses = res.data;
-      console.log(this.listCourses);
+      this.filteredCoursesFree = this.listCourses
+        .filter((course) => course.type === 'free')
+        .sort((a, b) => a.enrollmentCount - b.enrollmentCount);
     });
   }
+
+  // Hàm để lọc và sắp xếp lại danh sách khóa học PE Cấp tốc
+  filterAndSortCoursesPE() {
+    this.APIservice.getAllCourses().subscribe((res: any) => {
+      this.listCourses = res.data;
+      this.filteredCoursesPE = this.listCourses
+        .filter((course) => course.type === 'PE')
+        .sort((a, b) => a.enrollmentCount - b.enrollmentCount);
+    });
+  }
+
   getAllBillBoard() {
     this.APIservice.getAllBillBoards().subscribe((res: any) => {
       this.listBillBoard = res.data;

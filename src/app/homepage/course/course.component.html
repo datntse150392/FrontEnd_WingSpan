@@ -28,7 +28,7 @@
           </div>
           <div class="col-4 flex flex-column justify-content-center">
             <img
-              style="width: 100%; margin-left: 5%"
+              style="width: 100%; margin-left: 5%; mix-blend-mode: darken"
               src="{{ product.rightImg }}"
             />
           </div>
@@ -36,50 +36,58 @@
       </ng-template>
     </p-carousel>
   </div>
-  <!-- Khóa học Pro -->
-  <div class="mb-4">
+
+  <!-- Khóa học Ôn Thi PE  -->
+  <div>
     <div class="flex flex-row align-items-center gap-2">
-      <h2 class="font-bold">Khóa học Pro</h2>
-      <p-tag class="mb-3" value="Mới"></p-tag>
+      <h2 class="font-bold">Khóa ôn thi PE cấp tốc</h2>
+      <p-tag class="mb-3" value="Hot" severity="danger"></p-tag>
     </div>
     <div class="grid">
-      <div class="col-3">
+      <div
+        *ngFor="let course of filteredCoursesPE; index as i"
+        class="col-3 mb-2"
+      >
         <div
           class="course-container flex flex-wrap align-items-center justify-content-center"
         >
           <img
             class="img-hover border-round-3xl w-full"
             alt="Card"
-            src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Course%2FIMAGE%20FOR%20COURSE%20(1).png?alt=media&token=d887afa7-7c4e-47d2-aba4-f27ed6156e8b"
+            src="{{ course.image }}"
           />
           <p-button
             class="register-button flipup animation-duration-500"
             [style]="{ background: '#fff', border: '2px solid #fff' }"
           >
-            <span class="ml-2 font-bold" [style]="{ color: '#000' }"
+            <span
+              [routerLink]="['/detail/', course._id]"
+              class="ml-2 font-bold"
+              [style]="{ color: '#000' }"
               >Xem khóa học</span
             ></p-button
           >
         </div>
-
-        <p class="font-bold">HTML CSS Pro</p>
-        <div>
-          <span [ngStyle]="{ 'text-decoration': 'line-through' }"
-            >2.500.000đ
-          </span>
-          &nbsp;
-          <strong [ngStyle]="{ color: 'red' }"> 1.299.000đ </strong>
-        </div>
+        <p class="font-bold">{{ course.title }}</p>
+        <p-tag
+          icon="pi pi-user"
+          severity="info"
+          value="{{ course.enrollmentCount }}"
+        ></p-tag>
       </div>
     </div>
   </div>
+
   <!-- Khóa học Miễn Phí -->
   <div>
     <div class="flex flex-row align-items-center gap-2">
       <h2 class="font-bold">Khóa học miễn phí</h2>
     </div>
     <div class="grid">
-      <div *ngFor="let course of listCourses; index as i" class="col-3 mb-2">
+      <div
+        *ngFor="let course of filteredCoursesFree; index as i"
+        class="col-3 mb-2"
+      >
         <div
           class="course-container flex flex-wrap align-items-center justify-content-center"
         >
