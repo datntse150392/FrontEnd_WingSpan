@@ -8,6 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToastModule } from 'primeng/toast';
+import { ToastService } from './service/ToastService.service';
+import { MessageService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
@@ -26,6 +31,8 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     HttpClientModule,
     FontAwesomeModule,
     SocialLoginModule,
+    ToastModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
@@ -42,6 +49,8 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
         ],
       } as SocialAuthServiceConfig,
     },
+    ToastService,
+    MessageService,
   ],
   bootstrap: [AppComponent],
 })

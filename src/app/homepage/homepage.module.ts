@@ -14,10 +14,15 @@ import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 import { TreeModule } from 'primeng/tree';
 import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
+import { MenubarModule } from 'primeng/menubar';
+import { BadgeModule } from 'primeng/badge';
+import { MenuModule } from 'primeng/menu';
 import { CourseDetailComponent } from './course/course-detail/course-detail.component';
 import { CourseLearningContentComponent } from './course/course-detail/course-leanring/course-leanring-content/content.component';
 import { CourseLeanringSidebarComponent } from './course/course-detail/course-leanring/course-learning-sidebar/sidebar.component';
 import { CourseLearningLessonsComponent } from './course/course-detail/course-leanring/course-learning-lessons/lessons.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -31,6 +36,10 @@ import { CourseLearningLessonsComponent } from './course/course-detail/course-le
     TagModule,
     TreeModule,
     InputTextModule,
+    ToastModule,
+    MenubarModule,
+    BadgeModule,
+    MenuModule,
   ],
   declarations: [
     ContentComponent,

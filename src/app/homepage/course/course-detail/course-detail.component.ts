@@ -4,13 +4,16 @@ import { TreeNode } from 'primeng/api';
 import { Course } from 'src/app/models/CourseModel';
 import { ConfigLocal } from 'src/app/models/Config/localState';
 import { APIService } from 'src/app/service/APIservice.service';
+
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
   styleUrls: ['./course-detail.component.scss'],
 })
 export class CourseDetailComponent implements OnInit {
-  configLocal!: ConfigLocal;
+  configLocal: ConfigLocal = {
+    userInfo: {},
+  };
   course!: Course;
   mainCourse!: TreeNode[];
   isExpand!: boolean;
@@ -29,6 +32,11 @@ export class CourseDetailComponent implements OnInit {
         this.mainCourse = transformedData;
       }
     );
+    try {
+      this.configLocal.userInfo = this.parseData().userInfo;
+    } catch (error) {
+      console.log(error);
+    }
   }
   expandAll() {
     this.isExpand = true;
@@ -41,6 +49,15 @@ export class CourseDetailComponent implements OnInit {
     this.mainCourse.forEach((node) => {
       this.expandRecursive(node, false);
     });
+  }
+
+  parseData() {
+    const configLocalString = localStorage.getItem('configLocal');
+    if (configLocalString) {
+      const configLocal = JSON.parse(configLocalString);
+      return configLocal;
+    }
+    return null;
   }
   private expandRecursive(node: TreeNode, isExpand: boolean) {
     node.expanded = isExpand;

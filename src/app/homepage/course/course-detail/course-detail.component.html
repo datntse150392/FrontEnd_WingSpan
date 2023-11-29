@@ -87,7 +87,9 @@
           >
         </ng-template>
         <ng-template let-node pTemplate="default">
-          <b>{{ node.label }}</b>
+          <b>
+            {{ node.label }}
+          </b>
         </ng-template>
       </p-tree>
     </div>
@@ -98,15 +100,29 @@
     </div>
     <div class="flex flex-column">
       <h1 class="text-center">Khóa Học Miễn Phí</h1>
-      <p-button
-        class="text-center relative"
-        [style]="{
+      <ng-container *ngIf="configLocal.userInfo.fullName; else loginBtn">
+        <p-button
+          class="text-center relative"
+          [style]="{
+          backgroundColor: 'green',
+          border: 'none',
+          fontWeight: 'bold',
+        }"
+          >Đã kích hoạt khóa học</p-button
+        >
+      </ng-container>
+      <ng-template #loginBtn>
+        <p-button
+          [routerLink]="['/auth/login']"
+          class="text-center relative"
+          [style]="{
           backgroundColor: 'orange',
           border: 'none',
           fontWeight: 'bold',
         }"
-        >Đăng ký học</p-button
-      >
+          >Đăng nhập để học ngay</p-button
+        >
+      </ng-template>
     </div>
   </div>
 </div>
