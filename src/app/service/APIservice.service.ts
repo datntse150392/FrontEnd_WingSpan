@@ -15,6 +15,7 @@ const apiUrl = 'https://ongbutdicodev1.onrender.com/api/';
 })
 export class APIService {
   constructor(private httpClient: HttpClient) {}
+
   getAllBillBoards(): Observable<BillBoard[]> {
     return this.httpClient
       .get<BillBoard[]>(`${apiUrl}billboard/getAllBillboard`)
@@ -61,6 +62,13 @@ export class APIService {
     const body = { username, password };
     return this.httpClient
       .post(`${apiUrl}auth/signin`, body)
+      .pipe(catchError(this.handleError<any>()));
+  }
+
+  register(email: any, username: any, password: any) {
+    const body = { email, username, password };
+    return this.httpClient
+      .post(`${apiUrl}auth/signup`, body)
       .pipe(catchError(this.handleError<any>()));
   }
 
