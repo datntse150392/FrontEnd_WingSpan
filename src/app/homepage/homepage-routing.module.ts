@@ -5,6 +5,7 @@ import { CourseComponent } from './course/course.component';
 import { CourseDetailComponent } from './course/course-detail/course-detail.component';
 import { CourseLearningContentComponent } from './course/course-detail/course-leanring/course-leanring-content/content.component';
 import { CourseLearningLessonsComponent } from './course/course-detail/course-leanring/course-learning-lessons/lessons.component';
+import { CanLearnCourseGuard } from './can-learn-course.guard';
 const routes: Routes = [
   {
     path: '',
@@ -17,11 +18,11 @@ const routes: Routes = [
   {
     path: 'learning',
     component: CourseLearningContentComponent,
+    canActivateChild: [CanLearnCourseGuard],
     children: [
       {
         path: 'lessons-for-newbie/:courseId/:videoId',
         component: CourseLearningLessonsComponent,
-        children: [],
       },
     ],
   },

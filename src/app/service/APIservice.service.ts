@@ -57,10 +57,10 @@ export class APIService {
     });
   }
 
-  login(username: string, password: string): Observable<any> {
+  login(username: any, password: any): Observable<any> {
     const body = { username, password };
     return this.httpClient
-      .post(`${apiUrl}/auth/signin`, body)
+      .post(`${apiUrl}auth/signin`, body)
       .pipe(catchError(this.handleError<any>()));
   }
 

@@ -11,20 +11,38 @@
   </div>
 
   <div class="flex align-items-center justify-content-start gap-3">
-    <button
-      [routerLink]="['/auth/login/']"
-      pButton
-      pRipple
-      label="Đăng nhập"
-      class="p-button-success btn-auth"
-      icon="pi pi-user"
-    ></button>
-    <button
-      pButton
-      pRipple
-      label="Đăng ký"
-      class="p-button-danger btn-auth"
-      icon="pi pi-user-plus"
-    ></button>
+    <ng-container *ngIf="configLocal.userInfo.username; else isFailLogin">
+      <div class="p-2">
+        <p
+          (click)="menu.toggle($event)"
+          [ngStyle]="{
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: 'bold'
+          }"
+        >
+          {{ configLocal.userInfo.fullName }}
+        </p>
+
+        <p-menu #menu [model]="items" [popup]="true"></p-menu>
+      </div>
+    </ng-container>
+    <ng-template #isFailLogin>
+      <button
+        [routerLink]="['/auth/login/']"
+        pButton
+        pRipple
+        label="Đăng nhập"
+        class="p-button-success btn-auth"
+        icon="pi pi-user"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="Đăng ký"
+        class="p-button-danger btn-auth"
+        icon="pi pi-user-plus"
+      ></button>
+    </ng-template>
   </div>
 </div>

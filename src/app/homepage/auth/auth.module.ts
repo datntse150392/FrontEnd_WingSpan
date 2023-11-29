@@ -9,7 +9,6 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { ReactiveFormsModule } from '@angular/forms';
-
 @NgModule({
   declarations: [SignInComponent, SignUpComponent],
   imports: [
@@ -22,5 +21,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     GoogleSigninButtonModule,
     ReactiveFormsModule,
   ],
+  providers: [],
 })
 export class AuthModule {}

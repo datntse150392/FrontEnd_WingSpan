@@ -1,3 +1,5 @@
+import { User } from '../UserModel';
+
 export interface ConfigLocal {
-  configCourse?: String[];
+  userInfo: User;
 }

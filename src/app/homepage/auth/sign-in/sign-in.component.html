@@ -3,6 +3,13 @@
   [ngStyle]="{ height: '100vh', 'overflow-y': 'hidden' }"
 >
   <div class="col-4 flex flex-column align-items-center justify-content-center">
+    <div>
+      <img
+        [routerLink]="['/']"
+        src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2Fsilhouette-solo-dribbble-03_v4.gif?alt=media&token=45485a0f-0e34-4ba4-99be-5d3d195a2590"
+        [ngStyle]="{ height: '100px', cursor: 'pointer' }"
+      />
+    </div>
     <form [formGroup]="signInForm">
       <div class="flex flex-column">
         <h2 class="text-center">Đăng Nhập</h2>
@@ -20,7 +27,7 @@
       </div>
       <div>
         <button
-        (click)="login()"
+          (click)="login()"
           pButton
           pRipple
           label="Đăng nhập "
@@ -32,7 +39,7 @@
         </div>
       </div>
     </form>
-    <pre>{{ signInForm.value | json }}</pre>
+
     <p-divider align="left">
       <div class="inline-flex align-items-center">
         <b>Hoặc</b>
