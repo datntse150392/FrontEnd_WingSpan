@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { APIService } from 'src/app/service/APIservice.service';
+import { UserAPIService } from 'src/app/service/api/UserAPI.service';
 import { ConfigLocal } from 'src/app/models/Config/localState';
 import { User } from 'src/app/models/UserModel';
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/service/ToastService.service';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { SocialUser } from '@abacritt/angularx-social-login';
+import { forkJoin, mergeMap, of } from 'rxjs';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent implements OnInit {
+  userGG!: SocialUser;
+  loggedIn!: boolean;
   signInForm = new FormGroup({
     username: new FormControl(''), // <== default value
     password: new FormControl(''), // <== default value
@@ -23,9 +30,73 @@ export class SignInComponent implements OnInit {
   constructor(
     private APIservice: APIService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private authService: SocialAuthService,
+    private userAPIService: UserAPIService
   ) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.authState
+      .pipe(
+        mergeMap((user) => {
+          this.userGG = user;
+          this.loggedIn = user != null;
+          if (this.userGG) {
+            return this.userAPIService.isCheckAccount(this.userGG.email);
+          }
+          return of(null);
+        })
+      )
+      .subscribe((res: any) => {
+        if (res.status === 200 && res.message === 'Not Found') {
+          this.APIservice.register(
+            this.userGG.email,
+            this.userGG.email,
+            '123456',
+            this.userGG.photoUrl
+          ).subscribe((res: any) => {
+            try {
+              if (res.data.user) {
+                this.user = res.data.user;
+                this.configLocal.userInfo = this.user;
+                localStorage.setItem(
+                  'configLocal',
+                  JSON.stringify(this.configLocal)
+                );
+                // Display success toast message after successful login
+                this.toastService.setToastIsRegister(true);
+                this.router.navigate(['/']);
+              } else {
+              }
+            } catch (error) {
+              this.toastService.setToastIsRegister(false);
+              localStorage.clear();
+            }
+          });
+        } else {
+          this.APIservice.login(this.userGG.email, '123456').subscribe(
+            (res: any) => {
+              try {
+                if (res.data.user) {
+                  this.user = res.data.user;
+                  this.configLocal.userInfo = this.user;
+                  localStorage.setItem(
+                    'configLocal',
+                    JSON.stringify(this.configLocal)
+                  );
+                  // Display success toast message after successful login
+                  this.toastService.setToastIsLogin(true);
+                  this.router.navigate(['/']);
+                } else {
+                }
+              } catch (error) {
+                this.toastService.setToastIsLogin(false);
+                localStorage.clear();
+              }
+            }
+          );
+        }
+      });
+  }
 
   login() {
     this.APIservice.login(

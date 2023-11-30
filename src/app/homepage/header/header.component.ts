@@ -54,6 +54,7 @@ export class HeaderComponent implements OnInit {
     this.configLocal.userInfo = {};
     localStorage.clear();
     this.router.navigate(['/']);
+    window.location.reload();
   }
 
   parseData() {
