@@ -5,9 +5,11 @@ import { MessageService } from 'primeng/api';
 export class ToastService {
   private isLogin = new BehaviorSubject<boolean>(true);
   private isRegister = new BehaviorSubject<boolean>(true);
+  private isEnrollCourse = new BehaviorSubject<boolean>(true);
   // Observable stream that components can subscribe to
   toast$ = this.isLogin.asObservable();
   toastRegister$ = this.isRegister.asObservable();
+  toastEnrollCourse$ = this.isEnrollCourse.asObservable();
 
   constructor(private messageService: MessageService) {}
 
@@ -21,6 +23,9 @@ export class ToastService {
     this.isRegister.next(isRegister);
   }
 
+  setToastIsEnrollCourse(isEnrollCourse: boolean) {
+    this.isEnrollCourse.next(isEnrollCourse);
+  }
   showSuccess(message: string) {
     this.messageService.add({
       severity: 'success',
@@ -31,7 +36,7 @@ export class ToastService {
 
   showFail(message: string) {
     this.messageService.add({
-      severity: 'warning',
+      severity: 'danger',
       summary: 'Thất bại',
       detail: message,
     });

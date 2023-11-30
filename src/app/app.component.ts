@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
         this.toastService.showFail('Tài khoản không chính xác!');
       }
     });
+
     // Subscribe to the toast$ Observable to receive toast messages for register
     this.toastService.toastRegister$.subscribe((isRegister) => {
       if (isRegister) {
@@ -23,6 +24,17 @@ export class AppComponent implements OnInit {
       } else {
         this.toastService.showFail(
           'Thông tin hoặc mật khẩu bị trùng, mời bạn thử lại!'
+        );
+      }
+    });
+
+    // Subscribe to the toast$ Observable to receive toast messsages for enroll Course
+    this.toastService.toastEnrollCourse$.subscribe((isEnrollCourse) => {
+      if (isEnrollCourse) {
+        this.toastService.showSuccess('Bạn đã đăng ký khóa học thành công!');
+      } else {
+        this.toastService.showFail(
+          'Đăng ký khóa học thất bại, mời bạn thử lại!'
         );
       }
     });

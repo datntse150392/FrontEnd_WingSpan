@@ -1,23 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
-import { User } from 'src/app/models/UserModel';
 import { environment } from 'src/environments/environment';
 @Injectable({ providedIn: 'root' })
-export class UserAPIService {
+export class CourseAPIService {
   constructor(private httpClient: HttpClient) {}
 
-  isCheckAccount(email: any): Observable<any> {
-    const body = { email };
+  enrollCourse(userId: string, courseId: string): Observable<any> {
+    const body = { userId, courseId };
     return this.httpClient
-      .post(`${environment.apiUrl}auth/isCheckAccount`, body)
-      .pipe(catchError(this.handleError<any>()));
-  }
-
-  getUser(userId: any): Observable<User> {
-    const body = { userId };
-    return this.httpClient
-      .post(`${environment.apiUrl}user/getUser`, body)
+      .post(`${environment.apiUrl}course/enrollmentCourse`, body)
       .pipe(catchError(this.handleError<any>()));
   }
 
