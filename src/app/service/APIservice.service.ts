@@ -4,12 +4,10 @@ import { Observable, catchError, map, of } from 'rxjs';
 import { BillBoard } from '../models/BillboardModel';
 import { Course } from '../models/CourseModel';
 import { TreeNode } from 'primeng/api';
-
+import { environment } from 'src/environments/environment';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'Application/json' }),
 };
-const apiUrl = 'https://ongbutdicodev1.onrender.com/api/';
-// const apiUrl = 'http://localhost:5000/api/';
 @Injectable({
   providedIn: 'root',
 })
@@ -18,19 +16,19 @@ export class APIService {
 
   getAllBillBoards(): Observable<BillBoard[]> {
     return this.httpClient
-      .get<BillBoard[]>(`${apiUrl}billboard/getAllBillboard`)
+      .get<BillBoard[]>(`${environment.apiUrl}billboard/getAllBillboard`)
       .pipe(catchError(this.handleError<BillBoard[]>('getAllBillBoards', [])));
   }
 
   getAllCourses(): Observable<Course[]> {
     return this.httpClient
-      .get<Course[]>(`${apiUrl}course/getAllCourses`)
+      .get<Course[]>(`${environment.apiUrl}course/getAllCourses`)
       .pipe(catchError(this.handleError<Course[]>('getAllCourses', [])));
   }
 
   getCoursebyId(courseId: any): Observable<Course> {
     return this.httpClient
-      .get<Course>(`${apiUrl}course/${courseId}`)
+      .get<Course>(`${environment.apiUrl}course/${courseId}`)
       .pipe(catchError(this.handleError<Course>('getAllBillBoards')));
   }
 
@@ -61,14 +59,14 @@ export class APIService {
   login(username: any, password: any): Observable<any> {
     const body = { username, password };
     return this.httpClient
-      .post(`${apiUrl}auth/signin`, body)
+      .post(`${environment.apiUrl}auth/signin`, body)
       .pipe(catchError(this.handleError<any>()));
   }
 
-  register(email: any, username: any, password: any) {
+  register(email: any, username: any, password?: any, profileImage?: any) {
     const body = { email, username, password };
     return this.httpClient
-      .post(`${apiUrl}auth/signup`, body)
+      .post(`${environment.apiUrl}auth/signup`, body)
       .pipe(catchError(this.handleError<any>()));
   }
 
