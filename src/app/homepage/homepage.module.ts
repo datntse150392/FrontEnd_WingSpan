@@ -18,6 +18,7 @@ import { ToastModule } from 'primeng/toast';
 import { MenubarModule } from 'primeng/menubar';
 import { BadgeModule } from 'primeng/badge';
 import { MenuModule } from 'primeng/menu';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CourseDetailComponent } from './course/course-detail/course-detail.component';
 import { CourseLearningContentComponent } from './course/course-detail/course-leanring/course-leanring-content/content.component';
 import { CourseLeanringSidebarComponent } from './course/course-detail/course-leanring/course-learning-sidebar/sidebar.component';
@@ -41,6 +42,7 @@ import { FooterComponent } from './footer/footer.component';
     MenubarModule,
     BadgeModule,
     MenuModule,
+    ConfirmDialogModule,
   ],
   declarations: [
     ContentComponent,

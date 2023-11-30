@@ -100,7 +100,7 @@
     </div>
     <div class="flex flex-column">
       <h1 class="text-center">Khóa Học Miễn Phí</h1>
-      <ng-container *ngIf="configLocal.userInfo.fullName; else loginBtn">
+      <ng-container *ngIf="isCheckContainCourse(); else EmptyCourse">
         <p-button
           class="text-center relative"
           [style]="{
@@ -108,21 +108,36 @@
           border: 'none',
           fontWeight: 'bold',
         }"
-          >Đã kích hoạt khóa học</p-button
-        >
+          >Đã kích hoạt
+        </p-button>
       </ng-container>
-      <ng-template #loginBtn>
-        <p-button
-          [routerLink]="['/auth/login']"
-          class="text-center relative"
-          [style]="{
+      <ng-template #EmptyCourse>
+        <ng-container *ngIf="configLocal.userInfo.username; else loginForm">
+          <p-button
+            (click)="confirmEnrollCourse(configLocal.userInfo._id, course._id)"
+            class="text-center relative"
+            [style]="{
           backgroundColor: 'orange',
           border: 'none',
           fontWeight: 'bold',
         }"
-          >Đăng nhập để học ngay</p-button
-        >
+            >Đăng ký ngay
+          </p-button>
+        </ng-container>
+        <ng-template #loginForm>
+          <p-button
+            [routerLink]="['/auth/login']"
+            class="text-center relative"
+            [style]="{
+        backgroundColor: 'orange',
+        border: 'none',
+        fontWeight: 'bold',
+      }"
+            >Đăng nhập ngay
+          </p-button>
+        </ng-template>
       </ng-template>
     </div>
   </div>
 </div>
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>

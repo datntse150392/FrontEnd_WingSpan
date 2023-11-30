@@ -46,7 +46,8 @@ export class SignUpComponent implements OnInit {
     this.APIservice.register(
       this.signUpForm.value.email,
       this.signUpForm.value.username,
-      this.signUpForm.value.password
+      this.signUpForm.value.password,
+      ''
     ).subscribe((res: any) => {
       try {
         if (res.data.user) {
