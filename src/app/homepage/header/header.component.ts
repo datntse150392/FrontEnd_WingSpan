@@ -20,20 +20,14 @@ export class HeaderComponent implements OnInit {
         label: 'Tài khoản',
         items: [
           {
-            label: 'Khóa học',
-          },
-          {
             label: 'Thông tin các nhân',
+            url: '/profile',
           },
         ],
       },
       {
         label: 'Cài đặt',
         items: [
-          {
-            label: 'Thay đổi mật khẩu',
-            url: '#',
-          },
           {
             label: 'Đăng xuất',
             command: () => {

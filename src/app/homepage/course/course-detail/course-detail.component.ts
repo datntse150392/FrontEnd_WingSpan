@@ -8,7 +8,6 @@ import { CourseAPIService } from 'src/app/service/api/CourseAPI.service';
 import { ConfirmationService } from 'primeng/api';
 import { UserAPIService } from 'src/app/service/api/UserAPI.service';
 import { ToastService } from 'src/app/service/ToastService.service';
-import { User } from 'src/app/models/UserModel';
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
@@ -16,12 +15,15 @@ import { User } from 'src/app/models/UserModel';
   providers: [ConfirmationService],
 })
 export class CourseDetailComponent implements OnInit {
+  constLesson!: number;
+  isExpand!: boolean;
+
   configLocal: ConfigLocal = {
     userInfo: {},
   };
   course!: Course;
   mainCourse!: TreeNode[];
-  isExpand!: boolean;
+
   constructor(
     private route: ActivatedRoute,
     private APIservice: APIService,
@@ -30,6 +32,7 @@ export class CourseDetailComponent implements OnInit {
     private toastService: ToastService,
     private userAPIService: UserAPIService
   ) {}
+
   ngOnInit() {
     // Lấy giá trị của tham số 'id' từ URL
     const courseId = this.route.snapshot.params['id'];
@@ -42,6 +45,8 @@ export class CourseDetailComponent implements OnInit {
     this.APIservice.tranferMainCourseById(courseId).subscribe(
       (transformedData: TreeNode[]) => {
         this.mainCourse = transformedData;
+        this.constLesson = this.mainCourse.length;
+        console.log(this.mainCourse);
       }
     );
     try {
@@ -127,7 +132,7 @@ export class CourseDetailComponent implements OnInit {
             }
           });
       },
-      reject: (type: any) => {
+      reject: () => {
         this.toastService.setToastIsEnrollCourse(false);
       },
     });

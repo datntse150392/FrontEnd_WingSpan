@@ -12,7 +12,7 @@ import { ToastModule } from 'primeng/toast';
 import { ToastService } from './service/ToastService.service';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { DividerModule } from 'primeng/divider';
 import {
   SocialLoginModule,
   SocialAuthServiceConfig,
@@ -33,6 +33,7 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     SocialLoginModule,
     ToastModule,
     BrowserAnimationsModule,
+    DividerModule,
   ],
   providers: [
     {
