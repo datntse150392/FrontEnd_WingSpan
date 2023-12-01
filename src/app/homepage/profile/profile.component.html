@@ -1,0 +1,57 @@
+<div class="p-8" [ngStyle]="{ border: '1px solid #000' }">
+  <h3>Thông tin cá nhân</h3>
+  <p-divider></p-divider>
+  <!-- Full Name -->
+  <div class="grid">
+    <div class="col-9">
+      <h3>Họ và tên</h3>
+      <p>{{ configLocal.userInfo.fullName }}</p>
+      <p-divider></p-divider>
+      <span
+        >Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của
+        bạn.</span
+      >
+    </div>
+    <div class="col-3 flex align-items-center">
+      <p-toggleButton onLabel="Thay đổi" offLabel="Chỉnh sửa"></p-toggleButton>
+    </div>
+  </div>
+
+  <!-- Avatar -->
+  <div class="grid">
+    <div class="col-9">
+      <h3>Avatar</h3>
+      <p-image
+        src="{{ configLocal.userInfo.profileImage }}"
+        alt="Image"
+        width="250"
+        [preview]="true"
+      ></p-image>
+      <p-divider></p-divider>
+      <span>Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.</span>
+    </div>
+    <div class="col-3 flex align-items-center">
+      <p-fileUpload
+        mode="basic"
+        name="demo[]"
+        url="https://www.primefaces.org/cdn/api/upload.php"
+        accept="image/*"
+        [auto]="true"
+        chooseLabel="Cập nhật ảnh"
+      ></p-fileUpload>
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="grid">
+    <div class="col-9">
+      <h3>Email</h3>
+      <p>{{ configLocal.userInfo.email }}</p>
+      <p-divider></p-divider>
+      <span>Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.</span>
+    </div>
+    <div class="col-3 flex align-items-center">
+      <p-toggleButton onLabel="Thay đổi" offLabel="Chỉnh sửa"></p-toggleButton>
+    </div>
+  </div>
+</div>

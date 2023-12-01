@@ -1,35 +1,40 @@
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
+import { ConfigLocal } from '../models/Config/localState';
 import { Observable } from 'rxjs';
-import { ConfigLocal } from 'src/app/models/Config/localState';
-import { Router } from '@angular/router';
-import { ToastService } from '../service/ToastService.service';
 @Injectable({
   providedIn: 'root',
 })
-export class CanLearnCourseGuard {
+export class ProfileGuard implements CanActivate {
   configLocal: ConfigLocal;
-  constructor(private router: Router, private toastService: ToastService) {
+
+  constructor(private router: Router) {
     this.configLocal = { userInfo: {} };
   }
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
+
+  canActivate(
+    route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    // Check if the user is logged in or has the necessary permissions
+    // Example: Replace the condition below with your actual authentication logic
     try {
       this.configLocal.userInfo = this.parseData().userInfo;
       if (!this.configLocal.userInfo.fullName) {
         return this.router.navigate(['/auth/login']);
       }
     } catch (error) {
+      console.error('Error during user info parsing:', error);
       return this.router.navigate(['/auth/login']);
     }
     return true;

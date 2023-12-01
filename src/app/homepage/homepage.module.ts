@@ -18,13 +18,17 @@ import { ToastModule } from 'primeng/toast';
 import { MenubarModule } from 'primeng/menubar';
 import { BadgeModule } from 'primeng/badge';
 import { MenuModule } from 'primeng/menu';
+import { DividerModule } from 'primeng/divider';
+import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CourseDetailComponent } from './course/course-detail/course-detail.component';
 import { CourseLearningContentComponent } from './course/course-detail/course-leanring/course-leanring-content/content.component';
 import { CourseLeanringSidebarComponent } from './course/course-detail/course-leanring/course-learning-sidebar/sidebar.component';
 import { CourseLearningLessonsComponent } from './course/course-detail/course-leanring/course-learning-lessons/lessons.component';
 import { FooterComponent } from './footer/footer.component';
-
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -43,6 +47,10 @@ import { FooterComponent } from './footer/footer.component';
     BadgeModule,
     MenuModule,
     ConfirmDialogModule,
+    DividerModule,
+    ImageModule,
+    FileUploadModule,
+    ToggleButtonModule,
   ],
   declarations: [
     ContentComponent,
@@ -54,6 +62,7 @@ import { FooterComponent } from './footer/footer.component';
     CourseLeanringSidebarComponent,
     CourseLearningContentComponent,
     FooterComponent,
+    ProfileComponent,
   ],
   providers: [],
 })

@@ -19,7 +19,7 @@
           class="col-6"
         >
           <i
-            class="pi pi-caret-right mr-2"
+            class="pi pi-code mr-2"
             style="font-size: 1rem"
             [ngStyle]="{ color: 'red' }"
           ></i>
@@ -40,8 +40,9 @@
           <li [ngStyle]="">
             <strong>{{ course.mainCourse.length }}</strong> chương
           </li>
-          <li><strong>12</strong> bài học</li>
-          <li>Thời lượng <strong>03 giờ 26 phút</strong></li>
+          <li>
+            <strong>{{ constLesson }}</strong> bài học
+          </li>
         </ul>
         <ng-container *ngIf="isExpand; else elseNotExpand">
           <p
@@ -73,18 +74,29 @@
       <!-- Các video khóa học -->
       <p-tree [value]="mainCourse" class="w-full md:w-30rem">
         <ng-template let-node pTemplate="url">
-          <a
-            [routerLink]="[
-              '/learning/lessons-for-newbie/',
-              course._id,
-              node.data
-            ]"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-700 hover:text-primary"
-            [ngStyle]="{ 'text-decoration': 'none' }"
-            >{{ node.label }}</a
-          >
+          <ng-container *ngIf="isCheckContainCourse(); else isNotContainCourse">
+            <a
+              [routerLink]="[
+                '/learning/lessons-for-newbie/',
+                course._id,
+                node.data
+              ]"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-700 hover:text-primary"
+              [ngStyle]="{ 'text-decoration': 'none' }"
+              >{{ node.label }}</a
+            >
+          </ng-container>
+          <ng-template #isNotContainCourse>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-500"
+              [ngStyle]="{ 'text-decoration': 'none' }"
+              >{{ node.label }}</a
+            >
+          </ng-template>
         </ng-template>
         <ng-template let-node pTemplate="default">
           <b>
