@@ -7,6 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { ConfigLocal } from 'src/app/models/Config/localState';
 import { Router } from '@angular/router';
+import { Course } from '../models/CourseModel';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,6 +16,7 @@ export class CanLearnCourseGuard {
   constructor(private router: Router) {
     this.configLocal = { userInfo: {} };
   }
+
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -24,9 +26,15 @@ export class CanLearnCourseGuard {
     | boolean
     | UrlTree {
     try {
+      const { courseId } = childRoute.params;
       this.configLocal.userInfo = this.parseData().userInfo;
-      if (!this.configLocal.userInfo.fullName) {
-        return this.router.navigate(['/auth/login']);
+      console.log();
+      if (
+        !this.configLocal.userInfo.enrolledCourses?.filter(
+          (item: Course) => item._id === courseId
+        )
+      ) {
+        return this.router.navigate(['/']);
       }
     } catch (error) {
       return this.router.navigate(['/auth/login']);

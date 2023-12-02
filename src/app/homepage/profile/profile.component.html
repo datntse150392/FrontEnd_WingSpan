@@ -5,7 +5,12 @@
   <div class="grid">
     <div class="col-9">
       <h3>Họ và tên</h3>
-      <p>{{ configLocal.userInfo.fullName }}</p>
+      <ng-container *ngIf="toggleEditUserName; else notChangeUserName">
+        <input type="text" pInputText [(ngModel)]="newFullName" />
+      </ng-container>
+      <ng-template #notChangeUserName>
+        <p>{{ this.user.fullName }}</p>
+      </ng-template>
       <p-divider></p-divider>
       <span
         >Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của
@@ -13,7 +18,24 @@
       >
     </div>
     <div class="col-3 flex align-items-center">
-      <p-toggleButton onLabel="Thay đổi" offLabel="Chỉnh sửa"></p-toggleButton>
+      <ng-container *ngIf="toggleEditUserName; else notBtnChange">
+        <button
+          pButton
+          pRipple
+          label="Thay đổi"
+          class="p-button-success"
+          (click)="updateInfo()"
+        ></button>
+      </ng-container>
+      <ng-template #notBtnChange>
+        <button
+          pButton
+          pRipple
+          label="Chỉnh sửa"
+          class="p-button-secondary"
+          (click)="toggleEditChange()"
+        ></button>
+      </ng-template>
     </div>
   </div>
 
@@ -22,7 +44,7 @@
     <div class="col-9">
       <h3>Avatar</h3>
       <p-image
-        src="{{ configLocal.userInfo.profileImage }}"
+        src="{{ this.user.profileImage }}"
         alt="Image"
         width="250"
         [preview]="true"
@@ -46,12 +68,8 @@
   <div class="grid">
     <div class="col-9">
       <h3>Email</h3>
-      <p>{{ configLocal.userInfo.email }}</p>
+      <p>{{ this.user.email }}</p>
       <p-divider></p-divider>
-      <span>Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.</span>
-    </div>
-    <div class="col-3 flex align-items-center">
-      <p-toggleButton onLabel="Thay đổi" offLabel="Chỉnh sửa"></p-toggleButton>
     </div>
   </div>
 </div>
