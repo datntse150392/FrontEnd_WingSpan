@@ -21,6 +21,20 @@ export class UserAPIService {
       .pipe(catchError(this.handleError<any>()));
   }
 
+  getUserByEmail(email: any): Observable<User> {
+    const body = { email };
+    return this.httpClient
+      .post(`${environment.apiUrl}user/getUserByEmail`, body)
+      .pipe(catchError(this.handleError<any>()));
+  }
+
+  updateInfo(email: any, fullName: any): Observable<any> {
+    const body = { email, fullName };
+    return this.httpClient
+      .put(`${environment.apiUrl}user/updateInfo`, body)
+      .pipe(catchError(this.handleError<any>()));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);

@@ -38,5 +38,14 @@ export class AppComponent implements OnInit {
         );
       }
     });
+
+    // Subscribe to the toast$ Observable to receive toast messsages for enroll Course
+    this.toastService.toastEditInfo$.subscribe((isEditInfo) => {
+      if (isEditInfo) {
+        this.toastService.showSuccess('Bạn đã cập nhật thông tin thành công!');
+      } else {
+        this.toastService.showFail('Cập nhật thất bại, mời bạn thử lại!');
+      }
+    });
   }
 }
