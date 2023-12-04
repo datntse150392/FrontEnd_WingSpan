@@ -35,6 +35,19 @@ export class UserAPIService {
       .pipe(catchError(this.handleError<any>()));
   }
 
+  /**
+   * Logic code
+   * @param userId
+   * @returns {Observable}
+   */
+  getUserByUserId(_id: any): Observable<any> {
+    const body = { _id };
+    return this.httpClient.post(
+      `${environment.apiUrl}user/getUserByUserId`,
+      body
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);

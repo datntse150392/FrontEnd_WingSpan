@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { ConfigLocal } from 'src/app/models/Config/localState';
 import { Router } from '@angular/router';
-import { UserAPIService } from 'src/app/service/api/UserAPI.service';
+import { UserAPIService } from 'src/app/service/api/User.service';
+import { AuthService } from 'src/app/service/api/Auth.service';
 import { User } from 'src/app/models/UserModel';
 
 @Component({
@@ -17,7 +18,11 @@ export class HeaderComponent implements OnInit {
   };
   user!: User;
 
-  constructor(private router: Router, private userAPIService: UserAPIService) {}
+  constructor(
+    private router: Router,
+    private userAPIService: UserAPIService,
+    private authService: AuthService
+  ) {}
   ngOnInit(): void {
     this.items = [
       {
@@ -44,15 +49,14 @@ export class HeaderComponent implements OnInit {
     try {
       this.configLocal.userInfo = this.parseData().userInfo;
       this.getUser();
+      this.getUserByUserId();
     } catch (error) {
       console.log(error);
     }
   }
 
   logout() {
-    this.configLocal.userInfo = {};
-    localStorage.clear();
-    this.router.navigate(['/']);
+    this.authService.logout();
   }
 
   getUser() {
@@ -72,5 +76,21 @@ export class HeaderComponent implements OnInit {
       return configLocal;
     }
     return null;
+  }
+
+  /**
+   * @param userId
+   * @return {User}
+   */
+  getUserByUserId() {
+    const configLocalString = localStorage.getItem('configLocal');
+    if (configLocalString) {
+      this.userAPIService
+        .getUserByUserId(this.configLocal.userInfo._id)
+        .subscribe((res: any) => {
+          this.user = res.data.user;
+          console.log(this.user);
+        });
+    }
   }
 }

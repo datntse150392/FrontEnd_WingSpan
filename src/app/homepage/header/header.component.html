@@ -11,7 +11,7 @@
   </div>
 
   <div class="flex align-items-center justify-content-start gap-3">
-    <ng-container *ngIf="configLocal.userInfo.username; else isFailLogin">
+    <ng-container *ngIf="this.user; else isFailLogin">
       <div class="p-2">
         <p
           (click)="menu.toggle($event)"
