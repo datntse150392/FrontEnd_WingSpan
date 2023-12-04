@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfigLocal } from 'src/app/models/Config/localState';
 import { User } from 'src/app/models/UserModel';
 import { ToastService } from 'src/app/service/ToastService.service';
-import { UserAPIService } from 'src/app/service/api/UserAPI.service';
+import { UserAPIService } from 'src/app/service/api/User.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

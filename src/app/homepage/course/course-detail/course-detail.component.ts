@@ -4,9 +4,9 @@ import { TreeNode } from 'primeng/api';
 import { Course } from 'src/app/models/CourseModel';
 import { ConfigLocal } from 'src/app/models/Config/localState';
 import { APIService } from 'src/app/service/APIservice.service';
-import { CourseAPIService } from 'src/app/service/api/CourseAPI.service';
+import { CourseAPIService } from 'src/app/service/api/Course.service';
 import { ConfirmationService } from 'primeng/api';
-import { UserAPIService } from 'src/app/service/api/UserAPI.service';
+import { UserAPIService } from 'src/app/service/api/User.service';
 import { ToastService } from 'src/app/service/ToastService.service';
 @Component({
   selector: 'app-course-detail',

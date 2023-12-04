@@ -5,43 +5,13 @@
     [ngStyle]="{ height: '100px', cursor: 'pointer' }"
   />
 </div>
-<form [formGroup]="signInForm">
-  <div class="flex flex-column">
-    <h2 class="text-center">Đăng Nhập</h2>
-    <div class="mb-4">
-      <p class="m-0 mb-2">Tên tài khoản</p>
-      <input formControlName="username" class="w-full" pInputText />
-    </div>
-    <div>
-      <p class="m-0 mb-2">Mật khẩu</p>
-      <p-password formControlName="password" [toggleMask]="true"></p-password>
-    </div>
-  </div>
-  <div>
-    <button
-      (click)="login()"
-      pButton
-      pRipple
-      label="Đăng nhập "
-      class="p-button-success mt-3 w-full"
-    ></button>
-    <div class="flex flex-row justify-content-between">
-      <p
-        [routerLink]="['/auth/register']"
-        [ngStyle]="{ fontSize: '12px', cursor: 'pointer' }"
-      >
-        Đăng ký ngay
-      </p>
-      <p [ngStyle]="{ fontSize: '12px' }">Quên mật khẩu?</p>
-    </div>
-  </div>
-</form>
 
 <p-divider align="center">
   <div class="inline-flex align-items-center">
-    <b>Hoặc</b>
+    <b>Đăng nhập với Google</b>
   </div>
 </p-divider>
+
 <div class="w-full flex align-items-center justify-content-center">
   <asl-google-signin-button
     type="standard"
