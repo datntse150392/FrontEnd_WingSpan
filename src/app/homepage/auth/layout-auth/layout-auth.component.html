@@ -2,10 +2,12 @@
   class="grid m-0 p-0"
   [ngStyle]="{ height: '100vh', 'overflow-y': 'hidden' }"
 >
-  <div class="col-4 flex flex-column align-items-center justify-content-center">
+  <div
+    class="col-4 flex flex-column align-items-center justify-content-center reponsive"
+  >
     <router-outlet></router-outlet>
   </div>
-  <div class="col-8 h-full p-0">
+  <div class="col-8 h-full p-0 bg-singin">
     <img
       [ngStyle]="{ height: '100%', width: '100%' }"
       src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Auth%2Fpexels-mo-eid-9829615.jpg?alt=media&token=38d46d44-58f3-4171-bfcb-6206d62c7768"

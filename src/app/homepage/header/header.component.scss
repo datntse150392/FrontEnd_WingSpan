@@ -12,3 +12,22 @@
   border: none;
   color: #000;
 }
+
+.logo {
+  width: 120px;
+}
+
+/* Add this CSS in your component's style file or in a global style file */
+
+/* For screens smaller than 600px (typical mobile devices) */
+@media (max-width: 600px) {
+  .logo {
+    height: auto; /* Allow the image to scale proportionally */
+    max-width: 100%; /* Ensure the image does not exceed the width of its container */
+  }
+
+  /* Add additional mobile-specific styling if needed */
+  .flex {
+    flex-direction: row; /* Adjust flex direction for better stacking */
+  }
+}

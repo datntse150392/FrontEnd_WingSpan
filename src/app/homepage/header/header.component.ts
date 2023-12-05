@@ -89,7 +89,6 @@ export class HeaderComponent implements OnInit {
         .getUserByUserId(this.configLocal.userInfo._id)
         .subscribe((res: any) => {
           this.user = res.data.user;
-          console.log(this.user);
         });
     }
   }

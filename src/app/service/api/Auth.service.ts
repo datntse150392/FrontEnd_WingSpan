@@ -3,11 +3,16 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private token: string | null = localStorage.getItem('token');
 
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private authService: SocialAuthService
+  ) {}
 
   /**
    * Logic code handle for signin account
@@ -38,8 +43,8 @@ export class AuthService {
    */
   logout() {
     localStorage.clear();
+    this.authService.signOut();
     this.router.navigate(['/auth/login']);
-    window.location.reload();
   }
 
   /**

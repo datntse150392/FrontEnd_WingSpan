@@ -1,18 +1,18 @@
-<div class="flex align-items-center justify-content-between mr-3 ml-3 h-full">
-  <div class="flex align-items-center justify-content-between">
-    <p-avatar
-      [ngStyle]="{ cursor: 'pointer' }"
+<div
+  class="flex align-items-center justify-content-between mr-3 ml-3 h-full w-full header-reponsive"
+>
+  <div class="flex w-full align-items-center justify-content-start">
+    <img
+      class="logo"
       [routerLink]="['/']"
-      image="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2Fsilhouette-solo-dribbble-03_v4.gif?alt=media&token=45485a0f-0e34-4ba4-99be-5d3d195a2590"
-      size="xlarge"
-    ></p-avatar>
-    <h3>WingSpan</h3>
+      src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2Fwing%20span%20(300%20x%20200%20px)%20(1).svg?alt=media&token=ab6f6569-f860-44a4-b640-bcca4af42519"
+    />
     <app-sidebar></app-sidebar>
   </div>
 
-  <div class="flex align-items-center justify-content-start gap-3">
+  <div class="flex align-items-center justify-content-start">
     <ng-container *ngIf="this.user; else isFailLogin">
-      <div class="p-2">
+      <div class="mr-4" [ngStyle]="{ width: '150px' }">
         <p
           (click)="menu.toggle($event)"
           [ngStyle]="{
@@ -35,14 +35,6 @@
         label="Đăng nhập"
         class="p-button-success btn-auth"
         icon="pi pi-user"
-      ></button>
-      <button
-        [routerLink]="['/auth/register/']"
-        pButton
-        pRipple
-        label="Đăng ký"
-        class="p-button-danger btn-auth"
-        icon="pi pi-user-plus"
       ></button>
     </ng-template>
   </div>
