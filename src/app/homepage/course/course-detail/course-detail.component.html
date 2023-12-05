@@ -1,4 +1,7 @@
-<div class="grid" [ngStyle]="{ height: '100vh' }">
+<div
+  class="grid custom-course-detail-item-main"
+  [ngStyle]="{ height: '100vh' }"
+>
   <div class="col-8 flex flex-column gap-5">
     <!-- Main Title -->
     <div>
@@ -149,6 +152,165 @@
           </p-button>
         </ng-template>
       </ng-template>
+    </div>
+  </div>
+</div>
+<!-- For Mobile Web-->
+<div class="grid custom-course-detail-item-sub-main">
+  <div class="custom-course-container-1">
+    <div>
+      <img class="img-custom w-full" src="{{ course.image }}" />
+    </div>
+    <div class="flex flex-column">
+      <h1 class="text-center">Khóa Học Miễn Phí</h1>
+      <ng-container *ngIf="isCheckContainCourse(); else EmptyCourse">
+        <p-button
+          class="text-center relative"
+          [style]="{
+        backgroundColor: 'green',
+        border: 'none',
+        fontWeight: 'bold',
+      }"
+          >Đã kích hoạt
+        </p-button>
+      </ng-container>
+      <ng-template #EmptyCourse>
+        <ng-container *ngIf="this.user; else loginForm">
+          <p-button
+            (click)="confirmEnrollCourse(configLocal.userInfo._id, course._id)"
+            class="text-center relative"
+            [style]="{
+        backgroundColor: 'orange',
+        border: 'none',
+        fontWeight: 'bold',
+      }"
+            >Đăng ký ngay
+          </p-button>
+        </ng-container>
+        <ng-template #loginForm>
+          <p-button
+            [routerLink]="['/auth/login']"
+            class="text-center relative"
+            [style]="{
+      backgroundColor: 'orange',
+      border: 'none',
+      fontWeight: 'bold',
+    }"
+            >Đăng nhập ngay
+          </p-button>
+        </ng-template>
+      </ng-template>
+    </div>
+  </div>
+  <p-divider class="w-full mt-4" align="center">
+    <span class="p-tag">Chi tiết khóa học</span>
+  </p-divider>
+  <div class="flex flex-column gap-5 custom-course-container-2">
+    <!-- Main Title -->
+    <div
+      class="flex flex-column align-items-center text-center custom-course-sub-container"
+    >
+      <h1>{{ course.title }}</h1>
+      <p>
+        {{ course.titleDescription }}
+      </p>
+    </div>
+    <!-- Sub Title -->
+    <div class="custom-course-sub-container-2">
+      <h3>Bạn sẽ học được gì?</h3>
+      <div class="flex flex-column gap-2">
+        <div
+          *ngFor="
+            let subTitleDescription of course.subTitleDescription;
+            index as i
+          "
+        >
+          <i
+            class="pi pi-code mr-2"
+            style="font-size: 1rem"
+            [ngStyle]="{ color: 'red' }"
+          ></i>
+          <span [ngStyle]="{ fontSize: '13px' }">{{
+            subTitleDescription
+          }}</span>
+        </div>
+      </div>
+    </div>
+    <!-- Main Course -->
+    <div class="custom-course-sub-container-3">
+      <h2>Nội dung khóa học</h2>
+      <div class="flex flex-row justify-content-between">
+        <ul
+          class="flex flex-row gap-4 no-bullet"
+          [ngStyle]="{ fontSize: '14px', paddingLeft: '0' }"
+        >
+          <li [ngStyle]="">
+            <strong>{{ course.mainCourse.length }}</strong> chương
+          </li>
+          <li>
+            <strong>{{ constLesson }}</strong> bài học
+          </li>
+        </ul>
+        <ng-container *ngIf="isExpand; else elseNotExpand">
+          <p
+            (click)="collapseAll()"
+            [ngStyle]="{
+              color: 'red',
+              fontSize: '13px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }"
+          >
+            Thu nhỏ tất cả
+          </p>
+        </ng-container>
+        <ng-template #elseNotExpand>
+          <p
+            (click)="expandAll()"
+            [ngStyle]="{
+              color: 'red',
+              fontSize: '13px',
+              fontWeight: 'bold',
+              cursor: 'pointer'
+            }"
+          >
+            Mở rộng tất cả
+          </p>
+        </ng-template>
+      </div>
+      <!-- Các video khóa học -->
+      <p-tree [value]="mainCourse" class="w-full md:w-30rem">
+        <ng-template let-node pTemplate="url">
+          <ng-container *ngIf="isCheckContainCourse(); else isNotContainCourse">
+            <p
+              [routerLink]="[
+                '/learning/lessons-for-newbie/',
+                course._id,
+                node.data
+              ]"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-primary"
+              [ngStyle]="{ 'text-decoration': 'none', 'font-size': '13px' }"
+            >
+              {{ node.label }}
+            </p>
+          </ng-container>
+          <ng-template #isNotContainCourse>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              [ngStyle]="{ 'text-decoration': 'none', 'font-size': '12px' }"
+              >{{ node.label }}</a
+            >
+          </ng-template>
+        </ng-template>
+        <ng-template let-node pTemplate="default">
+          <p [ngStyle]="{ 'font-size': '15px', 'font-weight': 'bold' }">
+            {{ node.label }}
+          </p>
+        </ng-template>
+      </p-tree>
     </div>
   </div>
 </div>

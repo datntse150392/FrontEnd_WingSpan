@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path: 'learning',
     component: CourseLearningContentComponent,
-    canActivateChild: [CanLearnCourseGuard],
+    // canActivateChild: [CanLearnCourseGuard],
     children: [
       {
         path: 'lessons-for-newbie/:courseId/:videoId',

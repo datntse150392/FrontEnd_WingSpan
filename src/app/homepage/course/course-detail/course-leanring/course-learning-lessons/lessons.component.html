@@ -1,14 +1,16 @@
-<div class="w-full flex align-items-center">
+<div class="w-full flex align-items-center custome-leanring-lessons-item">
   <iframe
     width="100%"
-    height="550"
+    height="600"
     [src]="videoUrl"
     frameborder="0"
     allowfullscreen
   ></iframe>
 </div>
-
-<div class="p-6">
+<div class="custome-course-leanring-sidebar-mobile-web">
+  <app-course-learning-sidebar></app-course-learning-sidebar>
+</div>
+<div class="custome-leanring-lessons-container">
   <h2 class="m-0">{{ course.title }}</h2>
   <span [ngStyle]="{ fontSize: '10px' }">Cập nhật tháng 11 năm 2022</span>
   <p>
