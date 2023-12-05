@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/models/CourseModel';
 import { BillBoard } from 'src/app/models/BillboardModel';
-import { APIService } from 'src/app/service/APIservice.service';
+import { APIService } from 'src/app/service/api/APIservice.service';
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',

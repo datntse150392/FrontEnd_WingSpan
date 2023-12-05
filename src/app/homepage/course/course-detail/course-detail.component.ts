@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { TreeNode } from 'primeng/api';
 import { Course } from 'src/app/models/CourseModel';
 import { ConfigLocal } from 'src/app/models/Config/localState';
-import { APIService } from 'src/app/service/APIservice.service';
+import { APIService } from 'src/app/service/api/APIservice.service';
 import { CourseAPIService } from 'src/app/service/api/Course.service';
 import { ConfirmationService } from 'primeng/api';
 import { UserAPIService } from 'src/app/service/api/User.service';
 import { ToastService } from 'src/app/service/ToastService.service';
+import { User } from 'src/app/models/UserModel';
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
@@ -23,6 +24,7 @@ export class CourseDetailComponent implements OnInit {
   };
   course!: Course;
   mainCourse!: TreeNode[];
+  user!: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,6 +53,7 @@ export class CourseDetailComponent implements OnInit {
     );
     try {
       this.configLocal.userInfo = this.parseData().userInfo;
+      this.getUserByUserId(this.configLocal.userInfo._id);
     } catch (error) {
       console.log(error);
     }
@@ -90,7 +93,7 @@ export class CourseDetailComponent implements OnInit {
 
   isCheckContainCourse() {
     if (
-      this.configLocal.userInfo.enrolledCourses?.some(
+      this.user.enrolledCourses?.some(
         (course: Course) => this.course._id === course._id
       )
     ) {
@@ -113,7 +116,6 @@ export class CourseDetailComponent implements OnInit {
           .subscribe((res: any) => {
             try {
               if (res?.status === 200) {
-                this.toastService.setToastIsEnrollCourse(true);
                 this.userAPIService
                   .getUser(this.configLocal.userInfo.username)
                   .subscribe((res: any) => {
@@ -124,6 +126,7 @@ export class CourseDetailComponent implements OnInit {
                       JSON.stringify(this.configLocal)
                     );
                   });
+                this.toastService.setToastIsEnrollCourse(true);
               } else if (res?.status === 400) {
                 this.toastService.setToastIsEnrollCourse(false);
               }
@@ -135,6 +138,16 @@ export class CourseDetailComponent implements OnInit {
       reject: () => {
         this.toastService.setToastIsEnrollCourse(false);
       },
+    });
+  }
+
+  /**
+   * @parms userId from localStorage
+   */
+  getUserByUserId(userId: any) {
+    this.userAPIService.getUserByUserId(userId).subscribe((res) => {
+      this.user = res.data.user;
+      console.log(this.user);
     });
   }
 }

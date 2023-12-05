@@ -17,13 +17,29 @@
   width: 120px;
 }
 
+.sub-header {
+  display: none;
+}
+
 /* Add this CSS in your component's style file or in a global style file */
 
 /* For screens smaller than 600px (typical mobile devices) */
 @media (max-width: 600px) {
+  div.main-header {
+    display: none !important; /* Use !important to ensure higher specificity */
+    p {
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: "bold";
+    }
+  }
   .logo {
     height: auto; /* Allow the image to scale proportionally */
     max-width: 100%; /* Ensure the image does not exceed the width of its container */
+  }
+
+  .sub-header {
+    display: block;
   }
 
   /* Add additional mobile-specific styling if needed */

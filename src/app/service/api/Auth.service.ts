@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 @Injectable({ providedIn: 'root' })
@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private authService: SocialAuthService
+    private socialAuthService: SocialAuthService
   ) {}
 
   /**
@@ -43,7 +43,7 @@ export class AuthService {
    */
   logout() {
     localStorage.clear();
-    this.authService.signOut();
+    this.socialAuthService.signOut();
     this.router.navigate(['/auth/login']);
   }
 
@@ -63,7 +63,7 @@ export class AuthService {
   /**
    * Function to get headers to serve require need it
    */
-  getHeaders() {
-    return new HttpHeaders({ Authorization: `Bearer ${this.token}` });
+  getHeaders(token: any) {
+    return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
 }

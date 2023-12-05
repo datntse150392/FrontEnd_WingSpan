@@ -14,3 +14,22 @@
     font-weight: bold;
   }
 }
+
+/* Media query for screens 600px or smaller (typical mobile devices) */
+@media (max-width: 600px) {
+  .custom-footer-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .custom-footer-container {
+      width: 100%;
+      align-items: start !important;
+    }
+  }
+
+  .custom-footer-bottom {
+    p {
+      font-size: 10px;
+    }
+  }
+}

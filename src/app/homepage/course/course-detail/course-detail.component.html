@@ -1,4 +1,4 @@
-<div class="grid">
+<div class="grid" [ngStyle]="{ height: '100vh' }">
   <div class="col-8 flex flex-column gap-5">
     <!-- Main Title -->
     <div>
@@ -124,7 +124,7 @@
         </p-button>
       </ng-container>
       <ng-template #EmptyCourse>
-        <ng-container *ngIf="configLocal.userInfo.username; else loginForm">
+        <ng-container *ngIf="this.user; else loginForm">
           <p-button
             (click)="confirmEnrollCourse(configLocal.userInfo._id, course._id)"
             class="text-center relative"

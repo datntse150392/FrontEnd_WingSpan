@@ -11,3 +11,41 @@
     opacity: 0.4; /* Điều chỉnh độ trong suốt của hình ảnh */
   }
 }
+/* Default styles for larger screens */
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-container {
+  margin-bottom: 20px;
+}
+
+.course-section {
+  margin-bottom: 20px;
+}
+
+.divider {
+  display: none;
+}
+
+/* Media query for screens 600px or smaller (typical mobile devices) */
+@media (max-width: 600px) {
+  .divider {
+    display: block;
+  }
+  .custom-carousel-item {
+    display: none;
+  }
+  .custom-course-item {
+    h2 {
+      font-size: 20px;
+    }
+  }
+  .custom-course-container {
+    width: 100%;
+    p {
+      font-size: 14px;
+    }
+  }
+}

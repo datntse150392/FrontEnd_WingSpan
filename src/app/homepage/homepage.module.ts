@@ -23,6 +23,8 @@ import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { SidebarModule } from 'primeng/sidebar';
+
 import { CourseDetailComponent } from './course/course-detail/course-detail.component';
 import { CourseLearningContentComponent } from './course/course-detail/course-leanring/course-leanring-content/content.component';
 import { CourseLeanringSidebarComponent } from './course/course-detail/course-leanring/course-learning-sidebar/sidebar.component';
@@ -51,6 +53,7 @@ import { ProfileComponent } from './profile/profile.component';
     ImageModule,
     FileUploadModule,
     ToggleButtonModule,
+    SidebarModule,
   ],
   declarations: [
     ContentComponent,
