@@ -6,7 +6,7 @@ import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { DividerModule } from 'primeng/divider';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
+
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LayoutAuthComponent } from './layout-auth/layout-auth.component';
@@ -19,7 +19,7 @@ import {
   FacebookLoginProvider,
 } from '@abacritt/angularx-social-login';
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent, LayoutAuthComponent],
+  declarations: [SignInComponent, LayoutAuthComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

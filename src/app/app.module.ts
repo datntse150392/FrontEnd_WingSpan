@@ -18,9 +18,11 @@ import {
   SocialAuthServiceConfig,
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { AuthGuard } from './guard/auth.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -52,6 +54,7 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     },
     ToastService,
     MessageService,
+    AuthGuard,
   ],
   bootstrap: [AppComponent],
 })

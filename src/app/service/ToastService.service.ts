@@ -34,6 +34,7 @@ export class ToastService {
   }
 
   showSuccess(message: string) {
+    this.messageService.clear();
     this.messageService.add({
       severity: 'success',
       summary: 'Thành công',
@@ -42,6 +43,7 @@ export class ToastService {
   }
 
   showFail(message: string) {
+    this.messageService.clear();
     this.messageService.add({
       severity: 'danger',
       summary: 'Thất bại',

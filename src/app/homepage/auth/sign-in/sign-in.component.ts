@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { APIService } from 'src/app/service/APIservice.service';
-import { UserAPIService } from 'src/app/service/api/User.service';
 import { AuthService } from 'src/app/service/api/Auth.service';
 import { ConfigLocal } from 'src/app/models/Config/localState';
 import { User } from 'src/app/models/UserModel';
@@ -11,7 +9,6 @@ import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { mergeMap, of } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -50,7 +47,7 @@ export class SignInComponent implements OnInit {
         })
       )
       .subscribe((res: any) => {
-        if (res.status === 200 && res.message === 'Not Found') {
+        if (res && res.status === 200 && res.message === 'Not Found') {
           this.authService
             .signUp(this.userGG.email, this.userGG.name)
             .subscribe((res: any) => {
@@ -72,24 +69,25 @@ export class SignInComponent implements OnInit {
               }
             });
         } else {
-          this.authService.signIn(this.userGG.email).subscribe((res: any) => {
-            try {
-              const token = res && res.access_token.split(' ')[1];
-              localStorage.setItem('token', token);
-              // Decode the token
-              const decoded = this.helper.decodeToken(token);
-              this.configLocal.userInfo = decoded;
-              localStorage.setItem(
-                'configLocal',
-                JSON.stringify(this.configLocal)
-              );
-              this.toastService.setToastIsLogin(true);
-              this.router.navigate(['/']);
-            } catch (error) {
-              this.toastService.setToastIsLogin(false);
-              localStorage.clear();
-            }
-          });
+          this.userGG &&
+            this.authService.signIn(this.userGG.email).subscribe((res: any) => {
+              try {
+                const token = res && res.access_token.split(' ')[1];
+                localStorage.setItem('token', token);
+                // Decode the token
+                const decoded = this.helper.decodeToken(token);
+                this.configLocal.userInfo = decoded;
+                localStorage.setItem(
+                  'configLocal',
+                  JSON.stringify(this.configLocal)
+                );
+                this.toastService.setToastIsLogin(true);
+                this.router.navigate(['/']);
+              } catch (error) {
+                this.toastService.setToastIsLogin(false);
+                localStorage.clear();
+              }
+            });
         }
       });
   }
