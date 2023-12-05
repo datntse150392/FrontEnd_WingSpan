@@ -12,6 +12,7 @@ import { User } from 'src/app/models/UserModel';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  sidebarVisible: boolean = false;
   items: MenuItem[] | undefined;
   configLocal: ConfigLocal = {
     userInfo: {},

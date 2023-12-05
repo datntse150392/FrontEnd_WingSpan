@@ -3,7 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TreeNode } from 'primeng/api';
 import { Course } from 'src/app/models/CourseModel';
-import { APIService } from 'src/app/service/APIservice.service';
+import { APIService } from 'src/app/service/api/APIservice.service';
 
 @Component({
   selector: 'app-lessons',

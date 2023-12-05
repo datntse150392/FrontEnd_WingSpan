@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TreeNode } from 'primeng/api';
 import { CourseServiceModule } from '../../../course.service';
-import { APIService } from 'src/app/service/APIservice.service';
+import { APIService } from 'src/app/service/api/APIservice.service';
 @Component({
   selector: 'app-course-learning-sidebar',
   templateUrl: './sidebar.component.html',

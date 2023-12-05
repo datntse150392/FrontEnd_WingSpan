@@ -1,5 +1,5 @@
 <div
-  class="flex align-items-center justify-content-between mr-3 ml-3 h-full w-full header-reponsive"
+  class="flex align-items-center justify-content-between mr-3 ml-3 h-full w-full main-header"
 >
   <div class="flex w-full align-items-center justify-content-start">
     <img
@@ -33,9 +33,74 @@
         pButton
         pRipple
         label="Đăng nhập"
-        class="p-button-success btn-auth"
+        class="p-button-success btn-auth mr-4"
         icon="pi pi-user"
+        [ngStyle]="{ width: '120px' }"
       ></button>
     </ng-template>
   </div>
+</div>
+
+<div class="sub-header p-2">
+  <p-sidebar [(visible)]="sidebarVisible">
+    <div>
+      <img
+        class="logo"
+        [routerLink]="['/']"
+        src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2Fwing%20span%20(300%20x%20200%20px)%20(1).svg?alt=media&token=ab6f6569-f860-44a4-b640-bcca4af42519"
+      />
+      <ng-container *ngIf="this.user; else loginForm">
+        <p
+          [ngStyle]="{
+            cursor: 'pointer',
+            fontSize: '15px',
+            fontWeight: 'bold'
+          }"
+        >
+          {{ user.fullName }}
+        </p>
+      </ng-container>
+      <ng-template #loginForm>
+        <div class="flex flex-row align-items-center">
+          <i class="pi pi-sign-in mr-3" style="font-size: 1rem"></i>
+          <p [routerLink]="['/auth/login/']">Đăng nhập</p>
+        </div>
+      </ng-template>
+    </div>
+    <p-divider></p-divider>
+    <div class="flex flex-column">
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-user mr-3" style="font-size: 1rem"></i>
+        <p>Trang cá nhân</p>
+      </div>
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-list mr-3" style="font-size: 1rem"></i>
+        <p>Khóa học của tôi</p>
+      </div>
+      <p-divider></p-divider>
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-home mr-3" style="font-size: 1rem"></i>
+        <p>Trang chủ</p>
+      </div>
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-map mr-3" style="font-size: 1rem"></i>
+        <p>Lộ trình</p>
+      </div>
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-file mr-3" style="font-size: 1rem"></i>
+        <p>Bài viết</p>
+      </div>
+    </div>
+    <p-divider></p-divider>
+    <ng-container *ngIf="this.user">
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-sign-out mr-3" style="font-size: 1rem"></i>
+        <p (click)="logout()">Đăng xuất</p>
+      </div>
+    </ng-container>
+  </p-sidebar>
+  <p-button
+    (click)="sidebarVisible = true"
+    icon="pi pi-align-justify"
+  ></p-button>
 </div>

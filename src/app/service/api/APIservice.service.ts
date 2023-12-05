@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
-import { BillBoard } from '../models/BillboardModel';
-import { Course } from '../models/CourseModel';
+import { BillBoard } from '../../models/BillboardModel';
+import { Course } from '../../models/CourseModel';
 import { TreeNode } from 'primeng/api';
 import { environment } from 'src/environments/environment';
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'Application/json' }),
-};
+import { AuthService } from './Auth.service';
 @Injectable({
   providedIn: 'root',
 })
 export class APIService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService
+  ) {}
+  /**
+   * Delcre headers to authorization
+   */
+  headers = this.authService.getHeaders(localStorage.getItem('token'));
 
   getAllBillBoards(): Observable<BillBoard[]> {
     return this.httpClient
@@ -28,7 +33,9 @@ export class APIService {
 
   getCoursebyId(courseId: any): Observable<Course> {
     return this.httpClient
-      .get<Course>(`${environment.apiUrl}course/${courseId}`)
+      .get<Course>(`${environment.apiUrl}course/${courseId}`, {
+        headers: this.headers,
+      })
       .pipe(catchError(this.handleError<Course>('getAllBillBoards')));
   }
 
