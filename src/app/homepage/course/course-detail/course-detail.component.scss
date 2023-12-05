@@ -9,3 +9,33 @@ ul.no-bullet li:not(:first-child) {
   /* Áp dụng cho tất cả các mục trừ mục đầu tiên */
   list-style-type: disc; /* Có thể thay đổi kiểu hiển thị khác nếu cần */
 }
+
+.custom-course-detail-item-sub-main {
+  display: none !important;
+}
+
+/* Media query for screens 600px or smaller (typical mobile devices) */
+@media (max-width: 600px) {
+  .custom-course-detail-item-main {
+    display: none !important;
+  }
+  .custom-course-detail-item-sub-main {
+    display: flex !important;
+  }
+  .custom-course-container-2 {
+    .custom-course-sub-container {
+      h1 {
+        font-size: 25px;
+      }
+      p {
+        font-size: 13px;
+        margin: 0;
+      }
+    }
+    .custom-course-sub-container-2 {
+      h3 {
+        margin-top: 0;
+      }
+    }
+  }
+}

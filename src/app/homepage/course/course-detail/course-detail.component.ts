@@ -38,17 +38,23 @@ export class CourseDetailComponent implements OnInit {
   ngOnInit() {
     // Lấy giá trị của tham số 'id' từ URL
     const courseId = this.route.snapshot.params['id'];
+
     // Lưu courseId vào configCourse và lưu vào localStorage
     localStorage.setItem('courseId', courseId);
+
     // Subscribe to the Observable to get the Course data
     this.APIservice.getCoursebyId(courseId).subscribe((res: any) => {
-      this.course = res.data;
+      if (res) {
+        this.course = res.data;
+      }
     });
     this.APIservice.tranferMainCourseById(courseId).subscribe(
       (transformedData: TreeNode[]) => {
-        this.mainCourse = transformedData;
-        this.constLesson = this.mainCourse.length;
-        console.log(this.mainCourse);
+        if (transformedData) {
+          this.mainCourse = transformedData;
+          this.constLesson = this.mainCourse.length;
+          console.log(this.mainCourse);
+        }
       }
     );
     try {
@@ -93,6 +99,7 @@ export class CourseDetailComponent implements OnInit {
 
   isCheckContainCourse() {
     if (
+      this.user &&
       this.user.enrolledCourses?.some(
         (course: Course) => this.course._id === course._id
       )

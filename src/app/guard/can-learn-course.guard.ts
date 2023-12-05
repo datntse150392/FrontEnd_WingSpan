@@ -20,25 +20,15 @@ export class CanLearnCourseGuard {
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
-    try {
-      const { courseId } = childRoute.params;
-      this.configLocal.userInfo = this.parseData().userInfo;
-      console.log();
-      if (
-        !this.configLocal.userInfo.enrolledCourses?.filter(
-          (item: Course) => item._id === courseId
-        )
-      ) {
-        return this.router.navigate(['/']);
-      }
-    } catch (error) {
-      return this.router.navigate(['/auth/login']);
+  ): boolean {
+    // is check user has in the system ?
+    const isLoggedIn = localStorage.getItem('configLocal');
+
+    if (isLoggedIn) {
+      // If user was logge, so redirect user to homepage
+      this.router.navigate(['/']);
     }
+    // If user is't login so access this path
     return true;
   }
 

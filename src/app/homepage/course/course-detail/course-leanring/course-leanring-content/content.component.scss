@@ -1,0 +1,13 @@
+.custom-course-leanring-item-sub-main {
+  display: none !important;
+}
+/* Media query for screens 600px or smaller (typical mobile devices) */
+@media (max-width: 600px) {
+  .custom-course-leanring-item-main {
+    display: none !important;
+  }
+  .custom-course-leanring-item-sub-main {
+    display: flex !important;
+    flex-direction: column;
+  }
+}
