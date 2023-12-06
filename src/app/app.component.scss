@@ -1,0 +1,12 @@
+.custom-toast-sub {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  .custom-toast-main {
+    display: none !important;
+  }
+  .custom-toast-sub {
+    display: block !important;
+  }
+}

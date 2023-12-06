@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { TreeNode } from 'primeng/api';
@@ -10,7 +10,7 @@ import { APIService } from 'src/app/service/api/APIservice.service';
   templateUrl: './lessons.component.html',
   styleUrls: ['./lessons.component.scss'],
 })
-export class CourseLearningLessonsComponent {
+export class CourseLearningLessonsComponent implements OnInit {
   courseId!: string;
   videoId!: string;
   videoUrl!: SafeResourceUrl;
@@ -27,12 +27,13 @@ export class CourseLearningLessonsComponent {
     this.route.params.subscribe((params) => {
       this.videoId = params['videoId'];
       this.courseId = params['courseId'];
+      // Thay thế "VIDEO_ID" bằng ID của video YouTube
+      // Tạo URL an toàn
+      this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+        `https://www.youtube.com/embed/${this.videoId}`
+      );
     });
-    // Thay thế "VIDEO_ID" bằng ID của video YouTube
-    // Tạo URL an toàn
-    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.youtube.com/embed/${this.videoId}`
-    );
+
     this.APIservice.getCoursebyId(this.courseId).subscribe((res: any) => {
       this.course = res.data;
     });

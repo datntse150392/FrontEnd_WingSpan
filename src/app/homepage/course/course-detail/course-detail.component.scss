@@ -14,6 +14,9 @@ ul.no-bullet li:not(:first-child) {
   display: none !important;
 }
 
+.confirmDialog {
+  width: 50vw;
+}
 /* Media query for screens 600px or smaller (typical mobile devices) */
 @media (max-width: 600px) {
   .custom-course-detail-item-main {
@@ -37,5 +40,9 @@ ul.no-bullet li:not(:first-child) {
         margin-top: 0;
       }
     }
+  }
+
+  .confirmDialog {
+    width: 70vw !important;
   }
 }
