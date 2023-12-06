@@ -10,8 +10,19 @@
     <app-sidebar></app-sidebar>
   </div>
 
-  <div class="flex align-items-center justify-content-start">
+  <div class="flex align-items-center justify-content-start gap-4">
     <ng-container *ngIf="this.user; else isFailLogin">
+      <div class="card flex justify-content-center align-items-center">
+        <i class="pi pi-bell text-2xl" pBadge severity="danger" value="0"></i>
+      </div>
+      <div class="card flex justify-content-center align-items-center">
+        <i
+          class="pi pi-shopping-cart text-2xl"
+          pBadge
+          severity="danger"
+          value="0"
+        ></i>
+      </div>
       <div class="mr-4" [ngStyle]="{ width: '150px' }">
         <p
           (click)="menu.toggle($event)"
@@ -41,7 +52,7 @@
   </div>
 </div>
 
-<div class="sub-header p-2">
+<div class="sub-header p-3">
   <p-sidebar [(visible)]="sidebarVisible">
     <div>
       <img
@@ -66,6 +77,13 @@
           <p [routerLink]="['/auth/login/']">Đăng nhập</p>
         </div>
       </ng-template>
+    </div>
+    <p-divider></p-divider>
+    <div class="flex flex-column">
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-shopping-cart mr-3" style="font-size: 1rem"></i>
+        <p>Xem giỏ hàng</p>
+      </div>
     </div>
     <p-divider></p-divider>
     <div class="flex flex-column">
@@ -99,8 +117,20 @@
       </div>
     </ng-container>
   </p-sidebar>
-  <p-button
-    (click)="sidebarVisible = true"
-    icon="pi pi-align-justify"
-  ></p-button>
+  <div class="flex flex-row justify-content-between mr-2">
+    <button
+      (click)="sidebarVisible = true"
+      pButton
+      pRipple
+      icon="pi pi-align-justify"
+      class="p-button-secondary"
+    ></button>
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText />
+    </span>
+    <div class="card flex justify-content-center align-items-center">
+      <i class="pi pi-bell text-3xl" pBadge severity="danger" value="0"></i>
+    </div>
+  </div>
 </div>
