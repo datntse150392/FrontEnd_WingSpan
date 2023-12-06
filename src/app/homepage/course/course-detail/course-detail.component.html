@@ -297,12 +297,13 @@
             </p>
           </ng-container>
           <ng-template #isNotContainCourse>
-            <a
+            <p
               target="_blank"
               rel="noopener noreferrer"
               [ngStyle]="{ 'text-decoration': 'none', 'font-size': '12px' }"
-              >{{ node.label }}</a
             >
+              {{ node.label }}
+            </p>
           </ng-template>
         </ng-template>
         <ng-template let-node pTemplate="default">
@@ -314,4 +315,28 @@
     </div>
   </div>
 </div>
-<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+<div class="confirmDialog">
+  <p-confirmDialog #cd class="w-full">
+    <ng-template pTemplate="message">
+      <h4>Bạn chắc chắn muốn đăng ký?</h4>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="flex flex-row w-20rem">
+        <button
+          [ngStyle]="{ backgroundColor: 'red' }"
+          type="button"
+          pButton
+          icon="pi pi-times"
+          label="Không"
+          (click)="cd.reject()"
+        ></button>
+        <button
+          type="button"
+          pButton
+          icon="pi pi-check"
+          label="Đăng ký"
+          (click)="cd.accept()"
+        ></button>
+      </div> </ng-template
+  ></p-confirmDialog>
+</div>

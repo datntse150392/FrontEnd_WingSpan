@@ -2,17 +2,18 @@
 <div class="card flex justify-content-center">
   <p-tree [value]="mainCourses" class="w-full md:w-30rem">
     <ng-template let-node pTemplate="url">
-      <a
+      <p
         [ngStyle]="{ 'text-decoration': 'none', 'font-size': '14px' }"
-        [routerLink]="['lessons-for-newbie/', courseId, node.data]"
+        [routerLink]="['/learning/lessons-for-newbie/', course._id, node.data]"
         target="_blank"
         rel="noopener noreferrer"
         class="text-700 hover:text-primary"
-        >{{ node.label }}</a
       >
+        {{ node.label }}
+      </p>
     </ng-template>
     <ng-template let-node pTemplate="default">
-      <b>{{ node.label }}</b>
+      <b [ngStyle]="{ fontSize: '15px' }">{{ node.label }}</b>
     </ng-template>
   </p-tree>
 </div>

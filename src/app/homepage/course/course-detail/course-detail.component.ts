@@ -9,6 +9,7 @@ import { ConfirmationService } from 'primeng/api';
 import { UserAPIService } from 'src/app/service/api/User.service';
 import { ToastService } from 'src/app/service/ToastService.service';
 import { User } from 'src/app/models/UserModel';
+
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
@@ -25,6 +26,9 @@ export class CourseDetailComponent implements OnInit {
   course!: Course;
   mainCourse!: TreeNode[];
   user!: User;
+
+  // Check state change or update
+  checkLog: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -53,7 +57,6 @@ export class CourseDetailComponent implements OnInit {
         if (transformedData) {
           this.mainCourse = transformedData;
           this.constLesson = this.mainCourse.length;
-          console.log(this.mainCourse);
         }
       }
     );
@@ -114,25 +117,13 @@ export class CourseDetailComponent implements OnInit {
   */
   confirmEnrollCourse(userId: any, courseId: any) {
     this.confirmationService.confirm({
-      message: 'Bạn có đồng ý đăng ký khóa học này không?',
-      header: 'Xác thực đăng ký khóa học',
-      icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.courseAPIService
           .enrollCourse(userId, courseId)
           .subscribe((res: any) => {
             try {
               if (res?.status === 200) {
-                this.userAPIService
-                  .getUser(this.configLocal.userInfo.username)
-                  .subscribe((res: any) => {
-                    const user = res.data.user;
-                    this.configLocal.userInfo = user;
-                    localStorage.setItem(
-                      'configLocal',
-                      JSON.stringify(this.configLocal)
-                    );
-                  });
+                this.getUserByUserId(this.configLocal.userInfo._id);
                 this.toastService.setToastIsEnrollCourse(true);
               } else if (res?.status === 400) {
                 this.toastService.setToastIsEnrollCourse(false);

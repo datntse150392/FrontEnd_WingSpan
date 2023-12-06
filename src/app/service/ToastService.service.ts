@@ -45,7 +45,7 @@ export class ToastService {
   showFail(message: string) {
     this.messageService.clear();
     this.messageService.add({
-      severity: 'danger',
+      severity: 'error',
       summary: 'Thất bại',
       detail: message,
     });
