@@ -5,3 +5,37 @@ p {
 span {
   font-size: 10px;
 }
+
+.custom-profile-item {
+  display: none !important;
+}
+@media (max-width: 600px) {
+  .custom-profile-main {
+    display: none !important;
+  }
+  .custom-profile-item {
+    display: flex !important;
+    flex-direction: column;
+    h3 {
+      font-size: 15px;
+    }
+    .custom-profile-container {
+      display: flex;
+      flex-direction: column;
+      h3 {
+        font-size: 13px;
+      }
+      input {
+        width: 100%;
+        font-size: 13px;
+      }
+      button,
+      btn-image {
+        margin-top: 10px;
+        width: 150px;
+        font-size: 13px;
+        height: 40px;
+      }
+    }
+  }
+}

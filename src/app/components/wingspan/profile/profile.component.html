@@ -1,4 +1,4 @@
-<div class="p-8" [ngStyle]="{ border: '1px solid #000' }">
+<div class="p-8 custom-profile-main" [ngStyle]="{ border: '1px solid #000' }">
   <h3>Thông tin cá nhân</h3>
   <p-divider></p-divider>
   <!-- Full Name -->
@@ -67,6 +67,81 @@
   <!-- Email -->
   <div class="grid">
     <div class="col-9">
+      <h3>Email</h3>
+      <p>{{ this.user && this.user.email }}</p>
+      <p-divider></p-divider>
+    </div>
+  </div>
+</div>
+
+<!-- responsive -->
+<div class="p-4 custom-profile-item" [ngStyle]="{ border: '1px solid #000' }">
+  <h3>Thông tin cá nhân</h3>
+  <p-divider></p-divider>
+  <!-- Full Name -->
+  <div class="custom-profile-container">
+    <div class="custom-profile-content">
+      <h3>Họ và tên</h3>
+      <ng-container *ngIf="toggleEditUserName; else notChangeUserName">
+        <input type="text" pInputText [(ngModel)]="newFullName" />
+      </ng-container>
+      <ng-template #notChangeUserName>
+        <p>{{ this.user && this.user.fullName }}</p>
+      </ng-template>
+      <ng-container *ngIf="toggleEditUserName; else notBtnChange">
+        <button
+          pButton
+          pRipple
+          label="Thay đổi"
+          class="p-button-success"
+          (click)="updateInfo()"
+        ></button>
+      </ng-container>
+      <ng-template #notBtnChange>
+        <button
+          pButton
+          pRipple
+          label="Chỉnh sửa"
+          class="p-button-secondary"
+          (click)="toggleEditChange()"
+        ></button>
+      </ng-template>
+      <p-divider></p-divider>
+      <span
+        >Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của
+        bạn.</span
+      >
+    </div>
+    <div class="col-3 flex align-items-center"></div>
+  </div>
+
+  <!-- Avatar -->
+  <div class="">
+    <div class="">
+      <h3>Avatar</h3>
+      <div class="flex align-items-center justify-content-between mt-2">
+        <p-image
+          src="{{ this.user && this.user.profileImage }}"
+          alt="Image"
+          width="250"
+          [preview]="true"
+        ></p-image>
+        <p-fileUpload
+          mode="basic"
+          name="demo[]"
+          url="https://www.primefaces.org/cdn/api/upload.php"
+          accept="image/*"
+        >
+        </p-fileUpload>
+      </div>
+      <p-divider></p-divider>
+      <span>Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.</span>
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div>
+    <div>
       <h3>Email</h3>
       <p>{{ this.user && this.user.email }}</p>
       <p-divider></p-divider>
