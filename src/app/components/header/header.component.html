@@ -12,16 +12,70 @@
 
   <div class="flex align-items-center justify-content-start gap-4">
     <ng-container *ngIf="this.user; else isFailLogin">
-      <div class="card flex justify-content-center align-items-center">
-        <i class="pi pi-bell text-2xl" pBadge severity="danger" value="0"></i>
-      </div>
-      <div class="card flex justify-content-center align-items-center">
-        <i
-          class="pi pi-shopping-cart text-2xl"
-          pBadge
+      <div class="card flex justify-content-center align-items-center relative">
+        <p-badge
           severity="danger"
+          class="absolute badge-infomation"
           value="0"
-        ></i>
+        ></p-badge>
+        <img
+          width="30"
+          height="30"
+          src="https://img.icons8.com/ios/50/bell.png"
+          alt="bell"
+        />
+      </div>
+      <div class="card flex justify-content-center align-items-center relative">
+        <p-badge
+          severity="danger"
+          class="absolute badge-infomation"
+          value="{{
+            this.configLocal.cartItems?.count
+              ? this.configLocal.cartItems?.count
+              : 0
+          }}"
+        ></p-badge>
+        <img
+          (click)="op.toggle($event)"
+          width="30"
+          height="30"
+          src="https://img.icons8.com/ios/50/shopping-cart--v1.png"
+          alt="shopping-cart--v1"
+          [ngStyle]="{ cursor: 'pointer' }"
+        />
+        <p-overlayPanel #op>
+          <ng-template pTemplate="content">
+            <ng-container *ngIf="this.configLocal.cartItems; else emptyCart">
+              <div *ngFor="let item of configLocal.cartItems.items">
+                <div class="flex flex-row gap-2">
+                  <img
+                    width="200"
+                    height="100"
+                    src="{{ item.image }}"
+                    alt="shopping-cart--v1"
+                  />
+                  <div>
+                    <h4>{{ item.title }}</h4>
+                    <p>{{ item.amount | currency : "VND" }}</p>
+                  </div>
+                </div>
+                <div class="w-full flex flex-row justify-content-center">
+                  <button
+                    pButton
+                    pRipple
+                    label="Thanh toán ngay"
+                    class="p-button-danger mt-4"
+                  ></button>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #emptyCart>
+              <p [ngStyle]="{ color: '#000' }">
+                Giỏ hàng bạn trống, mời bạn chọn khóa học!
+              </p>
+            </ng-template>
+          </ng-template>
+        </p-overlayPanel>
       </div>
       <div class="mr-4" [ngStyle]="{ width: '150px' }">
         <p
@@ -129,8 +183,18 @@
       <i class="pi pi-search"></i>
       <input type="text" pInputText />
     </span>
-    <div class="card flex justify-content-center align-items-center">
-      <i class="pi pi-bell text-3xl" pBadge severity="danger" value="0"></i>
+    <div class="card flex justify-content-center align-items-center relative">
+      <p-badge
+        severity="danger"
+        class="absolute badge-infomation"
+        value="2"
+      ></p-badge>
+      <img
+        width="30"
+        height="30"
+        src="https://img.icons8.com/ios/50/bell.png"
+        alt="bell"
+      />
     </div>
   </div>
 </div>

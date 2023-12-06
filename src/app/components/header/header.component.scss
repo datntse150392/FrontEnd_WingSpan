@@ -21,6 +21,11 @@
   display: none;
 }
 
+.badge-infomation {
+  top: -30%;
+  right: -30%;
+}
+
 /* Add this CSS in your component's style file or in a global style file */
 
 /* For screens smaller than 600px (typical mobile devices) */
@@ -45,5 +50,10 @@
   /* Add additional mobile-specific styling if needed */
   .flex {
     flex-direction: row; /* Adjust flex direction for better stacking */
+  }
+
+  .badge-infomation {
+    top: -10%;
+    right: -30%;
   }
 }

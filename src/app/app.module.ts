@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ScrollTopModule } from 'primeng/scrolltop';
 import { ToastModule } from 'primeng/toast';
 import { ToastService } from './service/ToastService.service';
 import { MessageService } from 'primeng/api';
@@ -36,6 +37,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ToastModule,
     BrowserAnimationsModule,
     DividerModule,
+    ScrollTopModule,
   ],
   providers: [
     {
