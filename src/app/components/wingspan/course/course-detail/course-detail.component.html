@@ -114,7 +114,13 @@
       <img class="img-custom w-full" src="{{ course.image }}" />
     </div>
     <div class="flex flex-column">
-      <h1 class="text-center">Khóa Học Miễn Phí</h1>
+      <h1 class="text-center">
+        {{
+          course.type === "PE"
+            ? (course.amount | currency : "VND")
+            : "Khóa Học Miễn Phí"
+        }}
+      </h1>
       <ng-container *ngIf="isCheckContainCourse(); else EmptyCourse">
         <p-button
           class="text-center relative"
@@ -129,6 +135,17 @@
       <ng-template #EmptyCourse>
         <ng-container *ngIf="this.user; else loginForm">
           <p-button
+            *ngIf="course && course.type === 'PE'"
+            class="text-center relative"
+            [style]="{
+          backgroundColor: 'red',
+          border: 'none',
+          fontWeight: 'bold',
+        }"
+            >Thêm vào giỏ hàng
+          </p-button>
+          <p-button
+            *ngIf="course && course.type !== 'PE'"
             (click)="confirmEnrollCourse(configLocal.userInfo._id, course._id)"
             class="text-center relative"
             [style]="{
@@ -162,7 +179,13 @@
       <img class="img-custom w-full" src="{{ course.image }}" />
     </div>
     <div class="flex flex-column">
-      <h1 class="text-center">Khóa Học Miễn Phí</h1>
+      <h1 class="text-center">
+        {{
+          course.type === "PE"
+            ? (course.amount | currency : "VND")
+            : "Khóa Học Miễn Phí"
+        }}
+      </h1>
       <ng-container *ngIf="isCheckContainCourse(); else EmptyCourse">
         <p-button
           class="text-center relative"
@@ -177,13 +200,24 @@
       <ng-template #EmptyCourse>
         <ng-container *ngIf="this.user; else loginForm">
           <p-button
+            *ngIf="course && course.type === 'PE'"
+            class="text-center relative"
+            [style]="{
+          backgroundColor: 'red',
+          border: 'none',
+          fontWeight: 'bold',
+        }"
+            >Thêm vào giỏ hàng
+          </p-button>
+          <p-button
+            *ngIf="course && course.type !== 'PE'"
             (click)="confirmEnrollCourse(configLocal.userInfo._id, course._id)"
             class="text-center relative"
             [style]="{
-        backgroundColor: 'orange',
-        border: 'none',
-        fontWeight: 'bold',
-      }"
+          backgroundColor: 'orange',
+          border: 'none',
+          fontWeight: 'bold',
+        }"
             >Đăng ký ngay
           </p-button>
         </ng-container>
@@ -192,10 +226,10 @@
             [routerLink]="['/auth/login']"
             class="text-center relative"
             [style]="{
-      backgroundColor: 'orange',
-      border: 'none',
-      fontWeight: 'bold',
-    }"
+        backgroundColor: 'orange',
+        border: 'none',
+        fontWeight: 'bold',
+      }"
             >Đăng nhập ngay
           </p-button>
         </ng-template>

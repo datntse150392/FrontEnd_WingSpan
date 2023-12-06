@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { ConfigLocal } from 'src/app/models/Config/localState';
-import { Router } from '@angular/router';
 import { UserAPIService } from 'src/app/service/api/User.service';
 import { AuthService } from 'src/app/service/api/Auth.service';
 import { User } from 'src/app/models/UserModel';
+import { CartService } from 'src/app/service/api/Cart.service';
 
 @Component({
   selector: 'app-header',
@@ -16,13 +16,14 @@ export class HeaderComponent implements OnInit {
   items: MenuItem[] | undefined;
   configLocal: ConfigLocal = {
     userInfo: {},
+    cartItems: undefined,
   };
   user!: User;
 
   constructor(
-    private router: Router,
     private userAPIService: UserAPIService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cartService: CartService
   ) {}
   ngOnInit(): void {
     this.items = [
@@ -51,6 +52,7 @@ export class HeaderComponent implements OnInit {
       this.configLocal.userInfo = this.parseData().userInfo;
       this.getUser();
       this.getUserByUserId();
+      this.getCartItems(this.configLocal.userInfo._id);
     } catch (error) {
       console.log(error);
     }
@@ -92,5 +94,16 @@ export class HeaderComponent implements OnInit {
           this.user = res.data.user;
         });
     }
+  }
+
+  /**
+   *
+   *
+   */
+  getCartItems(userId: any) {
+    this.cartService.getCartItems(userId).subscribe((res: any) => {
+      this.configLocal.cartItems = res.data.cartItems;
+      localStorage.setItem('configLocal', JSON.stringify(this.configLocal));
+    });
   }
 }

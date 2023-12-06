@@ -19,10 +19,12 @@ import { BadgeModule } from 'primeng/badge';
 import { MenuModule } from 'primeng/menu';
 import { DividerModule } from 'primeng/divider';
 import { ImageModule } from 'primeng/image';
+import { ScrollTopModule } from 'primeng/scrolltop';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { SidebarModule } from 'primeng/sidebar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './wingspan/profile/profile.component';
 import { CourseComponent } from './wingspan/course/course.component';
@@ -54,6 +56,8 @@ import { AuthorGuard } from '../guards/author.guard';
     FileUploadModule,
     ToggleButtonModule,
     SidebarModule,
+    ScrollTopModule,
+    OverlayPanelModule,
   ],
   declarations: [
     ContentComponent,
