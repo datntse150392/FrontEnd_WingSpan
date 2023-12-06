@@ -23,14 +23,18 @@
 <p>This project is a fusion of passion and technical expertise, aiming to create an online education platform for FPT University students. Leveraging advanced technologies such as Angular, NodeJS, and MongoDB, this project provides a flexible and interactive learning experience for users.</p>
 
 ## Tính Năng Chính | Key Features
-### Khóa Học Đa Dạng: Cung cấp nhiều khóa học lập trình web app, từ cơ bản đến nâng cao
-- Diverse Courses: Offers a variety of web app programming courses, ranging from basic to advanced levels.
-### Học Tương Tác: Tích hợp Pusher và Firebase để tạo môi trường học tập tương tác.
-- Interactive Learning: Integrates Pusher and Firebase to create an interactive learning environment.
-### Triển Khai Linh Hoạt: Sử dụng Docker để đảm bảo quá trình triển khai dễ dàng và nhất quán.
+### Khóa Học Đa Dạng |  Diverse Courses
+- Cung cấp nhiều khóa học lập trình web app, từ cơ bản đến nâng cao
+- Offers a variety of web app programming courses, ranging from basic to advanced levels.
+### Học Tương Tác | Interactive Learning
+- Tích hợp Pusher và Firebase để tạo môi trường học tập tương tác.
+- Integrates Pusher and Firebase to create an interactive learning environment.
+### Triển Khai Linh Hoạt | Flexible Deployment
+- Sử dụng Docker để đảm bảo quá trình triển khai dễ dàng và nhất quán.
 - Flexible Deployment: Utilizes Docker to ensure an easy and consistent deployment process.
-### Giao Diện Người Dùng Thân Thiện: Giao diện được thiết kế với Angular, tạo trải nghiệm người dùng mượt mà và trực quan.
-  User-Friendly Interface: The interface is designed with Angular, providing a smooth and intuitive user experience.
+### Giao Diện Người Dùng Thân Thiện | User-Friendly Interface
+- Giao diện được thiết kế với Angular, tạo trải nghiệm người dùng mượt mà và trực quan.
+- The interface is designed with Angular, providing a smooth and intuitive user experience.
 
 ## Công Nghệ Sử Dụng | Technologies Used
 - Frontend: Angular
@@ -73,4 +77,5 @@
 
 
 ## Mục Tiêu Dự Án | Project Goals
-Mục tiêu của dự án này là tạo ra một nền tảng giáo dục trực tuyến chất lượng cao, dễ tiếp cận và hữu ích cho sinh viên FPT, đặc biệt là những người có niềm đam mê với lập trình web app. | The goal of this project is to establish a high-quality online education platform that is easily accessible and beneficial for FPT University students, especially those passionate about web app development.
+- Mục tiêu của dự án này là tạo ra một nền tảng giáo dục trực tuyến chất lượng cao, dễ tiếp cận và hữu ích cho sinh viên FPT, đặc biệt là những người có niềm đam mê với lập trình web app.
+- The goal of this project is to establish a high-quality online education platform that is easily accessible and beneficial for FPT University students, especially those passionate about web app development.
