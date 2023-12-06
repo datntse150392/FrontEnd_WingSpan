@@ -9,7 +9,7 @@ import { ConfirmationService } from 'primeng/api';
 import { UserAPIService } from 'src/app/service/api/User.service';
 import { ToastService } from 'src/app/service/ToastService.service';
 import { User } from 'src/app/models/UserModel';
-
+import { ViewportScroller } from '@angular/common';
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
@@ -36,10 +36,14 @@ export class CourseDetailComponent implements OnInit {
     private courseAPIService: CourseAPIService,
     private confirmationService: ConfirmationService,
     private toastService: ToastService,
-    private userAPIService: UserAPIService
+    private userAPIService: UserAPIService,
+    private viewportScroller: ViewportScroller
   ) {}
 
   ngOnInit() {
+    // Scroll in the head page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     // Lấy giá trị của tham số 'id' từ URL
     const courseId = this.route.snapshot.params['id'];
 

@@ -19,6 +19,9 @@ export class CourseComponent implements OnInit {
   constructor(private APIservice: APIService) {}
 
   ngOnInit(): void {
+    // Scroll in the head page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     this.filterAndSortCoursesPEandFree();
     this.getAllBillBoard();
     this.responsiveOptions = [
