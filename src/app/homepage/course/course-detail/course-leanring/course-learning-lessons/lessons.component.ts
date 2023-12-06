@@ -25,6 +25,9 @@ export class CourseLearningLessonsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
+      // Scroll in the head page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
       this.videoId = params['videoId'];
       this.courseId = params['courseId'];
       // Thay thế "VIDEO_ID" bằng ID của video YouTube
