@@ -1,21 +1,21 @@
 # Dự Án Web App Giáo Dục - Angular, NodeJS, MongoDB <WingSpan>
 # https://wingspan-dev-course.vercel.app/
 
-|-- client/          # Thư mục chứa mã nguồn của phần frontend (Angular) \
-|&nbsp;&nbsp; &nbsp; |-- src/ \
-|   |   |-- app/ \
-|   |   |   |-- components/ \
-|   |   |   |-- services/ \
-|   |   |   |-- models/ \
-|   |   |   |-- views/ \
-|   |   |   |-- guards/ \
-|   |   |   |-- pipes/ \
-|   |   |   |-- assets/ \
-|   |   |   |-- ... \
-|   |-- angular.json \
-|   |-- tsconfig.json \
-|   |-- package.json \
-|   |-- ...
+|-- client/ # Thư mục chứa mã nguồn của phần frontend (Angular) \
+|&nbsp;&nbsp;&nbsp;|-- src/ \
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-- app/ \
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-- components/ \
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-- services/ \
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-- models/ \
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-- views/ \
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-- guards/ \
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-- pipes/ \
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-- assets/ \
+|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-- ... \
+|&nbsp;&nbsp;&nbsp;|-- angular.json \
+|&nbsp;&nbsp;&nbsp;|-- tsconfig.json \
+|&nbsp;&nbsp;&nbsp;|-- package.json \
+|&nbsp;&nbsp;&nbsp;|-- ...
 
 
 ## Giới Thiệu
