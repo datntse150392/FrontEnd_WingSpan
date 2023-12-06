@@ -1,11 +1,26 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { User } from 'src/app/models/UserModel';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './Auth.service';
+import { ConfigLocal } from 'src/app/models/Config/localState';
 @Injectable({ providedIn: 'root' })
 export class UserAPIService {
-  constructor(private httpClient: HttpClient) {}
+  headers!: {};
+
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService
+  ) {
+    const token = localStorage.getItem('token');
+    if (token !== null) {
+      this.headers = this.authService.getHeaders(token);
+    } else {
+      // Handle the case when 'configLocal' is null.
+      console.error('Config data not found in local storage.');
+    }
+  }
 
   isCheckAccount(email: any): Observable<any> {
     const body = { email };
@@ -31,7 +46,9 @@ export class UserAPIService {
   updateInfo(email: any, fullName: any): Observable<any> {
     const body = { email, fullName };
     return this.httpClient
-      .put(`${environment.apiUrl}user/updateInfo`, body)
+      .put(`${environment.apiUrl}user/updateInfo`, body, {
+        headers: this.headers,
+      })
       .pipe(catchError(this.handleError<any>()));
   }
 

@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ContentComponent } from './content/content.component';
+import { ContentComponent } from './wingspan/content/content.component';
 import { CommonModule } from '@angular/common';
 import { HomepageRoutingModule } from './homepage-routing.module';
 import { AvatarModule } from 'primeng/avatar';
@@ -7,7 +7,6 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'primeng/carousel';
-import { CourseComponent } from './course/course.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { CardModule } from 'primeng/card';
@@ -24,13 +23,14 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { SidebarModule } from 'primeng/sidebar';
-
-import { CourseDetailComponent } from './course/course-detail/course-detail.component';
-import { CourseLearningContentComponent } from './course/course-detail/course-leanring/course-leanring-content/content.component';
-import { CourseLeanringSidebarComponent } from './course/course-detail/course-leanring/course-learning-sidebar/sidebar.component';
-import { CourseLearningLessonsComponent } from './course/course-detail/course-leanring/course-learning-lessons/lessons.component';
 import { FooterComponent } from './footer/footer.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './wingspan/profile/profile.component';
+import { CourseComponent } from './wingspan/course/course.component';
+import { CourseDetailComponent } from './wingspan/course/course-detail/course-detail.component';
+import { CourseLearningContentComponent } from './wingspan/course/course-detail/course-leanring/course-leanring-content/content.component';
+import { CourseLeanringSidebarComponent } from './wingspan/course/course-detail/course-leanring/course-learning-sidebar/sidebar.component';
+import { CourseLearningLessonsComponent } from './wingspan/course/course-detail/course-leanring/course-learning-lessons/lessons.component';
+import { AuthorGuard } from '../guards/author.guard';
 @NgModule({
   imports: [
     CommonModule,

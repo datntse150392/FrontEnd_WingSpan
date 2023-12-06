@@ -9,7 +9,7 @@
         <input type="text" pInputText [(ngModel)]="newFullName" />
       </ng-container>
       <ng-template #notChangeUserName>
-        <p>{{ this.user.fullName }}</p>
+        <p>{{ this.user && this.user.fullName }}</p>
       </ng-template>
       <p-divider></p-divider>
       <span
@@ -44,7 +44,7 @@
     <div class="col-9">
       <h3>Avatar</h3>
       <p-image
-        src="{{ this.user.profileImage }}"
+        src="{{ this.user && this.user.profileImage }}"
         alt="Image"
         width="250"
         [preview]="true"
@@ -68,7 +68,7 @@
   <div class="grid">
     <div class="col-9">
       <h3>Email</h3>
-      <p>{{ this.user.email }}</p>
+      <p>{{ this.user && this.user.email }}</p>
       <p-divider></p-divider>
     </div>
   </div>

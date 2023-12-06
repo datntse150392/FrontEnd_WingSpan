@@ -36,8 +36,7 @@ export class CourseDetailComponent implements OnInit {
     private courseAPIService: CourseAPIService,
     private confirmationService: ConfirmationService,
     private toastService: ToastService,
-    private userAPIService: UserAPIService,
-    private viewportScroller: ViewportScroller
+    private userAPIService: UserAPIService
   ) {}
 
   ngOnInit() {

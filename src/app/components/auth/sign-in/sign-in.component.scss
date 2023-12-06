@@ -3,6 +3,12 @@
   color: #000;
 }
 
+img {
+  height: auto; /* Allow the image to scale proportionally */
+  max-width: 100%; /* Ensure the image does not exceed the width of its container */
+  width: 450;
+}
+
 p {
   font-size: 15px;
 }
