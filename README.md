@@ -1,21 +1,21 @@
 # Dự Án Web App Giáo Dục - Angular, NodeJS, MongoDB <WingSpan>
 # https://wingspan-dev-course.vercel.app/
 
-###|-- client/          # Thư mục chứa mã nguồn của phần frontend (Angular)
-###|   |-- src/
-###|   |   |-- app/
-###|   |   |   |-- components/
-###|   |   |   |-- services/
-###|   |   |   |-- models/
-###|   |   |   |-- views/
-###|   |   |   |-- guards/
-###|   |   |   |-- pipes/
-###|   |   |   |-- assets/
-###|   |   |   |-- ...
-###|   |-- angular.json
-###|   |-- tsconfig.json
-###|   |-- package.json
-###|   |-- ...
+|-- client/          # Thư mục chứa mã nguồn của phần frontend (Angular)
+|   |-- src/
+|   |   |-- app/
+|   |   |   |-- components/
+|   |   |   |-- services/
+|   |   |   |-- models/
+|   |   |   |-- views/
+|   |   |   |-- guards/
+|   |   |   |-- pipes/
+|   |   |   |-- assets/
+|   |   |   |-- ...
+|   |-- angular.json
+|   |-- tsconfig.json
+|   |-- package.json
+|   |-- ...
 
 ## Giới Thiệu
 Dự án này là sự kết hợp của đam mê và kỹ thuật, hướng đến việc tạo ra một nền tảng giáo dục trực tuyến cho sinh viên trường FPT. Sử dụng công nghệ tiên tiến như Angular, NodeJS, và MongoDB, dự án này cung cấp một trải nghiệm học tập linh hoạt và tương tác cho người dùng.
