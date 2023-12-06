@@ -41,11 +41,11 @@ export class CourseDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Scroll in the head page
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
     // Lấy giá trị của tham số 'id' từ URL
     const courseId = this.route.snapshot.params['id'];
+
+    // Scroll in the head page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     // Lưu courseId vào configCourse và lưu vào localStorage
     localStorage.setItem('courseId', courseId);
