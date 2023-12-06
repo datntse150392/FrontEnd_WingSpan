@@ -1,6 +1,7 @@
 # Dự Án Web App Giáo Dục - Angular, NodeJS, MongoDB <WingSpan>
 # https://wingspan-dev-course.vercel.app/
 
+## Cấu trúc của dự án | Project Structure
 |-- client/ # Thư mục chứa mã nguồn của phần frontend (Angular) \
 |&nbsp;&nbsp;&nbsp;|-- src/ \
 |&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|-- app/ \
