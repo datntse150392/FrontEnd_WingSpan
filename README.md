@@ -2,7 +2,7 @@
 # https://wingspan-dev-course.vercel.app/
 
 |-- client/          # Thư mục chứa mã nguồn của phần frontend (Angular) \
-|   |-- src/ \
+|&nbsp;|-- src/ \
 |   |   |-- app/ \
 |   |   |   |-- components/ \
 |   |   |   |-- services/ \
