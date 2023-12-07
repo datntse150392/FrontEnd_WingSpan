@@ -8,6 +8,6 @@ export interface Course {
   enrollmentCount: number;
   status: string;
   type: string;
-  amount: string;
+  amount: number;
   image: string;
 }

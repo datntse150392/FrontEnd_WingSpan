@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 import { TreeModule } from 'primeng/tree';
+import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { MenubarModule } from 'primeng/menubar';
@@ -23,6 +24,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { NgxPayPalModule } from 'ngx-paypal';
 import { SidebarModule } from 'primeng/sidebar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { FooterComponent } from './footer/footer.component';
@@ -33,6 +35,7 @@ import { CourseLearningContentComponent } from './wingspan/course/course-detail/
 import { CourseLeanringSidebarComponent } from './wingspan/course/course-detail/course-leanring/course-learning-sidebar/sidebar.component';
 import { CourseLearningLessonsComponent } from './wingspan/course/course-detail/course-leanring/course-learning-lessons/lessons.component';
 import { AuthorGuard } from '../guards/author.guard';
+import { CartComponent } from './wingspan/cart/cart.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -58,6 +61,8 @@ import { AuthorGuard } from '../guards/author.guard';
     SidebarModule,
     ScrollTopModule,
     OverlayPanelModule,
+    DropdownModule,
+    NgxPayPalModule,
   ],
   declarations: [
     ContentComponent,
@@ -70,6 +75,7 @@ import { AuthorGuard } from '../guards/author.guard';
     CourseLearningContentComponent,
     FooterComponent,
     ProfileComponent,
+    CartComponent,
   ],
   providers: [],
 })

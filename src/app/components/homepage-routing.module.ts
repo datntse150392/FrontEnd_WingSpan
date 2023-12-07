@@ -9,6 +9,7 @@ import { CourseDetailComponent } from './wingspan/course/course-detail/course-de
 import { CourseLearningContentComponent } from './wingspan/course/course-detail/course-leanring/course-leanring-content/content.component';
 import { CourseLearningLessonsComponent } from './wingspan/course/course-detail/course-leanring/course-learning-lessons/lessons.component';
 import { AuthorGuard } from '../guards/author.guard';
+import { CartComponent } from './wingspan/cart/cart.component';
 const routes: Routes = [
   {
     path: '',
@@ -25,6 +26,10 @@ const routes: Routes = [
         component: CourseDetailComponent,
       },
     ],
+  },
+  {
+    path: 'myCart',
+    component: CartComponent,
   },
   {
     path: 'learning',
