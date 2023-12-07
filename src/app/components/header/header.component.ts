@@ -35,6 +35,10 @@ export class HeaderComponent implements OnInit {
             label: 'Thông tin cá nhân',
             url: '/profile',
           },
+          {
+            label: 'Giỏ hàng của tôi',
+            url: '/myCart',
+          },
         ],
       },
       {
