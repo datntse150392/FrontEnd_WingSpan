@@ -9,7 +9,8 @@ import { ConfirmationService } from 'primeng/api';
 import { UserAPIService } from 'src/app/service/api/User.service';
 import { ToastService } from 'src/app/service/ToastService.service';
 import { User } from 'src/app/models/UserModel';
-import { ViewportScroller } from '@angular/common';
+import { CartService } from 'src/app/service/api/Cart.service';
+import { ShareService } from 'src/app/service/ShareService.service';
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
@@ -36,7 +37,9 @@ export class CourseDetailComponent implements OnInit {
     private courseAPIService: CourseAPIService,
     private confirmationService: ConfirmationService,
     private toastService: ToastService,
-    private userAPIService: UserAPIService
+    private userAPIService: UserAPIService,
+    private cartService: CartService,
+    private shareService: ShareService
   ) {}
 
   ngOnInit() {
@@ -150,5 +153,21 @@ export class CourseDetailComponent implements OnInit {
       this.user = res.data.user;
       console.log(this.user);
     });
+  }
+
+  /**
+   * Logic Func: Add to cart
+   */
+  addToCart(userId: any, courseId: any) {
+    try {
+      this.cartService.addToCart(userId, courseId).subscribe((res) => {
+        if (res && res.status === 200) {
+          this.shareService.setIsUpdateConfigLocal(true);
+          this.toastService.setToastIsAddToCart(true);
+        } else {
+          this.toastService.setToastIsAddToCart(false);
+        }
+      });
+    } catch (error) {}
   }
 }

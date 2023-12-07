@@ -47,5 +47,14 @@ export class AppComponent implements OnInit {
         this.toastService.showFail('Cập nhật thất bại, mời bạn thử lại!');
       }
     });
+
+    // Subscribe to the toast$ Observable to receive toast messsages for Add To Cart
+    this.toastService.toastAddToCart$.subscribe((isAddToCart) => {
+      if (isAddToCart) {
+        this.toastService.showSuccess('Thêm khóa học vào giỏ hàng thành công!');
+      } else {
+        this.toastService.showFail('Khóa học đã tồn tại trong giỏ hàng!');
+      }
+    });
   }
 }
