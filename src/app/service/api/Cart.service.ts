@@ -11,10 +11,22 @@ export class CartService {
     private authService: AuthService
   ) {}
 
+  header = this.authService.getHeaders(localStorage.getItem('token'));
+
   getCartItems(userId: any): Observable<any> {
     const body = { userId };
     return this.httpClient.post(`${environment.apiUrl}cart`, body, {
-      headers: this.authService.getHeaders(localStorage.getItem('token')),
+      headers: this.header,
+    });
+  }
+
+  /**
+   * Logic API: Add to cart
+   */
+  addToCart(userId: any, courseId: any): Observable<any> {
+    const body = { userId, courseId };
+    return this.httpClient.post(`${environment.apiUrl}cart/addToCart`, body, {
+      headers: this.header,
     });
   }
 }

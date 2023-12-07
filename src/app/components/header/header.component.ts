@@ -5,7 +5,7 @@ import { UserAPIService } from 'src/app/service/api/User.service';
 import { AuthService } from 'src/app/service/api/Auth.service';
 import { User } from 'src/app/models/UserModel';
 import { CartService } from 'src/app/service/api/Cart.service';
-
+import { ShareService } from 'src/app/service/ShareService.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -23,7 +23,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userAPIService: UserAPIService,
     private authService: AuthService,
-    private cartService: CartService
+    private cartService: CartService,
+    private shareService: ShareService
   ) {}
   ngOnInit(): void {
     this.items = [
@@ -56,6 +57,12 @@ export class HeaderComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+
+    this.shareService.updateConfigLocal$.subscribe((res) => {
+      if (res) {
+        this.updateConfigLocal();
+      }
+    });
   }
 
   logout() {
@@ -102,8 +109,16 @@ export class HeaderComponent implements OnInit {
    */
   getCartItems(userId: any) {
     this.cartService.getCartItems(userId).subscribe((res: any) => {
-      this.configLocal.cartItems = res.data.cartItems;
+      this.configLocal.cartItems = res.data.cartItem;
       localStorage.setItem('configLocal', JSON.stringify(this.configLocal));
     });
+  }
+
+  /**
+   * Logic Func: Update Config Local
+   */
+  updateConfigLocal() {
+    this.getUserByUserId();
+    this.getCartItems(this.configLocal.userInfo._id);
   }
 }

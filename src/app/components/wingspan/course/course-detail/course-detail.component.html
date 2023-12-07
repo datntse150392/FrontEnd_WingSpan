@@ -135,6 +135,7 @@
       <ng-template #EmptyCourse>
         <ng-container *ngIf="this.user; else loginForm">
           <p-button
+            (click)="addToCart(configLocal.userInfo._id, course._id)"
             *ngIf="course && course.type === 'PE'"
             class="text-center relative"
             [style]="{
