@@ -95,6 +95,8 @@ Mô tả chi tiết về Màn Hình Cart Page.
 - Giao diện được thiết kế với Angular, tạo trải nghiệm người dùng mượt mà và trực quan.
 - The interface is designed with Angular, providing a smooth and intuitive user experience.
 
+---
+
 ## 5. Công Nghệ Sử Dụng | Technologies Used
 
 - Frontend: Angular
@@ -106,6 +108,7 @@ Mô tả chi tiết về Màn Hình Cart Page.
 - Payment: Paypal, momo, zalopay
 - GG Cloud: Login, Gmail API
   <table align="center">
+    
     <tr>
       <td align="center" width="96">
           <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-angular-48.png?alt=media&token=0ab65086-a322-4850-ba81-963acffda8d0" width="48" height="48" alt="C" />
@@ -123,14 +126,8 @@ Mô tả chi tiết về Màn Hình Cart Page.
           <img src="https://img.icons8.com/color/48/express-js.png" width="48" height="48" alt="Java" />
         <br />express
       </td>
-      <td align="center" width="96">
-          <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-mongodb-a-cross-platform-document-oriented-database-program-48.png?alt=media&token=d0ec414b-79ad-437b-8835-8d567f9e80e3" width="48" height="48" alt="JavaScript" />
-        <br />MongoDB
-      </td>
     </tr>
-  </table>
-  <table align="center">
-
+    
     <tr>
       <td align="center" width="96">
           <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-google-firebase-console-48.png?alt=media&token=af552a40-5db6-45c1-8564-d4cddc9a5b44" width="48" height="48" alt="TypeScript" />
@@ -144,15 +141,19 @@ Mô tả chi tiết về Màn Hình Cart Page.
           <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-docker-48.png?alt=media&token=499cdb70-387a-4a4b-a8d0-3ff95a837fdc" width="48" height="48" alt="TypeScript" />
         <br />Docker
       </td>
-      <td align="center" width="96">
-          <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-sass-48.png?alt=media&token=bb7a0178-6df6-4ad7-91e3-9d436e1d6282" width="48" height="48" alt="TypeScript" />
-        <br />Sass
+     <td align="center" width="96">
+          <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-mongodb-a-cross-platform-document-oriented-database-program-48.png?alt=media&token=d0ec414b-79ad-437b-8835-8d567f9e80e3" width="48" height="48" alt="JavaScript" />
+        <br />MongoDB
       </td>
        
     </tr>
 
     <tr>
-    <td align="center" width="96">
+       <td align="center" width="96">
+          <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-sass-48.png?alt=media&token=bb7a0178-6df6-4ad7-91e3-9d436e1d6282" width="48" height="48" alt="TypeScript" />
+        <br />Sass
+      </td>
+      <td align="center" width="96">
           <img src="https://nodemailer.com/nm_logo_200x136.png" width="48" height="48" alt="TypeScript" />
         <br />Nodemailer
       </td>
@@ -167,6 +168,8 @@ Mô tả chi tiết về Màn Hình Cart Page.
     </tr>
 
 </table>
+
+---
 
 ## Mục Tiêu Dự Án | Project Goals
 
