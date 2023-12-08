@@ -1,0 +1,37 @@
+<div
+  class="grid m-0 p-0"
+  [ngStyle]="{ height: '100vh', 'overflow-y': 'hidden' }"
+>
+  <div
+    class="col-4 flex flex-column align-items-center justify-content-center reponsive"
+  >
+    <div class="flex flex-row justify-content-center">
+      <img
+        [routerLink]="['/']"
+        src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2Fn%C6%A1i%20t%E1%BA%A7m%20nh%C3%ACn%20kh%C3%B4ng%20c%C3%B3%20gi%E1%BB%9Bi%20h%E1%BA%A1n.svg?alt=media&token=c1dbc7d9-ba6b-4e9c-8145-b09ef2c0eb29"
+        [ngStyle]="{ height: '220px', width: '100%', cursor: 'pointer' }"
+      />
+    </div>
+
+    <p-divider align="center">
+      <div class="inline-flex align-items-center">
+        <b>Đăng nhập với Google</b>
+      </div>
+    </p-divider>
+
+    <div class="w-full flex align-items-center justify-content-center">
+      <asl-google-signin-button
+        type="standard"
+        size="large"
+        shape="rectangular"
+        theme="filled_blue"
+      ></asl-google-signin-button>
+    </div>
+  </div>
+  <div class="col-8 h-full p-0 bg-singin">
+    <img
+      [ngStyle]="{ height: '100%', width: '100%' }"
+      src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Auth%2Fpexels-mo-eid-9829615.jpg?alt=media&token=38d46d44-58f3-4171-bfcb-6206d62c7768"
+    />
+  </div>
+</div>

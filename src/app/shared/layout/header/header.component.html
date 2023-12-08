@@ -1,0 +1,200 @@
+<div
+  class="flex align-items-center justify-content-between pl-4 pt-2 h-full w-full main-header"
+>
+  <div class="flex w-full align-items-center justify-content-start">
+    <img
+      class="logo"
+      [routerLink]="['/']"
+      src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2FThi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn.svg?alt=media&token=e1e5cb09-f411-400d-bbdf-720f7eee1a70"
+    />
+    <app-sidebar></app-sidebar>
+  </div>
+
+  <div class="flex align-items-center justify-content-start gap-4">
+    <ng-container *ngIf="this.user; else isFailLogin">
+      <div class="card flex justify-content-center align-items-center relative">
+        <p-badge
+          severity="danger"
+          class="absolute badge-infomation"
+          value="0"
+        ></p-badge>
+        <img
+          width="30"
+          height="30"
+          src="https://img.icons8.com/ios/50/bell.png"
+          alt="bell"
+        />
+      </div>
+      <div class="card flex justify-content-center align-items-center relative">
+        <p-badge
+          severity="danger"
+          class="absolute badge-infomation"
+          value="{{
+            this.configLocal.cartItems?.count
+              ? this.configLocal.cartItems?.count
+              : 0
+          }}"
+        ></p-badge>
+        <img
+          (click)="op.toggle($event)"
+          width="30"
+          height="30"
+          src="https://img.icons8.com/ios/50/shopping-cart--v1.png"
+          alt="shopping-cart--v1"
+          [ngStyle]="{ cursor: 'pointer' }"
+        />
+        <p-overlayPanel #op>
+          <ng-template pTemplate="content">
+            <ng-container *ngIf="this.configLocal.cartItems; else emptyCart">
+              <div *ngFor="let item of configLocal.cartItems.items">
+                <div class="flex flex-row gap-2">
+                  <img
+                    width="200"
+                    height="100"
+                    src="{{ item.image }}"
+                    alt="shopping-cart--v1"
+                  />
+                  <div>
+                    <h4>{{ item.title }}</h4>
+                    <p>{{ item.amount | currency : "VND" }}</p>
+                  </div>
+                </div>
+                <div class="w-full flex flex-row justify-content-center">
+                  <button
+                    pButton
+                    pRipple
+                    label="Thanh toán ngay"
+                    class="p-button-danger mt-4"
+                  ></button>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #emptyCart>
+              <p [ngStyle]="{ color: '#000' }">
+                Giỏ hàng bạn trống, mời bạn chọn khóa học!
+              </p>
+            </ng-template>
+          </ng-template>
+        </p-overlayPanel>
+      </div>
+      <div class="mr-4" [ngStyle]="{ width: '150px' }">
+        <p
+          (click)="menu.toggle($event)"
+          [ngStyle]="{
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: 'bold'
+          }"
+        >
+          {{ user.fullName }}
+        </p>
+
+        <p-menu #menu [model]="items" [popup]="true"></p-menu>
+      </div>
+    </ng-container>
+    <ng-template #isFailLogin>
+      <button
+        [routerLink]="['/auth/signIn/']"
+        pButton
+        pRipple
+        label="Đăng nhập"
+        class="p-button-success btn-auth mr-4"
+        icon="pi pi-user"
+        [ngStyle]="{ width: '120px' }"
+      ></button>
+    </ng-template>
+  </div>
+</div>
+
+<div class="sub-header p-3">
+  <p-sidebar [(visible)]="sidebarVisible">
+    <div>
+      <img
+        class="logo"
+        [routerLink]="['/']"
+        src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2FThi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn.svg?alt=media&token=e1e5cb09-f411-400d-bbdf-720f7eee1a70"
+      />
+      <ng-container *ngIf="this.user; else loginForm">
+        <p
+          [ngStyle]="{
+            cursor: 'pointer',
+            fontSize: '15px',
+            fontWeight: 'bold'
+          }"
+        >
+          {{ user.fullName }}
+        </p>
+      </ng-container>
+      <ng-template #loginForm>
+        <div class="flex flex-row align-items-center">
+          <i class="pi pi-sign-in mr-3" style="font-size: 1rem"></i>
+          <p [routerLink]="['/auth/login/']">Đăng nhập</p>
+        </div>
+      </ng-template>
+    </div>
+    <p-divider></p-divider>
+    <div class="flex flex-column">
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-shopping-cart mr-3" style="font-size: 1rem"></i>
+        <p>Xem giỏ hàng</p>
+      </div>
+    </div>
+    <p-divider></p-divider>
+    <div class="flex flex-column">
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-user mr-3" style="font-size: 1rem"></i>
+        <p [routerLink]="['/profile']">Trang cá nhân</p>
+      </div>
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-list mr-3" style="font-size: 1rem"></i>
+        <p>Khóa học của tôi</p>
+      </div>
+      <p-divider></p-divider>
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-home mr-3" style="font-size: 1rem"></i>
+        <p [routerLink]="['/']">Trang chủ</p>
+      </div>
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-map mr-3" style="font-size: 1rem"></i>
+        <p>Lộ trình</p>
+      </div>
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-file mr-3" style="font-size: 1rem"></i>
+        <p>Bài viết</p>
+      </div>
+    </div>
+    <p-divider></p-divider>
+    <ng-container *ngIf="this.user">
+      <div class="flex flex-row align-items-center">
+        <i class="pi pi-sign-out mr-3" style="font-size: 1rem"></i>
+        <p (click)="logout()">Đăng xuất</p>
+      </div>
+    </ng-container>
+  </p-sidebar>
+  <div class="flex flex-row justify-content-between mr-2">
+    <button
+      (click)="sidebarVisible = true"
+      pButton
+      pRipple
+      icon="pi pi-align-justify"
+      class="p-button-secondary"
+    ></button>
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText />
+    </span>
+    <div class="card flex justify-content-center align-items-center relative">
+      <p-badge
+        severity="danger"
+        class="absolute badge-infomation"
+        value="2"
+      ></p-badge>
+      <img
+        width="30"
+        height="30"
+        src="https://img.icons8.com/ios/50/bell.png"
+        alt="bell"
+      />
+    </div>
+  </div>
+</div>

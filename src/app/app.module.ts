@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { ToastModule } from 'primeng/toast';
-import { ToastService } from './service/ToastService.service';
 import { MessageService } from 'primeng/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DividerModule } from 'primeng/divider';
@@ -20,7 +19,8 @@ import {
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 import { AuthGuard } from './guards/auth.guard';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ToastService } from './core/services';
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],

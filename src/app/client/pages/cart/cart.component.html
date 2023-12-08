@@ -1,0 +1,91 @@
+<div class="card">
+  <p-blockUI [blocked]="blockedUI"
+    ><p-progressSpinner></p-progressSpinner>
+  </p-blockUI>
+  <div class="pr-8 pl-8 pt-4 mb-4 w-full">
+    <div class="grid flex flex-row justify-content-center">
+      <div class="p-4 custom-cart-item-main col-8 flex flex-column gap-4">
+        <h3>Giỏ hàng của bạn</h3>
+
+        <div class="custom-cart-container flex flex-column gap-5">
+          <ng-container *ngFor="let item of this.cart.items">
+            <div
+              class="custom-cart-content flex flex-row gap-5 justify-content-between w-full"
+            >
+              <div class="flex flex-row gap-5">
+                <img
+                  width="120"
+                  height="80"
+                  src="{{ item.image }}"
+                  alt="product"
+                />
+                <div>
+                  <p>{{ item.title }}</p>
+                  <span>{{ item.titleDescription }}</span>
+                </div>
+              </div>
+              <div class="flex align-items-center">
+                <p>{{ item.amount | currency : "VND" }}</p>
+                <!-- If have a price voucher -->
+                <!-- <span>{{ item.amount | currency : "VND" }}</span> -->
+              </div>
+              <div class="flex flex-row align-items-center gap-4">
+                <button
+                  pButton
+                  pRipple
+                  label="Xóa sản phẩm"
+                  class="p-button-success"
+                ></button>
+              </div></div
+          ></ng-container>
+          <p-divider></p-divider>
+          <p class="note m-0">
+            - Lưu ý rằng, sau khi thanh toán hoàn tất, bộ phận chăm sóc khách
+            hàng sẽ gửi mã khoá học đến địa chỉ email bạn đã đăng nhập trước
+            đó.<br />
+            - Chúng tôi hy vọng rằng thông báo này sẽ giúp quá trình truy cập
+            khóa học của bạn trở nên thuận lợi hơn.
+          </p>
+        </div>
+      </div>
+      <div class="col-4 pl-4 pt-0 pr-0 pb-0">
+        <div
+          class="p-4 custom-cart-item-main col-4 flex flex-column gap-4 w-full mb-3"
+        >
+          <p class="m-0">Bạn có mã khuyến mãi ?</p>
+          <p-dropdown
+            class="p-4"
+            optionLabel="name"
+            placeholder="Chọn mã khuyến mãi của bạn"
+          ></p-dropdown>
+        </div>
+        <div
+          class="p-4 custom-cart-item-main col-4 flex flex-column gap-2 w-full"
+        >
+          <div class="flex flex-row justify-content-between align-items-center">
+            <p>Tổng tiền</p>
+            <span>{{ this.totalPrice | currency : "VND" }}</span>
+          </div>
+          <div class="flex flex-row justify-content-between align-items-center">
+            <p>Khuyến mãi</p>
+            <span>0</span>
+          </div>
+          <p-divider></p-divider>
+          <div class="flex flex-row justify-content-between align-items-center">
+            <p>Thành tiền</p>
+            <span>{{ this.totalPrice | currency : "VND" }}</span>
+          </div>
+          <p-divider></p-divider>
+          <div>
+            <p>Hình thức thanh toán</p>
+            <div
+              class="flex flex-row align-items-center justify-content-center gap-5"
+            >
+              <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

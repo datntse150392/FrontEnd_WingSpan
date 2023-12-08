@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ConfigLocal } from 'src/app/models/Config/localState';
 import { Router } from '@angular/router';
-import { Course } from '../models/CourseModel';
-import { User } from '../models/UserModel';
-import { UserAPIService } from '../service/api/User.service';
+import { ConfigLocal, Course, User } from '../core/models';
+import { UserAPIService } from '../core/services/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +49,7 @@ export class CanLearnCourseGuard {
    */
   getUserbyUserId(userId: any) {
     try {
-      this.userAPIService.getUserByUserId(userId).subscribe((res) => {
+      this.userAPIService.getUserByUserId(userId).subscribe((res: any) => {
         this.user = res.data.user;
       });
     } catch (error) {}

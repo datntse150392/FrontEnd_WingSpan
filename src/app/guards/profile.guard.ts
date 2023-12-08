@@ -31,11 +31,11 @@ export class ProfileGuard implements CanActivate {
     try {
       this.configLocal.userInfo = this.parseData().userInfo;
       if (!this.configLocal.userInfo.fullName) {
-        return this.router.navigate(['/auth/login']);
+        return this.router.navigate(['/auth/signIn']);
       }
     } catch (error) {
       console.error('Error during user info parsing:', error);
-      return this.router.navigate(['/auth/login']);
+      return this.router.navigate(['/auth/signIn']);
     }
     return true;
   }
