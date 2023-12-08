@@ -79,6 +79,10 @@
         <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-mongodb-a-cross-platform-document-oriented-database-program-48.png?alt=media&token=d0ec414b-79ad-437b-8835-8d567f9e80e3" width="48" height="48" alt="JavaScript" />
       <br />MongoDB
     </td>
+  </tr>
+</table>
+<table align="center">
+  <tr>
     <td align="center" width="96">
         <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-google-firebase-console-48.png?alt=media&token=af552a40-5db6-45c1-8564-d4cddc9a5b44" width="48" height="48" alt="TypeScript" />
       <br />Firebase
@@ -97,19 +101,15 @@
     </td>
      <td align="center" width="96">
         <img src="https://nodemailer.com/nm_logo_200x136.png" width="48" height="48" alt="TypeScript" />
-      <br />Sass
+      <br />Nodemailer
     </td>
      <td align="center" width="96">
         <img src="https://img.icons8.com/color/48/paypal.png" width="48" height="48" alt="TypeScript" />
-      <br />Sass
+      <br />Paypal
     </td>
      <td align="center" width="96">
         <img src="https://homepage.momocdn.net/jk/momo2020/img/sud/mascot-shadow.png" width="48" height="48" alt="TypeScript" />
-      <br />Sass
-    </td>
-     <td align="center" width="96">
-        <img src="https://vcci-hcm.org.vn/wp-content/uploads/2022/12/1.png" width="48" height="48" alt="TypeScript" />
-      <br />Sass
+      <br />Momo
     </td>
   </tr>
 </table>
