@@ -19,11 +19,13 @@ import { MenubarModule } from 'primeng/menubar';
 import { BadgeModule } from 'primeng/badge';
 import { MenuModule } from 'primeng/menu';
 import { DividerModule } from 'primeng/divider';
+import { BlockUIModule } from 'primeng/blockui';
 import { ImageModule } from 'primeng/image';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { SidebarModule } from 'primeng/sidebar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
@@ -63,6 +65,8 @@ import { CartComponent } from './wingspan/cart/cart.component';
     OverlayPanelModule,
     DropdownModule,
     NgxPayPalModule,
+    BlockUIModule,
+    ProgressSpinnerModule,
   ],
   declarations: [
     ContentComponent,
