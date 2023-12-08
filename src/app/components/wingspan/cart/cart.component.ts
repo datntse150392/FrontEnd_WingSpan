@@ -5,6 +5,8 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { TransactionService } from 'src/app/service/api/Transaction.service';
 import { ConfigLocal } from 'src/app/models/Config/localState';
 import { ToastService } from 'src/app/service/ToastService.service';
+import { ShareService } from 'src/app/service/ShareService.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -14,13 +16,16 @@ export class CartComponent implements OnInit {
   cart!: Cart;
   totalPrice: number = 0;
   configLocal!: ConfigLocal;
+  blockedUI: boolean = false;
 
   public payPalConfig?: IPayPalConfig;
 
   constructor(
     private cartService: CartService,
     private transactionService: TransactionService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private shareService: ShareService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -117,6 +122,7 @@ export class CartComponent implements OnInit {
         layout: 'vertical',
       },
       onApprove: (data, actions) => {
+        this.blockedUI = true;
         actions.order.get().then((details: any) => {
           console.log(
             'onApprove - you can get full order details inside onApprove: ',
@@ -141,6 +147,9 @@ export class CartComponent implements OnInit {
               .subscribe((res: any) => {
                 if (res && res.status === 200) {
                   this.toastService.setToastIsTransaction(true);
+                  this.shareService.setIsUpdateConfigLocal(true);
+                  this.blockedUI = false;
+                  this.router.navigate(['/']);
                 }
               });
           } catch (error) {
