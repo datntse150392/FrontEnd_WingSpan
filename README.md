@@ -7,27 +7,7 @@
 
 ## 2. Hình Ảnh | Introduction Screenshots
 
-<style>
-  .screenshot-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-  }
-
-  .screenshot-container img {
-    max-width: 300px;
-    margin: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-</style>
-
 ### Màn Hình Landing Page | Landing Page
-
-![Landing Page](path/to/screenshots/landing_page.png)
 
 <div class="screenshot-container">
   <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/ScreenIntroduce%2Floadingpage.png?alt=media&token=15a87ef3-244e-48cf-a84e-026e084e2dfb" alt="Landing Page">
