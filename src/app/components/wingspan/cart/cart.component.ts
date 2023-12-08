@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Cart } from 'src/app/models/Cart.model';
 import { CartService } from 'src/app/service/api/Cart.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+import { TransactionService } from 'src/app/service/api/Transaction.service';
+import { ConfigLocal } from 'src/app/models/Config/localState';
+import { ToastService } from 'src/app/service/ToastService.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -10,14 +13,31 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 export class CartComponent implements OnInit {
   cart!: Cart;
   totalPrice: number = 0;
+  configLocal!: ConfigLocal;
 
   public payPalConfig?: IPayPalConfig;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private transactionService: TransactionService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
-    this.getCartAndCountAmount();
-    this.initConfig();
+    const configLocalString = localStorage.getItem('configLocal');
+    if (configLocalString) {
+      this.configLocal = JSON.parse(configLocalString);
+      const userId = JSON.parse(configLocalString).userInfo._id;
+      this.cartService.getCartItems(userId).subscribe((res) => {
+        if (res) {
+          this.cart = res.data.cartItem;
+          this.cart.items.map((item) => {
+            this.totalPrice += item.amount;
+            this.initConfig();
+          });
+        }
+      });
+    }
   }
 
   /**
@@ -33,7 +53,6 @@ export class CartComponent implements OnInit {
             this.cart = res.data.cartItem;
             this.cart.items.map((item) => {
               this.totalPrice += item.amount;
-              console.log(item.amount);
             });
           }
         });
@@ -41,11 +60,23 @@ export class CartComponent implements OnInit {
     } catch (error) {}
   }
 
+  // Function to convert from VND to EUR
+  convertVNDtoEUR(amountInVND: any, exchangeRate: any) {
+    return amountInVND / exchangeRate;
+  }
+
+  // Function to convert from EUR to VND
+  convertEURtoVND(amountInEUR: any, exchangeRate: any) {
+    return amountInEUR * exchangeRate;
+  }
+
   private initConfig(): void {
-    const amountInVND = 350000; // Số tiền thanh toán trong VND
+    const amountInVND = this.totalPrice; // Số tiền thanh toán trong VND
+    console.log(this.totalPrice);
+
     const exchangeRate = 25000; // Tỉ giá hối đoái từ VND sang EUR (ví dụ)
     // Chuyển đổi số tiền sang EUR
-    const amountInEUR = amountInVND / exchangeRate;
+    const amountInEUR = this.convertVNDtoEUR(amountInVND, exchangeRate);
     this.payPalConfig = {
       currency: 'EUR',
       clientId: 'sb',
@@ -66,7 +97,7 @@ export class CartComponent implements OnInit {
               },
               items: [
                 {
-                  name: 'Ôn ENW492c Cấp Tốc',
+                  name: 'Thanh toán khóa học - PayPal',
                   quantity: '1',
                   category: 'DIGITAL_GOODS',
                   unit_amount: {
@@ -86,33 +117,42 @@ export class CartComponent implements OnInit {
         layout: 'vertical',
       },
       onApprove: (data, actions) => {
-        console.log(
-          'onApprove - transaction was approved, but not authorized',
-          data,
-          actions
-        );
         actions.order.get().then((details: any) => {
           console.log(
             'onApprove - you can get full order details inside onApprove: ',
             details
           );
+          try {
+            const cartId = this.cart._id;
+            const customerEmail = this.configLocal.userInfo.email;
+            const amount = this.totalPrice;
+            const payer = details.payer;
+            const transactionType = 'Register Course';
+            const status = 'success';
+            this.transactionService
+              .processPaymentAndSaveTransaction(
+                cartId,
+                amount,
+                payer,
+                transactionType,
+                status,
+                customerEmail
+              )
+              .subscribe((res: any) => {
+                if (res && res.status === 200) {
+                  this.toastService.setToastIsTransaction(true);
+                }
+              });
+          } catch (error) {
+            console.log('Transaction process error', error);
+            this.toastService.setToastIsTransaction(false);
+          }
         });
       },
-      onClientAuthorization: (data) => {
-        console.log(
-          'onClientAuthorization - you should probably inform your server about completed transaction at this point',
-          data
-        );
-      },
-      onCancel: (data, actions) => {
-        console.log('OnCancel', data, actions);
-      },
-      onError: (err) => {
-        console.log('OnError', err);
-      },
-      onClick: (data, actions) => {
-        console.log('onClick', data, actions);
-      },
+      onClientAuthorization: (data) => {},
+      onCancel: (data, actions) => {},
+      onError: (err) => {},
+      onClick: (data, actions) => {},
     };
   }
 }
