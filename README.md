@@ -74,23 +74,25 @@ Mô tả chi tiết về Màn Hình Cart Page.
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- package.json \
 |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|-- ...
 
+---
+
 ## 4. Tính Năng Chính | Key Features
 
-<h2>Khóa Học Đa Dạng | Diverse Courses</h2>
+<p>Khóa Học Đa Dạng | Diverse Courses</p>
 
 - Cung cấp nhiều khóa học lập trình web app, từ cơ bản đến nâng cao
 - Offers a variety of web app programming courses, ranging from basic to advanced levels.
 
-<h2>Học Tương Tác | Interactive Learning</h2>
+<p>Học Tương Tác | Interactive Learning</p>
 
 - Tích hợp Pusher và Firebase để tạo môi trường học tập tương tác.
 - Integrates Pusher and Firebase to create an interactive learning environment.
-<h2>Triển Khai Linh Hoạt | Flexible Deployment</h2>
+<p>Triển Khai Linh Hoạt | Flexible Deployment</p>
 
 - Sử dụng Docker để đảm bảo quá trình triển khai dễ dàng và nhất quán.
 - Flexible Deployment: Utilizes Docker to ensure an easy and consistent deployment process.
 
-<h2>Giao Diện Người Dùng Thân Thiện | User-Friendly Interface</h2>
+<p>Giao Diện Người Dùng Thân Thiện | User-Friendly Interface</p>
 
 - Giao diện được thiết kế với Angular, tạo trải nghiệm người dùng mượt mà và trực quan.
 - The interface is designed with Angular, providing a smooth and intuitive user experience.
