@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { Router } from '@angular/router';
-import { Cart, ConfigLocal } from 'src/app/core/models';
+import {
+  Cart,
+  ConfigLocal,
+  OperationType,
+  UpdateEventCart,
+} from 'src/app/core/models';
 import {
   CartService,
   ShareService,
@@ -13,11 +18,18 @@ import {
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
   cart!: Cart;
   totalPrice: number = 0;
   configLocal!: ConfigLocal;
   blockedUI: boolean = false;
+
+  DEFAULT: UpdateEventCart = {
+    isUpdateConfigLocal: true,
+    operationType: OperationType.Add,
+  };
+
+  private updateEventCart: UpdateEventCart = this.DEFAULT;
 
   public payPalConfig?: IPayPalConfig;
 
@@ -45,6 +57,8 @@ export class CartComponent implements OnInit {
       });
     }
   }
+
+  ngOnDestroy(): void {}
 
   /**
    * Logic Func: Get Cart
@@ -78,7 +92,6 @@ export class CartComponent implements OnInit {
 
   private initConfig(): void {
     const amountInVND = this.totalPrice; // Số tiền thanh toán trong VND
-    console.log(this.totalPrice);
 
     const exchangeRate = 25000; // Tỉ giá hối đoái từ VND sang EUR (ví dụ)
     // Chuyển đổi số tiền sang EUR
@@ -148,13 +161,17 @@ export class CartComponent implements OnInit {
               .subscribe((res: any) => {
                 if (res && res.status === 200) {
                   this.toastService.setToastIsTransaction(true);
-                  this.shareService.setIsUpdateConfigLocal(true);
+                  this.shareService.setIsUpdateConfigLocal(
+                    (this.updateEventCart = {
+                      isUpdateConfigLocal: true,
+                      operationType: OperationType.Delete,
+                    })
+                  );
                   this.blockedUI = false;
                   this.router.navigate(['/']);
                 }
               });
           } catch (error) {
-            console.log('Transaction process error', error);
             this.toastService.setToastIsTransaction(false);
           }
         });

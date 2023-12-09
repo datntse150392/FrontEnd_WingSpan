@@ -20,7 +20,6 @@ export class CourseLeanringSidebarComponent implements OnInit {
     this.APIservice.tranferMainCourseById(this.courseId).subscribe(
       (transformedData: TreeNode[]) => {
         this.mainCourses = transformedData;
-        console.log(transformedData);
       }
     );
     // Subscribe to the Observable to get the Course data

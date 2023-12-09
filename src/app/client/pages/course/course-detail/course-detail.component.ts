@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TreeNode } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
@@ -11,13 +11,16 @@ import {
   ToastService,
 } from 'src/app/core/services';
 import { UserAPIService } from 'src/app/core/services/user.service';
+import { UpdateEventCart, OperationType } from 'src/app/core/models';
+import { Subject, forkJoin } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
   styleUrls: ['./course-detail.component.scss'],
   providers: [ConfirmationService],
 })
-export class CourseDetailComponent implements OnInit {
+export class CourseDetailComponent implements OnInit, OnDestroy {
   constLesson!: number;
   isExpand!: boolean;
 
@@ -30,6 +33,14 @@ export class CourseDetailComponent implements OnInit {
 
   // Check state change or update
   checkLog: boolean = false;
+
+  DEFAULT: UpdateEventCart = {
+    isUpdateConfigLocal: true,
+    operationType: OperationType.Add,
+  };
+
+  private updateEventCart: UpdateEventCart = this.DEFAULT;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
@@ -51,27 +62,35 @@ export class CourseDetailComponent implements OnInit {
 
     // Lưu courseId vào configCourse và lưu vào localStorage
     localStorage.setItem('courseId', courseId);
+    this.configLocal.userInfo = this.parseData().userInfo;
+    this.getUserByUserId(this.configLocal.userInfo._id);
 
-    // Subscribe to the Observable to get the Course data
-    this.APIservice.getCoursebyId(courseId).subscribe((res: any) => {
-      if (res) {
-        this.course = res.data;
-      }
-    });
-    this.APIservice.tranferMainCourseById(courseId).subscribe(
-      (transformedData: TreeNode[]) => {
-        if (transformedData) {
-          this.mainCourse = transformedData;
+    const courseById$ = this.APIservice.getCoursebyId(courseId).pipe(
+      takeUntil(this.destroy$)
+    );
+    const mainCourse$ = this.APIservice.tranferMainCourseById(courseId).pipe(
+      takeUntil(this.destroy$)
+    );
+    forkJoin([courseById$, mainCourse$]).subscribe({
+      next: ([courseByIdRes, mainCourseRes]: [any, TreeNode[]]) => {
+        if (courseByIdRes && courseByIdRes.data) {
+          this.course = courseByIdRes.data;
+        }
+        if (mainCourseRes) {
+          this.mainCourse = mainCourseRes;
           this.constLesson = this.mainCourse.length;
         }
-      }
-    );
-    try {
-      this.configLocal.userInfo = this.parseData().userInfo;
-      this.getUserByUserId(this.configLocal.userInfo._id);
-    } catch (error) {
-      console.log(error);
-    }
+      },
+      error: (error) => {
+        console.error('Error fetching data:', error);
+      },
+      complete: () => {},
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   expandAll() {
@@ -110,7 +129,7 @@ export class CourseDetailComponent implements OnInit {
     if (
       this.user &&
       this.user.enrolledCourses?.some(
-        (course: Course) => this.course._id === course._id
+        (course: Course) => this.course && this.course._id === course._id
       )
     ) {
       return true;
@@ -151,7 +170,6 @@ export class CourseDetailComponent implements OnInit {
   getUserByUserId(userId: any) {
     this.userAPIService.getUserByUserId(userId).subscribe((res: any) => {
       this.user = res.data.user;
-      console.log(this.user);
     });
   }
 
@@ -162,7 +180,7 @@ export class CourseDetailComponent implements OnInit {
     try {
       this.cartService.addToCart(userId, courseId).subscribe((res) => {
         if (res && res.status === 200) {
-          this.shareService.setIsUpdateConfigLocal(true);
+          this.shareService.setIsUpdateConfigLocal(this.updateEventCart);
           this.toastService.setToastIsAddToCart(true);
         } else {
           this.toastService.setToastIsAddToCart(false);
