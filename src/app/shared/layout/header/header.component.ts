@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { ConfigLocal, User } from 'src/app/core/models';
+import { Subscription } from 'rxjs';
+import { ConfigLocal, UpdateEventCart, User } from 'src/app/core/models';
 import { AuthService, CartService, ShareService } from 'src/app/core/services';
 import { UserAPIService } from 'src/app/core/services/user.service';
 @Component({
@@ -8,7 +9,7 @@ import { UserAPIService } from 'src/app/core/services/user.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   sidebarVisible: boolean = false;
   items: MenuItem[] | undefined;
   configLocal: ConfigLocal = {
@@ -16,6 +17,9 @@ export class HeaderComponent implements OnInit {
     cartItems: undefined,
   };
   user!: User;
+
+  // Khai báo subscription để theo dõi
+  private configLocalUpdateSubscription: Subscription | undefined;
 
   constructor(
     private userAPIService: UserAPIService,
@@ -55,15 +59,34 @@ export class HeaderComponent implements OnInit {
       this.getUser();
       this.getUserByUserId();
       this.getCartItems(this.configLocal.userInfo._id);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
 
-    this.shareService.updateConfigLocal$.subscribe((res) => {
-      if (res) {
-        this.updateConfigLocal();
-      }
-    });
+    // Gán subscription cho updateConfigLocal$
+    this.configLocalUpdateSubscription =
+      this.shareService.updateConfigLocal$.subscribe((res: UpdateEventCart) => {
+        if (res.operationType === 'add') {
+          this.cartService
+            .getCartItems(this.configLocal.userInfo._id)
+            .subscribe((res: any) => {
+              if (res && res.status === 200) {
+                this.configLocal.cartItems = res.data.cartItem;
+              }
+              localStorage.setItem(
+                'configLocal',
+                JSON.stringify(this.configLocal)
+              );
+            });
+        } else if (res.operationType === 'delete') {
+          this.configLocal.cartItems = undefined;
+          localStorage.setItem('configLocal', JSON.stringify(this.configLocal));
+        }
+      });
+  }
+  ngOnDestroy(): void {
+    // Unsubscribe khi component được hủy
+    if (this.configLocalUpdateSubscription) {
+      this.configLocalUpdateSubscription.unsubscribe();
+    }
   }
 
   logout() {
@@ -90,8 +113,7 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * @param userId
-   * @return {User}
+   * Logic Func: Get user by userid
    */
   getUserByUserId() {
     const configLocalString = localStorage.getItem('configLocal');
@@ -110,16 +132,10 @@ export class HeaderComponent implements OnInit {
    */
   getCartItems(userId: any) {
     this.cartService.getCartItems(userId).subscribe((res: any) => {
-      this.configLocal.cartItems = res.data.cartItem;
+      if (res && res.status === 200) {
+        this.configLocal.cartItems = res.data.cartItem;
+      }
       localStorage.setItem('configLocal', JSON.stringify(this.configLocal));
     });
-  }
-
-  /**
-   * Logic Func: Update Config Local
-   */
-  updateConfigLocal() {
-    this.getUserByUserId();
-    this.getCartItems(this.configLocal.userInfo._id);
   }
 }

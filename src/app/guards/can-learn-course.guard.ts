@@ -34,11 +34,9 @@ export class CanLearnCourseGuard {
         return true;
       }
     } catch (error) {
-      console.log('hi');
 
       return this.router.navigate(['/']);
     }
-    console.log('hi');
 
     return this.router.navigate(['/']);
   }
