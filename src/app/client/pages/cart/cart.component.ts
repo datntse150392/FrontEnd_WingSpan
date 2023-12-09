@@ -13,6 +13,7 @@ import {
   ToastService,
   TransactionService,
 } from 'src/app/core/services';
+import { Subject, Subscription } from 'rxjs';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -29,9 +30,14 @@ export class CartComponent implements OnInit, OnDestroy {
     operationType: OperationType.Add,
   };
 
+  private destroy$ = new Subject();
+
+  private isDeleteCart = new Subject<boolean>();
   private updateEventCart: UpdateEventCart = this.DEFAULT;
 
   public payPalConfig?: IPayPalConfig;
+
+  private deleteCartSubscription: Subscription | undefined;
 
   constructor(
     private cartService: CartService,
@@ -40,6 +46,11 @@ export class CartComponent implements OnInit, OnDestroy {
     private shareService: ShareService,
     private router: Router
   ) {}
+
+  isDeleteCart$ = this.isDeleteCart.asObservable();
+  setIsDeleteCart(isDeleteCart: boolean) {
+    this.isDeleteCart.next(isDeleteCart);
+  }
 
   ngOnInit(): void {
     const configLocalString = localStorage.getItem('configLocal');
@@ -56,6 +67,29 @@ export class CartComponent implements OnInit, OnDestroy {
         }
       });
     }
+    // Issue right here is double code logic
+    this.deleteCartSubscription = this.isDeleteCart$.subscribe({
+      next: (res) => {
+        if (res) {
+          const configLocalString = localStorage.getItem('configLocal');
+          if (configLocalString) {
+            this.configLocal = JSON.parse(configLocalString);
+            const userId = JSON.parse(configLocalString).userInfo._id;
+            const cartId = this.configLocal.cartItems?._id;
+            this.deleteCart(cartId);
+            this.cartService.getCartItems(userId).subscribe((res) => {
+              if (res) {
+                this.cart = res.data.cartItem;
+                this.cart.items.map((item: any) => {
+                  this.totalPrice += item.amount;
+                  this.initConfig();
+                });
+              }
+            });
+          }
+        }
+      },
+    });
   }
 
   ngOnDestroy(): void {}
@@ -181,5 +215,30 @@ export class CartComponent implements OnInit, OnDestroy {
       onError: (err) => {},
       onClick: (data, actions) => {},
     };
+  }
+  /**
+   * Logic Func: Delete Cart by cartId
+   */
+  deleteCart(cartId: any) {
+    try {
+      this.cartService.deleteCart(cartId).subscribe({
+        next: (res) => {
+          if (res && res.status === 200) {
+            this.shareService.setIsUpdateConfigLocal(
+              (this.updateEventCart = {
+                isUpdateConfigLocal: true,
+                operationType: OperationType.Delete,
+              })
+            );
+            this.toastService.setToastIsDeleteCart(true);
+            window.location.reload(); // This is bug need to be fixed
+          }
+        },
+        error: (err: Error) => {
+          console.log(err);
+        },
+        complete: () => {},
+      });
+    } catch (error) {}
   }
 }

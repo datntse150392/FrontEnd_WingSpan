@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/services';
@@ -26,6 +26,17 @@ export class CartService {
     const body = { userId, courseId };
     return this.httpClient.post(`${environment.apiUrl}cart/addToCart`, body, {
       headers: this.header,
+    });
+  }
+
+  /**
+   * Logic Call API: Delete cart by cartId
+   */
+  deleteCart(cartId: any): Observable<any> {
+    const body = { cartId };
+    return this.httpClient.delete(`${environment.apiUrl}cart/deleteCart`, {
+      headers: this.header,
+      body,
     });
   }
 }

@@ -8,6 +8,7 @@ export class ToastService {
   private isEnrollCourse = new BehaviorSubject<boolean>(true);
   private isEditInfo = new BehaviorSubject<boolean>(true);
   private isAddToCart = new BehaviorSubject<boolean>(true);
+  private isDeleteCart = new BehaviorSubject<boolean>(true);
   private isTransaction = new BehaviorSubject<boolean>(true);
 
   // Observable stream that components can subscribe to
@@ -16,6 +17,7 @@ export class ToastService {
   toastEnrollCourse$ = this.isEnrollCourse.asObservable();
   toastEditInfo$ = this.isEditInfo.asObservable();
   toastAddToCart$ = this.isAddToCart.asObservable();
+  toastDeleteCart$ = this.isDeleteCart.asObservable();
   toastTransaction$ = this.isTransaction.asObservable();
 
   constructor(private messageService: MessageService) {}
@@ -40,6 +42,10 @@ export class ToastService {
 
   setToastIsAddToCart(isAddToCart: boolean) {
     this.isAddToCart.next(isAddToCart);
+  }
+
+  setToastIsDeleteCart(isDeleteCart: boolean) {
+    this.isDeleteCart.next(isDeleteCart);
   }
 
   setToastIsTransaction(isTransaction: boolean) {
