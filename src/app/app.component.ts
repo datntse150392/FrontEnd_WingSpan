@@ -57,6 +57,13 @@ export class AppComponent implements OnInit {
       }
     });
 
+    // Subscribe to the toast$ Observable to receive toast messsages for Add To Cart
+    this.toastService.toastDeleteCart$.subscribe((isDeleteCart) => {
+      if (isDeleteCart) {
+        this.toastService.showSuccess('Bạn đã xóa khóa học ra khỏi giỏ hàng');
+      }
+    });
+
     // Subscribe to the toast$ Observable to receive toast messsages for Transaction
     this.toastService.toastTransaction$.subscribe((isTransaction) => {
       if (isTransaction) {

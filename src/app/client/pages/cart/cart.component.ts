@@ -13,6 +13,7 @@ import {
   ToastService,
   TransactionService,
 } from 'src/app/core/services';
+import { Subject, Subscription } from 'rxjs';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -29,9 +30,14 @@ export class CartComponent implements OnInit, OnDestroy {
     operationType: OperationType.Add,
   };
 
+  private destroy$ = new Subject();
+
+  private isDeleteCart = new Subject<boolean>();
   private updateEventCart: UpdateEventCart = this.DEFAULT;
 
   public payPalConfig?: IPayPalConfig;
+
+  private deleteCartSubscription: Subscription | undefined;
 
   constructor(
     private cartService: CartService,
@@ -40,6 +46,11 @@ export class CartComponent implements OnInit, OnDestroy {
     private shareService: ShareService,
     private router: Router
   ) {}
+
+  isDeleteCart$ = this.isDeleteCart.asObservable();
+  setIsDeleteCart(isDeleteCart: boolean) {
+    this.isDeleteCart.next(isDeleteCart);
+  }
 
   ngOnInit(): void {
     const configLocalString = localStorage.getItem('configLocal');
@@ -58,7 +69,9 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.deleteCartSubscription?.unsubscribe();
+  }
 
   /**
    * Logic Func: Get Cart
@@ -181,5 +194,27 @@ export class CartComponent implements OnInit, OnDestroy {
       onError: (err) => {},
       onClick: (data, actions) => {},
     };
+  }
+  /**
+   * Logic Func: Delete Cart by cartId
+   */
+  deleteCart(itemtId: any) {
+    try {
+      this.deleteCartSubscription = this.cartService
+        .deleteCartItem(this.configLocal.cartItems?._id, itemtId)
+        .subscribe({
+          next: (res) => {
+            if (res && res.status === 200) {
+              this.toastService.setToastIsDeleteCart(true);
+              this.shareService.setIsUpdateConfigLocal(this.updateEventCart);
+              this.getCartAndCountAmount();
+            }
+          },
+          error: (err: Error) => {
+            console.log(err);
+          },
+          complete: () => {},
+        });
+    } catch (error) {}
   }
 }
