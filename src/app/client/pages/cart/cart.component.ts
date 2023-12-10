@@ -67,32 +67,11 @@ export class CartComponent implements OnInit, OnDestroy {
         }
       });
     }
-    // Issue right here is double code logic
-    this.deleteCartSubscription = this.isDeleteCart$.subscribe({
-      next: (res) => {
-        if (res) {
-          const configLocalString = localStorage.getItem('configLocal');
-          if (configLocalString) {
-            this.configLocal = JSON.parse(configLocalString);
-            const userId = JSON.parse(configLocalString).userInfo._id;
-            const cartId = this.configLocal.cartItems?._id;
-            this.deleteCart(cartId);
-            this.cartService.getCartItems(userId).subscribe((res) => {
-              if (res) {
-                this.cart = res.data.cartItem;
-                this.cart.items.map((item: any) => {
-                  this.totalPrice += item.amount;
-                  this.initConfig();
-                });
-              }
-            });
-          }
-        }
-      },
-    });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.deleteCartSubscription?.unsubscribe();
+  }
 
   /**
    * Logic Func: Get Cart
@@ -219,26 +198,23 @@ export class CartComponent implements OnInit, OnDestroy {
   /**
    * Logic Func: Delete Cart by cartId
    */
-  deleteCart(cartId: any) {
+  deleteCart(itemtId: any) {
     try {
-      this.cartService.deleteCart(cartId).subscribe({
-        next: (res) => {
-          if (res && res.status === 200) {
-            this.shareService.setIsUpdateConfigLocal(
-              (this.updateEventCart = {
-                isUpdateConfigLocal: true,
-                operationType: OperationType.Delete,
-              })
-            );
-            this.toastService.setToastIsDeleteCart(true);
-            window.location.reload(); // This is bug need to be fixed
-          }
-        },
-        error: (err: Error) => {
-          console.log(err);
-        },
-        complete: () => {},
-      });
+      this.deleteCartSubscription = this.cartService
+        .deleteCartItem(this.configLocal.cartItems?._id, itemtId)
+        .subscribe({
+          next: (res) => {
+            if (res && res.status === 200) {
+              this.toastService.setToastIsDeleteCart(true);
+              this.shareService.setIsUpdateConfigLocal(this.updateEventCart);
+              this.getCartAndCountAmount();
+            }
+          },
+          error: (err: Error) => {
+            console.log(err);
+          },
+          complete: () => {},
+        });
     } catch (error) {}
   }
 }

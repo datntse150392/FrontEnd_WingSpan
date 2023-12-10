@@ -32,9 +32,9 @@ export class CartService {
   /**
    * Logic Call API: Delete cart by cartId
    */
-  deleteCart(cartId: any): Observable<any> {
-    const body = { cartId };
-    return this.httpClient.delete(`${environment.apiUrl}cart/deleteCart`, {
+  deleteCartItem(cartId: any, itemId: any): Observable<any> {
+    const body = { cartId, itemId };
+    return this.httpClient.delete(`${environment.apiUrl}cart/deleteCartItem`, {
       headers: this.header,
       body,
     });
