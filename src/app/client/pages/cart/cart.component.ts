@@ -21,7 +21,7 @@ import { Subject, Subscription } from 'rxjs';
 })
 export class CartComponent implements OnInit, OnDestroy {
   cart!: Cart;
-  totalPrice: number = 0;
+  totalPrice: number | any = 0;
   configLocal!: ConfigLocal;
   blockedUI: boolean = false;
 
@@ -77,6 +77,7 @@ export class CartComponent implements OnInit, OnDestroy {
    * Logic Func: Get Cart
    */
   getCartAndCountAmount() {
+    let newTotalPrice = 0;
     try {
       const configLocalString = localStorage.getItem('configLocal');
       if (configLocalString) {
@@ -84,9 +85,6 @@ export class CartComponent implements OnInit, OnDestroy {
         this.cartService.getCartItems(userId).subscribe((res) => {
           if (res) {
             this.cart = res.data.cartItem;
-            this.cart.items.map((item: any) => {
-              this.totalPrice += item.amount;
-            });
           }
         });
       }
@@ -198,7 +196,7 @@ export class CartComponent implements OnInit, OnDestroy {
   /**
    * Logic Func: Delete Cart by cartId
    */
-  deleteCart(itemtId: any) {
+  deleteCart(itemtId: any, amount: any) {
     try {
       this.deleteCartSubscription = this.cartService
         .deleteCartItem(this.configLocal.cartItems?._id, itemtId)
@@ -207,7 +205,10 @@ export class CartComponent implements OnInit, OnDestroy {
             if (res && res.status === 200) {
               this.toastService.setToastIsDeleteCart(true);
               this.shareService.setIsUpdateConfigLocal(this.updateEventCart);
+
+              // Update statue when complete func deleteCart()
               this.getCartAndCountAmount();
+              this.totalPrice -= amount;
             }
           },
           error: (err: Error) => {
@@ -216,5 +217,13 @@ export class CartComponent implements OnInit, OnDestroy {
           complete: () => {},
         });
     } catch (error) {}
+  }
+
+  private calculateTotalPrice(): number {
+    let newTotalPrice = 0;
+    this.configLocal.cartItems?.items.map(
+      (item) => (newTotalPrice = this.totalPrice - item.amount)
+    );
+    return newTotalPrice;
   }
 }
