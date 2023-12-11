@@ -9,10 +9,22 @@ export class ShareService {
     operationType: OperationType.Add, //Default OperationType is add
   });
 
+  // Loading subject
+  private isLoadingSubject = new BehaviorSubject<boolean>(false);
+  public isLoading$ = this.isLoadingSubject.asObservable();
+
   // Observable stream that components can subscribe to
   updateConfigLocal$ = this.isUpdateConfigLocal.asObservable();
 
   constructor() {}
+
+  showLoading() {
+    this.isLoadingSubject.next(true);
+  }
+
+  hideLoading() {
+    this.isLoadingSubject.next(false);
+  }
 
   setIsUpdateConfigLocal(updateEventCart: UpdateEventCart) {
     this.isUpdateConfigLocal.next(updateEventCart);
