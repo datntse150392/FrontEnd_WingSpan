@@ -46,9 +46,13 @@
         <p-overlayPanel #op>
           <ng-template pTemplate="content">
             <ng-container *ngIf="this.configLocal.cartItems; else emptyCart">
-              <div *ngFor="let item of configLocal.cartItems.items">
+              <div
+                *ngFor="let item of configLocal.cartItems.items"
+                class="mb-3"
+              >
                 <div class="flex flex-row gap-2">
                   <img
+                    class="img-item"
                     width="200"
                     height="100"
                     src="{{ item.image }}"
@@ -59,15 +63,15 @@
                     <p>{{ item.amount | currency : "VND" }}</p>
                   </div>
                 </div>
-                <div class="w-full flex flex-row justify-content-center">
-                  <button
-                    [routerLink]="['myCart']"
-                    pButton
-                    pRipple
-                    label="Thanh toán ngay"
-                    class="p-button-danger mt-4"
-                  ></button>
-                </div>
+              </div>
+              <div class="w-full flex flex-row justify-content-center">
+                <button
+                  [routerLink]="['myCart']"
+                  pButton
+                  pRipple
+                  label="Thanh toán ngay"
+                  class="p-button-danger"
+                ></button>
               </div>
             </ng-container>
             <ng-template #emptyCart>
