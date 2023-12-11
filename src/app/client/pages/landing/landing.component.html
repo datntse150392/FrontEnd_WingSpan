@@ -1,8 +1,16 @@
-<app-header></app-header>
-<!-- Danh sách quảng cảo billBoard -->
-<div class="pr-6 pl-6 pt-4">
-  <router-outlet></router-outlet>
+<div>
+  <p-blockUI [blocked]="(shareService.isLoading$ | async) || false">
+    <img
+      width="350"
+      src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Loading%2F37d2eac15c.gif?alt=media&token=7b0730aa-501d-4309-8ce1-16fd5bccb69c"
+    />
+  </p-blockUI>
+  <app-header></app-header>
+  <!-- Danh sách quảng cảo billBoard -->
+  <div class="pr-6 pl-6 pt-4">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- Footer -->
+  <app-footer></app-footer>
+  <p-scrollTop></p-scrollTop>
 </div>
-<!-- Footer -->
-<app-footer></app-footer>
-<p-scrollTop></p-scrollTop>
