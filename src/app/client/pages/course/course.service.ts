@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { Observable, map } from 'rxjs';
-import { APIService } from 'src/app/service/api/APIservice.service';
+import { APIService } from 'src/app/core/services';
 
 @Injectable({ providedIn: 'root' })
 export class CourseServiceModule {
