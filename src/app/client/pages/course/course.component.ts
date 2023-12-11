@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, forkJoin, takeUntil } from 'rxjs';
 import { BillBoard, Course } from 'src/app/core/models';
-import { APIService } from 'src/app/core/services';
+import { APIService, ShareService } from 'src/app/core/services';
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss'],
 })
-export class CourseComponent implements OnInit {
+export class CourseComponent implements OnInit, OnDestroy {
   hover: boolean = false;
 
   listCourses: Course[] = []; // Danh sách gốc
@@ -15,14 +16,46 @@ export class CourseComponent implements OnInit {
   filteredCoursesPE: Course[] = []; // Danh sách đã được lọc và sắp xếp PRO
   responsiveOptions: any[] | undefined;
 
-  constructor(private APIservice: APIService) {}
+  constructor(
+    private APIservice: APIService,
+    private shareService: ShareService
+  ) {}
+
+  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
+    this.shareService.showLoading();
     // Scroll in the head page
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    this.filterAndSortCoursesPEandFree();
-    this.getAllBillBoard();
+    const filterCouse$ = this.APIservice.getAllCourses().pipe(
+      takeUntil(this.destroy$)
+    );
+
+    const getAllBillBoard$ = this.APIservice.getAllBillBoards().pipe(
+      takeUntil(this.destroy$)
+    );
+
+    // Using forkJoin to get parallel api
+    forkJoin([filterCouse$, getAllBillBoard$]).subscribe({
+      next: ([filterCouseRes, getAllBillBoardRes]: [any, any]) => {
+        this.listCourses = filterCouseRes.data;
+        this.filteredCoursesPE = this.listCourses
+          .filter((course) => course.type === 'PE')
+          .sort((a, b) => a.enrollmentCount - b.enrollmentCount);
+        this.filteredCoursesFree = this.listCourses
+          .filter((course) => course.type === 'free')
+          .sort((a, b) => a.enrollmentCount - b.enrollmentCount);
+
+        this.listBillBoard = getAllBillBoardRes.data;
+      },
+
+      error: (err: Error) => {
+        console.log(err);
+      },
+      complete: () => this.shareService.hideLoading(),
+    });
+
     this.responsiveOptions = [
       {
         breakpoint: '1199px',
@@ -42,22 +75,8 @@ export class CourseComponent implements OnInit {
     ];
   }
 
-  getAllBillBoard() {
-    this.APIservice.getAllBillBoards().subscribe((res: any) => {
-      this.listBillBoard = res.data;
-    });
-  }
-
-  // Hàm để lọc và sắp xếp lại danh sách khóa học PE Cấp tốc và danh sách khóa học free
-  filterAndSortCoursesPEandFree() {
-    this.APIservice.getAllCourses().subscribe((res: any) => {
-      this.listCourses = res.data;
-      this.filteredCoursesPE = this.listCourses
-        .filter((course) => course.type === 'PE')
-        .sort((a, b) => a.enrollmentCount - b.enrollmentCount);
-      this.filteredCoursesFree = this.listCourses
-        .filter((course) => course.type === 'free')
-        .sort((a, b) => a.enrollmentCount - b.enrollmentCount);
-    });
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
