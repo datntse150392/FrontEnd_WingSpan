@@ -1,8 +1,8 @@
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { ConfigLocal, User } from 'src/app/core/models';
-import { CodeService, ToastService } from 'src/app/core/services';
+import { ConfigLocal, OperationType, User } from 'src/app/core/models';
+import { CodeService, ShareService, ToastService } from 'src/app/core/services';
 import { UserAPIService } from 'src/app/core/services/user.service';
 import { Router } from '@angular/router';
 @Component({
@@ -24,7 +24,8 @@ export class ProfileComponent implements OnChanges {
     private userAPIService: UserAPIService,
     private toastService: ToastService,
     private codeService: CodeService,
-    private router: Router
+    private router: Router,
+    private shareService: ShareService
   ) {
     this.configLocal = { userInfo: {} };
   }
@@ -79,6 +80,10 @@ export class ProfileComponent implements OnChanges {
         .subscribe((res: any) => {
           if (res && res.status === 200) {
             this.toastService.setToastIsEditinfo(true);
+            this.shareService.setIsUpdateConfigLocal({
+              isUpdateConfigLocal: true,
+              operationType: OperationType.Update,
+            });
             this.user = res.data.userInfo;
             this.toggleEditUserName = !this.toggleEditUserName;
           } else {
@@ -108,6 +113,7 @@ export class ProfileComponent implements OnChanges {
                   isActiveCourse: true,
                   operationType: 'success',
                 });
+                this.router.navigate(['/']);
               } else {
                 if (res.message == 'Code was Actived') {
                   this.toastService.setMessageToastActiveCourse({
@@ -130,9 +136,7 @@ export class ProfileComponent implements OnChanges {
             error: (err: Error) => {
               console.log(err);
             },
-            complete: () => {
-              this.router.navigate(['/']);
-            },
+            complete: () => {},
           });
       }
     } catch (error) {}

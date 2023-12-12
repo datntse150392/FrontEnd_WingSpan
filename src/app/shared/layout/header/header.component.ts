@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { ConfigLocal, UpdateEventCart, User } from 'src/app/core/models';
 import { AuthService, CartService, ShareService } from 'src/app/core/services';
 import { UserAPIService } from 'src/app/core/services/user.service';
@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Khai báo subscription để theo dõi
   private configLocalUpdateSubscription: Subscription | undefined;
+
+  private destroy$ = new Subject<void>();
 
   constructor(
     private userAPIService: UserAPIService,
@@ -79,6 +81,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
         } else if (res.operationType === 'delete') {
           this.configLocal.cartItems = undefined;
           localStorage.setItem('configLocal', JSON.stringify(this.configLocal));
+        } else if (res.operationType === 'update') {
+          this.userAPIService
+            .getUserByUserId(this.configLocal.userInfo._id)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+              next: (res: any) => {
+                this.user = res.data.user;
+              },
+              error: (err: Error) => {
+                console.log(err);
+              },
+              complete: () => {
+                this.configLocal.userInfo = this.user;
+                localStorage.setItem(
+                  'configLocal',
+                  JSON.stringify(this.configLocal)
+                );
+              },
+            });
         }
       });
   }
@@ -87,6 +108,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.configLocalUpdateSubscription) {
       this.configLocalUpdateSubscription.unsubscribe();
     }
+    this.destroy$.next(), this.destroy$.complete();
   }
 
   logout() {

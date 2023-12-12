@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastService } from './core/services';
-import { MessageToastActiveCourse } from './core/models';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
