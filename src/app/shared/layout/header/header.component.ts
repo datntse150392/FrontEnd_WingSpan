@@ -34,11 +34,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         items: [
           {
             label: 'Thông tin cá nhân',
-            url: '/profile',
+            routerLink: '/profile',
           },
           {
             label: 'Giỏ hàng của tôi',
-            url: '/myCart',
+            routerLink: '/myCart',
           },
         ],
       },
