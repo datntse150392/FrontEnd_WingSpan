@@ -72,6 +72,31 @@
       <p-divider></p-divider>
     </div>
   </div>
+
+  <!-- Active Coirse -->
+  <div class="grid">
+    <div class="col-9">
+      <form [formGroup]="activeForm">
+        <h3 class="title-actice-course">KÍCH HOẠT KHÓA HỌC</h3>
+        <input
+          formControlName="code"
+          placeholder="Mời bạn nhập mã kích hoạt"
+          type="text"
+          pInputText
+        />
+      </form>
+      <p-divider></p-divider>
+    </div>
+    <div class="col-3 flex align-items-center">
+      <button
+        pButton
+        pRipple
+        label="Kích hoạt"
+        class="p-button-success"
+        (click)="activeCourse(activeForm.value.code)"
+      ></button>
+    </div>
+  </div>
 </div>
 
 <!-- responsive -->

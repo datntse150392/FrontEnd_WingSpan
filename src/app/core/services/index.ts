@@ -5,3 +5,4 @@ export * from './transaction.service';
 export * from './share.service';
 export * from './temp.service';
 export * from './toast.service';
+export * from './code.service';

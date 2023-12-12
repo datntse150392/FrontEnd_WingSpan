@@ -1,27 +1,37 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Subject, takeUntil } from 'rxjs';
 import { ConfigLocal, User } from 'src/app/core/models';
-import { ToastService } from 'src/app/core/services';
+import { CodeService, ToastService } from 'src/app/core/services';
 import { UserAPIService } from 'src/app/core/services/user.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnChanges {
   configLocal: ConfigLocal;
   formGroup!: FormGroup;
   toggleEditUserName: boolean = false;
   user!: User;
-
   newFullName!: string | undefined;
+
+  private destroy$ = new Subject<void>();
+
   constructor(
     private fb: FormBuilder,
     private userAPIService: UserAPIService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private codeService: CodeService,
+    private router: Router
   ) {
     this.configLocal = { userInfo: {} };
   }
+
+  activeForm = new FormGroup({
+    code: new FormControl(''), // <== default value
+  });
 
   ngOnInit(): void {
     this.configLocal.userInfo = this.parseData().userInfo;
@@ -30,6 +40,11 @@ export class ProfileComponent {
     this.formGroup = this.fb.group({
       checked: [false], // Initial state, you can set it to true if needed
     });
+  }
+
+  ngOnChanges(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   parseData() {
@@ -66,7 +81,6 @@ export class ProfileComponent {
             this.toastService.setToastIsEditinfo(true);
             this.user = res.data.userInfo;
             this.toggleEditUserName = !this.toggleEditUserName;
-            window.location.reload();
           } else {
             this.toastService.setToastIsEditinfo(false);
           }
@@ -74,5 +88,53 @@ export class ProfileComponent {
     } catch (error) {
       this.toastService.setToastIsEditinfo(false);
     }
+  }
+
+  /**
+   * Logic Code: Actvie Course
+   */
+  activeCourse(code: any) {
+    try {
+      if (this.configLocal.userInfo._id) {
+        this.codeService
+          .activeCourse(code, this.configLocal.userInfo._id)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            next: (res: any) => {
+              console.log(res);
+
+              if (res && res.status === 200) {
+                this.toastService.setMessageToastActiveCourse({
+                  isActiveCourse: true,
+                  operationType: 'success',
+                });
+              } else {
+                if (res.message == 'Code was Actived') {
+                  this.toastService.setMessageToastActiveCourse({
+                    isActiveCourse: false,
+                    operationType: 'Actived',
+                  });
+                } else if (res.message == 'Not Found Code') {
+                  this.toastService.setMessageToastActiveCourse({
+                    isActiveCourse: false,
+                    operationType: 'Not Found',
+                  });
+                } else {
+                  this.toastService.setMessageToastActiveCourse({
+                    isActiveCourse: false,
+                    operationType: 'Course was enrollmenteded',
+                  });
+                }
+              }
+            },
+            error: (err: Error) => {
+              console.log(err);
+            },
+            complete: () => {
+              this.router.navigate(['/']);
+            },
+          });
+      }
+    } catch (error) {}
   }
 }

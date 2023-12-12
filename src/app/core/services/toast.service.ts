@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { MessageToastActiveCourse } from '../models';
+
 @Injectable({ providedIn: 'root' })
 export class ToastService {
   private isLogin = new BehaviorSubject<boolean>(true);
@@ -10,6 +12,11 @@ export class ToastService {
   private isAddToCart = new BehaviorSubject<boolean>(true);
   private isDeleteCart = new BehaviorSubject<boolean>(true);
   private isTransaction = new BehaviorSubject<boolean>(true);
+  private messageToastActiveCourse =
+    new BehaviorSubject<MessageToastActiveCourse>({
+      isActiveCourse: true,
+      operationType: 'Success',
+    });
 
   // Observable stream that components can subscribe to
   toast$ = this.isLogin.asObservable();
@@ -19,6 +26,7 @@ export class ToastService {
   toastAddToCart$ = this.isAddToCart.asObservable();
   toastDeleteCart$ = this.isDeleteCart.asObservable();
   toastTransaction$ = this.isTransaction.asObservable();
+  messageToastActiveCourse$ = this.messageToastActiveCourse.asObservable();
 
   constructor(private messageService: MessageService) {}
 
@@ -50,6 +58,12 @@ export class ToastService {
 
   setToastIsTransaction(isTransaction: boolean) {
     this.isTransaction.next(isTransaction);
+  }
+
+  setMessageToastActiveCourse(
+    messageToastActiveCourse: MessageToastActiveCourse
+  ) {
+    this.messageToastActiveCourse.next(messageToastActiveCourse);
   }
 
   showSuccess(message: string) {
