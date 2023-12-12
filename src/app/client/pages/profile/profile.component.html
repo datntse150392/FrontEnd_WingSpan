@@ -2,9 +2,34 @@
   class="pr-8 pl-8 mb-4 w-full custom-profile-main"
   [ngStyle]="{ border: '1px solid #000' }"
 >
-  <h3>Thông tin cá nhân</h3>
+  <h2 class="pt-4">Thông tin cá nhân</h2>
   <p-divider></p-divider>
+  <!-- Active Coirse -->
+  <div class="grid">
+    <div class="col-9">
+      <form [formGroup]="activeForm">
+        <h3 class="title-actice-course">KÍCH HOẠT KHÓA HỌC</h3>
+        <input
+          formControlName="code"
+          placeholder="Mời bạn nhập mã kích hoạt"
+          type="text"
+          pInputText
+        />
+      </form>
+      <p-divider></p-divider>
+    </div>
+    <div class="col-3 flex align-items-center">
+      <button
+        pButton
+        pRipple
+        label="Kích hoạt"
+        class="p-button-success"
+        (click)="activeCourse(activeForm.value.code)"
+      ></button>
+    </div>
+  </div>
   <!-- Full Name -->
+
   <div class="grid">
     <div class="col-9">
       <h3>Họ và tên</h3>
@@ -73,31 +98,6 @@
       <h3>Email</h3>
       <p>{{ this.user && this.user.email }}</p>
       <p-divider></p-divider>
-    </div>
-  </div>
-
-  <!-- Active Coirse -->
-  <div class="grid">
-    <div class="col-9">
-      <form [formGroup]="activeForm">
-        <h3 class="title-actice-course">KÍCH HOẠT KHÓA HỌC</h3>
-        <input
-          formControlName="code"
-          placeholder="Mời bạn nhập mã kích hoạt"
-          type="text"
-          pInputText
-        />
-      </form>
-      <p-divider></p-divider>
-    </div>
-    <div class="col-3 flex align-items-center">
-      <button
-        pButton
-        pRipple
-        label="Kích hoạt"
-        class="p-button-success"
-        (click)="activeCourse(activeForm.value.code)"
-      ></button>
     </div>
   </div>
 </div>
