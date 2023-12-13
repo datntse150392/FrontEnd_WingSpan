@@ -267,7 +267,7 @@ Mô tả chi tiết về Màn Hình Cart Page.
          </td>
         <td align="center" width="96">
              <img width="48" height="48" src="https://img.icons8.com/color/48/java-web-token.png" alt="java-web-token"/>
-           <br />RxJS
+           <br />JWT
          </td>
        </tr>
   </table>
