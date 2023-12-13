@@ -206,8 +206,7 @@ Mô tả chi tiết về Màn Hình Cart Page.
 - Payment: Paypal, momo, zalopay
 - GG Cloud: Login, Gmail API
      <table align="center">
-       
-       <tr>
+              <tr>
          <td align="center" width="96">
              <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-angular-48.png?alt=media&token=0ab65086-a322-4850-ba81-963acffda8d0" width="48" height="48" alt="C" />
            <br />Angular
@@ -225,8 +224,7 @@ Mô tả chi tiết về Màn Hình Cart Page.
            <br />express
          </td>
        </tr>
-       
-       <tr>
+              <tr>
          <td align="center" width="96">
              <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-google-firebase-console-48.png?alt=media&token=af552a40-5db6-45c1-8564-d4cddc9a5b44" width="48" height="48" alt="TypeScript" />
            <br />Firebase
@@ -243,9 +241,7 @@ Mô tả chi tiết về Màn Hình Cart Page.
              <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-mongodb-a-cross-platform-document-oriented-database-program-48.png?alt=media&token=d0ec414b-79ad-437b-8835-8d567f9e80e3" width="48" height="48" alt="JavaScript" />
            <br />MongoDB
          </td>
-          
-       </tr>
-
+                 </tr>
        <tr>
           <td align="center" width="96">
              <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/README%2Ficons8-sass-48.png?alt=media&token=bb7a0178-6df6-4ad7-91e3-9d436e1d6282" width="48" height="48" alt="TypeScript" />
@@ -269,13 +265,11 @@ Mô tả chi tiết về Màn Hình Cart Page.
              <img src="https://rxjs.dev/generated/images/marketing/home/Rx_Logo-512-512.png" width="48" height="48" alt="RxJS" />
            <br />RxJS
          </td>
-
         <td align="center" width="96">
              <img width="48" height="48" src="https://img.icons8.com/color/48/java-web-token.png" alt="java-web-token"/>
            <br />RxJS
          </td>
        </tr>
-
   </table>
 
 ---
