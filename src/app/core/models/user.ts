@@ -6,4 +6,5 @@ export interface User {
   profileImage?: string;
   dateOfBirth?: string;
   enrolledCourses?: [];
+  createAt?: Date;
 }
