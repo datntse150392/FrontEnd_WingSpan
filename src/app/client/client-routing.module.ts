@@ -9,6 +9,7 @@ import {
   CourseLearningContentComponent,
   LandingComponent,
   ProfileComponent,
+  SettingComponent,
   SignInComponent,
 } from './pages';
 const routes: Routes = [
@@ -20,6 +21,11 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        // canActivate: [AuthorGuard],
+      },
+      {
+        path: 'settings',
+        children: [{ path: 'personal', component: SettingComponent }],
         // canActivate: [AuthorGuard],
       },
       {

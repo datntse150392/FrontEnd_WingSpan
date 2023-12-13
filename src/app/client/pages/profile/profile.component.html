@@ -1,178 +1,52 @@
-<div
-  class="pr-8 pl-8 mb-4 w-full custom-profile-main"
-  [ngStyle]="{ border: '1px solid #000' }"
->
-  <h2 class="pt-4">Thông tin cá nhân</h2>
-  <p-divider></p-divider>
-  <!-- Active Coirse -->
-  <div class="grid">
-    <div class="col-9">
-      <form [formGroup]="activeForm">
-        <h3 class="title-actice-course">KÍCH HOẠT KHÓA HỌC</h3>
-        <input
-          formControlName="code"
-          placeholder="Mời bạn nhập mã kích hoạt"
-          type="text"
-          pInputText
-        />
-      </form>
-      <p-divider></p-divider>
-    </div>
-    <div class="col-3 flex align-items-center">
-      <button
-        pButton
-        pRipple
-        label="Kích hoạt"
-        class="p-button-success"
-        (click)="activeCourse(activeForm.value.code)"
-      ></button>
-    </div>
+<div class="custom-profile-item relative">
+  <!-- Header Profile -->
+  <div class="custom-profile-header-container">
+    <!-- Btn edit Image Backgournd -->
   </div>
-  <!-- Full Name -->
-
-  <div class="grid">
-    <div class="col-9">
-      <h3>Họ và tên</h3>
-      <ng-container *ngIf="toggleEditUserName; else notChangeUserName">
-        <input type="text" pInputText [(ngModel)]="newFullName" />
-      </ng-container>
-      <ng-template #notChangeUserName>
-        <p>{{ this.user && this.user.fullName }}</p>
-      </ng-template>
-      <p-divider></p-divider>
-      <span
-        >Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của
-        bạn.</span
-      >
-    </div>
-    <div class="col-3 flex align-items-center">
-      <ng-container *ngIf="toggleEditUserName; else notBtnChange">
-        <button
-          pButton
-          pRipple
-          label="Thay đổi"
-          class="p-button-success"
-          (click)="updateInfo()"
-        ></button>
-      </ng-container>
-      <ng-template #notBtnChange>
-        <button
-          pButton
-          pRipple
-          label="Chỉnh sửa"
-          class="p-button-secondary"
-          (click)="toggleEditChange()"
-        ></button>
-      </ng-template>
-    </div>
-  </div>
-
-  <!-- Avatar -->
-  <div class="grid">
-    <div class="col-9">
-      <h3>Avatar</h3>
-      <p-image
-        src="{{ this.user && this.user.profileImage }}"
-        alt="Image"
-        width="250"
-        [preview]="true"
-      ></p-image>
-      <p-divider></p-divider>
-      <span>Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.</span>
-    </div>
-    <div class="col-3 flex align-items-center">
-      <p-fileUpload
-        mode="basic"
-        name="demo[]"
-        url="https://www.primefaces.org/cdn/api/upload.php"
-        accept="image/*"
-        [auto]="true"
-        chooseLabel="Cập nhật ảnh"
-      ></p-fileUpload>
-    </div>
-  </div>
-
-  <!-- Email -->
-  <div class="grid">
-    <div class="col-9">
-      <h3>Email</h3>
-      <p>{{ this.user && this.user.email }}</p>
-      <p-divider></p-divider>
-    </div>
-  </div>
-</div>
-
-<!-- responsive -->
-<div class="p-4 custom-profile-item" [ngStyle]="{ border: '1px solid #000' }">
-  <h3>Thông tin cá nhân</h3>
-  <p-divider></p-divider>
-  <!-- Full Name -->
-  <div class="custom-profile-container">
-    <div class="custom-profile-content">
-      <h3>Họ và tên</h3>
-      <ng-container *ngIf="toggleEditUserName; else notChangeUserName">
-        <input type="text" pInputText [(ngModel)]="newFullName" />
-      </ng-container>
-      <ng-template #notChangeUserName>
-        <p>{{ this.user && this.user.fullName }}</p>
-      </ng-template>
-      <ng-container *ngIf="toggleEditUserName; else notBtnChange">
-        <button
-          pButton
-          pRipple
-          label="Thay đổi"
-          class="p-button-success"
-          (click)="updateInfo()"
-        ></button>
-      </ng-container>
-      <ng-template #notBtnChange>
-        <button
-          pButton
-          pRipple
-          label="Chỉnh sửa"
-          class="p-button-secondary"
-          (click)="toggleEditChange()"
-        ></button>
-      </ng-template>
-      <p-divider></p-divider>
-      <span
-        >Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình luận của
-        bạn.</span
-      >
-    </div>
-    <div class="col-3 flex align-items-center"></div>
-  </div>
-
-  <!-- Avatar -->
-  <div class="">
-    <div class="">
-      <h3>Avatar</h3>
-      <div class="flex align-items-center justify-content-between mt-2">
-        <p-image
-          src="{{ this.user && this.user.profileImage }}"
-          alt="Image"
-          width="250"
-          [preview]="true"
-        ></p-image>
-        <p-fileUpload
-          mode="basic"
-          name="demo[]"
-          url="https://www.primefaces.org/cdn/api/upload.php"
-          accept="image/*"
-        >
-        </p-fileUpload>
+  <!-- Body Profile -->
+  <div class="grid mt-4 p-4">
+    <!-- Intro -->
+    <div class="col-5">
+      <div class="card">
+        <div class="info p-4">
+          <h5>{{ this.configLocal.userInfo.fullName }}</h5>
+          <div class="flex flex-row align-items-center gap-2 mt-3">
+            <i class="pi pi-users" style="font-size: 1rem"></i>
+            <p>
+              Thành viên của <strong>WingSpan</strong> từ ngày
+              {{ this.configLocal.userInfo.createAt | date : "dd/MM/yyyy " }}
+            </p>
+          </div>
+        </div>
+        <div class="info p-4 mt-4">
+          <h5>Hoạt động gần đây</h5>
+          <div class="flex flex-row align-items-center gap-2 mt-3">
+            <p>Chưa có hoạt động nào gần đây</p>
+          </div>
+        </div>
       </div>
-      <p-divider></p-divider>
-      <span>Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.</span>
     </div>
-  </div>
-
-  <!-- Email -->
-  <div>
-    <div>
-      <h3>Email</h3>
-      <p>{{ this.user && this.user.email }}</p>
-      <p-divider></p-divider>
+    <!-- List Course -->
+    <div class="col-7">
+      <div class="info p-4">
+        <h5>Các khóa học đã tham gia</h5>
+        <div class="mt-3" *ngFor="let course of courses; index as i">
+          <div class="flex flex-row gap-4">
+            <img
+              [ngStyle]="{ cursor: 'pointer' }"
+              [routerLink]="['/detail', course._id]"
+              class="border-round-2xl w-12rem"
+              alt="Card"
+              src="{{ course.image }}"
+            />
+            <div class="flex flex-column gap-2">
+              <h5>{{ course.title }}</h5>
+              <p>{{ course.titleDescription }}</p>
+            </div>
+          </div>
+          <p-divider *ngIf="courses?.length !== i + 1"></p-divider>
+        </div>
+      </div>
     </div>
   </div>
 </div>

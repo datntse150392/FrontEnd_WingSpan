@@ -1,45 +1,25 @@
-p {
-  font-size: 13px;
-}
-
-span {
-  font-size: 10px;
-}
-
 .custom-profile-item {
-  display: none !important;
-}
-
-.title-actice-course {
-  color: red;
-}
-@media (max-width: 600px) {
-  .custom-profile-main {
-    display: none !important;
+  padding: 0 10%;
+  .custom-profile-header-container {
+    background-image: url("https://fullstack.edu.vn/static/media/cover-profile.3fb9fed576da4b28386a.png");
+    width: 100%;
+    height: 270px;
+    border-radius: 10px;
+    .custom-profile-content {
+      position: absolute;
+      top: 27%;
+      left: 5%;
+    }
   }
-  .custom-profile-item {
-    display: flex !important;
-    flex-direction: column;
-    h3 {
-      font-size: 15px;
-    }
-    .custom-profile-container {
-      display: flex;
-      flex-direction: column;
-      h3 {
-        font-size: 13px;
-      }
-      input {
-        width: 100%;
-        font-size: 13px;
-      }
-      button,
-      btn-image {
-        margin-top: 10px;
-        width: 150px;
-        font-size: 13px;
-        height: 40px;
-      }
-    }
+}
+.info {
+  border: 1px solid #4b4b4b7a;
+  border-radius: 10px;
+  p {
+    font-size: 12px;
+    margin: 0;
+  }
+  h5 {
+    margin: 0;
   }
 }

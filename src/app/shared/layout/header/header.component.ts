@@ -48,6 +48,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         label: 'Cài đặt',
         items: [
           {
+            label: 'Cài đặt tài khoản',
+            routerLink: '/settings/personal',
+          },
+          {
             label: 'Đăng xuất',
             command: () => {
               this.logout();
