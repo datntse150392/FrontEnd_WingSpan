@@ -149,6 +149,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
             try {
               if (res?.status === 200) {
                 this.getUserByUserId(this.configLocal.userInfo._id);
+                this.shareService.UpdateConfigLocal();
                 this.toastService.setToastIsEnrollCourse(true);
               } else if (res?.status === 400) {
                 this.toastService.setToastIsEnrollCourse(false);
