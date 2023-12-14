@@ -49,7 +49,7 @@ export class SignInComponent implements OnInit {
         if (res && res.status === 200 && res.message === 'Not Found') {
           this.authService
 
-            .signUp(this.userGG.email, this.userGG.name)
+            .signUp(this.userGG.email, this.userGG.name, this.userGG.photoUrl)
             .subscribe((res: any) => {
               try {
                 const token = res && res.access_token.split(' ')[1];

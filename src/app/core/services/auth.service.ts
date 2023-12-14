@@ -30,10 +30,11 @@ export class AuthService {
    * @param fullName
    * @returns {Observable}
    */
-  signUp(email: any, fullName: any): Observable<any> {
+  signUp(email: any, fullName: any, profileImage: any): Observable<any> {
     const body = {
       email,
       fullName,
+      profileImage,
     };
     return this.httpClient.post(`${environment.apiUrl}auth/signUp`, body);
   }
