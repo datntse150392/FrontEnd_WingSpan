@@ -19,7 +19,6 @@ export class ProfileComponent implements OnChanges {
 
   ngOnInit(): void {
     this.configLocal.userInfo = this.parseData().userInfo;
-    console.log(this.configLocal.userInfo.enrolledCourses);
 
     this.courses = this.configLocal.userInfo.enrolledCourses;
   }
