@@ -54,6 +54,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.shareService.showLoading();
     // Lấy giá trị của tham số 'id' từ URL
     const courseId = this.route.snapshot.params['id'];
 
@@ -84,7 +85,9 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.error('Error fetching data:', error);
       },
-      complete: () => {},
+      complete: () => {
+        this.shareService.hideLoading();
+      },
     });
   }
 

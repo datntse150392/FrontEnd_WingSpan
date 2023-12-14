@@ -6,7 +6,7 @@ import { SocialUser } from '@abacritt/angularx-social-login';
 import { mergeMap, of } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ConfigLocal, User } from 'src/app/core/models';
-import { AuthService, ToastService } from 'src/app/core/services';
+import { AuthService, ShareService, ToastService } from 'src/app/core/services';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -29,10 +29,12 @@ export class SignInComponent implements OnInit {
     private router: Router,
     private toastService: ToastService,
     private socialAuthService: SocialAuthService,
-    private authService: AuthService
+    private authService: AuthService,
+    private shareService: ShareService
   ) {}
 
   ngOnInit(): void {
+    this.shareService.showLoading();
     this.socialAuthService.authState
       .pipe(
         mergeMap((user) => {
@@ -62,6 +64,7 @@ export class SignInComponent implements OnInit {
                   JSON.stringify(this.configLocal)
                 );
                 this.toastService.setToastIsLogin(true);
+                this.shareService.hideLoading();
                 this.router.navigate(['/']);
               } catch (error) {
                 this.toastService.setToastIsRegister(false);
@@ -82,8 +85,10 @@ export class SignInComponent implements OnInit {
                   JSON.stringify(this.configLocal)
                 );
                 this.toastService.setToastIsLogin(true);
+                this.shareService.hideLoading();
                 this.router.navigate(['/']);
               } catch (error) {
+                this.shareService.hideLoading();
                 this.toastService.setToastIsLogin(false);
                 localStorage.clear();
               }
