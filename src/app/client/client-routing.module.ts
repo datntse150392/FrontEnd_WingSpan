@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CanLearnCourseGuard } from '../guards/can-learn-course.guard';
-import { AuthorGuard } from '../guards/author.guard';
 import {
   CartComponent,
   CourseComponent,
@@ -12,6 +10,9 @@ import {
   SettingComponent,
   SignInComponent,
 } from './pages';
+import { SignInGuard } from '../guards/signIn.guard';
+import { AuthGuard } from '../guards/auth.guard';
+import { CanLearnCourseGuard } from '../guards/can-learn-course.guard';
 const routes: Routes = [
   {
     path: '',
@@ -21,12 +22,12 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
-        // canActivate: [AuthorGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'settings',
         children: [{ path: 'personal', component: SettingComponent }],
-        // canActivate: [AuthorGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'detail/:id',
@@ -35,17 +36,19 @@ const routes: Routes = [
       {
         path: 'myCart',
         component: CartComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'learning/lessons-for-newbie/:courseId/:videoId',
         component: CourseLearningContentComponent,
-        // canActivateChild: [CanLearnCourseGuard],
+        canActivate: [CanLearnCourseGuard],
       },
     ],
   },
   {
     path: 'auth/signIn',
     component: SignInComponent,
+    canActivate: [SignInGuard],
   },
 ];
 

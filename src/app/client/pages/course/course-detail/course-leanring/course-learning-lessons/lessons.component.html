@@ -11,7 +11,7 @@
   <app-course-learning-sidebar></app-course-learning-sidebar>
 </div>
 <div class="custome-leanring-lessons-container">
-  <h2 class="m-0">{{ course.title }}</h2>
+  <h2 class="m-0">{{ course && course.title }}</h2>
   <span [ngStyle]="{ fontSize: '10px' }">Cập nhật tháng 11 năm 2022</span>
   <p>
     Các vấn đề liên quan đến khóa học các bạn có thể liên hệ mình thông qua các

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import { Router } from '@angular/router';
 import { ConfigLocal, Course, User } from '../core/models';
-import { UserAPIService } from '../core/services/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,45 +10,25 @@ export class CanLearnCourseGuard {
   user: User = {};
   configLocal: ConfigLocal;
 
-  constructor(private router: Router, private userAPIService: UserAPIService) {
+  constructor(private router: Router) {
     this.configLocal = { userInfo: {} };
   }
 
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  canActivate(childRoute: ActivatedRouteSnapshot): boolean {
     try {
       const { courseId } = childRoute.params;
       this.configLocal.userInfo = this.parseData().userInfo;
-      this.getUserbyUserId(this.configLocal.userInfo._id);
-      if (
-        this.user &&
-        this.user.enrolledCourses?.find((item: Course) => item._id === courseId)
-      ) {
+
+      const courseArray = this.configLocal.userInfo.enrolledCourses;
+      if (courseArray?.find((course: Course) => course._id === courseId)) {
         return true;
+      } else {
+        this.router.navigate(['/']);
       }
     } catch (error) {
-
-      return this.router.navigate(['/']);
+      this.router.navigate(['/']);
     }
-
-    return this.router.navigate(['/']);
-  }
-
-  /**
-   *
-   * @returns UserInfo object
-   */
-  getUserbyUserId(userId: any) {
-    try {
-      this.userAPIService.getUserByUserId(userId).subscribe((res: any) => {
-        this.user = res.data.user;
-      });
-    } catch (error) {}
+    return true;
   }
 
   parseData() {
