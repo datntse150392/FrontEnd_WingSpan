@@ -54,7 +54,6 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.shareService.showLoading();
     // Lấy giá trị của tham số 'id' từ URL
     const courseId = this.route.snapshot.params['id'];
 
@@ -85,9 +84,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.error('Error fetching data:', error);
       },
-      complete: () => {
-        this.shareService.hideLoading();
-      },
+      complete: () => {},
     });
   }
 
@@ -145,6 +142,8 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
   */
   confirmEnrollCourse(userId: any, courseId: any) {
     this.confirmationService.confirm({
+      header: 'Đăng Ký Khóa Học',
+      message: 'Bạn có chắc muốn đăng ký khóa học này?',
       accept: () => {
         this.courseAPIService
           .enrollCourse(userId, courseId)

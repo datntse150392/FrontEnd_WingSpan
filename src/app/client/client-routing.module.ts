@@ -36,7 +36,7 @@ const routes: Routes = [
       {
         path: 'myCart',
         component: CartComponent,
-        canActivate: [AuthGuard],
+        // canActivate: [AuthGuard],
       },
       {
         path: 'learning/lessons-for-newbie/:courseId/:videoId',

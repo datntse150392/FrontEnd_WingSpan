@@ -28,6 +28,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { TreeModule } from 'primeng/tree';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { FooterComponent, HeaderComponent, SidebarComponent } from './layout';
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { FooterComponent, HeaderComponent, SidebarComponent } from './layout';
     OverlayPanelModule,
     NgxPayPalModule,
     GoogleSigninButtonModule,
+    ConfirmPopupModule,
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent],
   exports: [
@@ -97,6 +99,7 @@ import { FooterComponent, HeaderComponent, SidebarComponent } from './layout';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
+    ConfirmPopupModule,
   ],
 })
 export class SharedModule {}
