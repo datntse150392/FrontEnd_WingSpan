@@ -350,28 +350,34 @@
     </div>
   </div>
 </div>
-<div class="confirmDialog">
-  <p-confirmDialog #cd class="w-full">
-    <ng-template pTemplate="message">
-      <h4>Bạn chắc chắn muốn đăng ký?</h4>
+
+<div class="card flex justify-content-center">
+  <p-confirmDialog #cd>
+    <ng-template pTemplate="headless" let-message>
+      <div
+        class="flex flex-column align-items-center p-5 surface-overlay border-round"
+      >
+        <div
+          class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem -mt-8"
+        >
+          <i class="pi pi-question text-5xl"></i>
+        </div>
+        <span class="font-bold text-2xl block mb-2 mt-4">{{
+          message.header
+        }}</span>
+        <p class="mb-0">{{ message.message }}</p>
+        <div class="flex align-items-center gap-2 mt-4">
+          <button pButton label="Đăng ký" (click)="cd.accept()" class="w-8rem">
+            Đăng ký
+          </button>
+          <button
+            pButton
+            label="Hủy"
+            (click)="cd.reject()"
+            class="p-button-outlined w-8rem"
+          ></button>
+        </div>
+      </div>
     </ng-template>
-    <ng-template pTemplate="footer">
-      <div class="flex flex-row w-20rem">
-        <button
-          [ngStyle]="{ backgroundColor: 'red' }"
-          type="button"
-          pButton
-          icon="pi pi-times"
-          label="Không"
-          (click)="cd.reject()"
-        ></button>
-        <button
-          type="button"
-          pButton
-          icon="pi pi-check"
-          label="Đăng ký"
-          (click)="cd.accept()"
-        ></button>
-      </div> </ng-template
-  ></p-confirmDialog>
+  </p-confirmDialog>
 </div>
