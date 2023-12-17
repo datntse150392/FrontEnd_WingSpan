@@ -60,10 +60,13 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
     // Scroll in the head page
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Lưu courseId vào configCourse và lưu vào localStorage
-    localStorage.setItem('courseId', courseId);
-    this.configLocal.userInfo = this.parseData().userInfo;
-    this.getUserByUserId(this.configLocal.userInfo._id);
+    // Kiểm tra xem có đăng nhập hay chưa ?
+    if (localStorage.getItem('isLogin') === 'true') {
+      // Lưu courseId vào configCourse và lưu vào localStorage
+      localStorage.setItem('courseId', courseId);
+      this.configLocal.userInfo = this.parseData().userInfo;
+      this.getUserByUserId(this.configLocal.userInfo._id);
+    }
 
     const courseById$ = this.APIservice.getCoursebyId(courseId).pipe(
       takeUntil(this.destroy$)

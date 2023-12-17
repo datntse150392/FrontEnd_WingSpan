@@ -44,7 +44,7 @@
             <strong>{{ course && course.mainCourse.length }}</strong> chương
           </li>
           <li>
-            <strong>{{ constLesson }}</strong> bài học
+            <strong>{{ constLesson && constLesson }}</strong> bài học
           </li>
         </ul>
         <ng-container *ngIf="isExpand; else elseNotExpand">
