@@ -60,52 +60,56 @@ export class HeaderComponent implements OnInit, OnDestroy {
         ],
       },
     ];
-    try {
+    if (localStorage.getItem('isLogin') === 'true') {
       this.configLocal.userInfo = this.parseData().userInfo;
       this.getUser();
       this.getUserByUserId();
       this.getCartItems(this.configLocal.userInfo._id);
-    } catch (error) {}
-
-    // Gán subscription cho updateConfigLocal$
-    this.configLocalUpdateSubscription =
-      this.shareService.updateConfigLocal$.subscribe((res: UpdateEventCart) => {
-        if (res.operationType === 'add') {
-          this.cartService
-            .getCartItems(this.configLocal.userInfo._id)
-            .subscribe((res: any) => {
-              if (res && res.status === 200) {
-                this.configLocal.cartItems = res.data.cartItem;
-              }
+      // Gán subscription cho updateConfigLocal$
+      this.configLocalUpdateSubscription =
+        this.shareService.updateConfigLocal$.subscribe(
+          (res: UpdateEventCart) => {
+            if (res.operationType === 'add') {
+              this.cartService
+                .getCartItems(this.configLocal.userInfo._id)
+                .subscribe((res: any) => {
+                  if (res && res.status === 200) {
+                    this.configLocal.cartItems = res.data.cartItem;
+                  }
+                  localStorage.setItem(
+                    'configLocal',
+                    JSON.stringify(this.configLocal)
+                  );
+                });
+            } else if (res.operationType === 'delete') {
+              this.configLocal.cartItems = undefined;
               localStorage.setItem(
                 'configLocal',
                 JSON.stringify(this.configLocal)
               );
-            });
-        } else if (res.operationType === 'delete') {
-          this.configLocal.cartItems = undefined;
-          localStorage.setItem('configLocal', JSON.stringify(this.configLocal));
-        } else if (res.operationType === 'update') {
-          this.userAPIService
-            .getUserByUserId(this.configLocal.userInfo._id)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe({
-              next: (res: any) => {
-                this.user = res.data.user;
-              },
-              error: (err: Error) => {
-                console.log(err);
-              },
-              complete: () => {
-                this.configLocal.userInfo = this.user;
-                localStorage.setItem(
-                  'configLocal',
-                  JSON.stringify(this.configLocal)
-                );
-              },
-            });
-        }
-      });
+            } else if (res.operationType === 'update') {
+              this.userAPIService
+                .getUserByUserId(this.configLocal.userInfo._id)
+                .pipe(takeUntil(this.destroy$))
+                .subscribe({
+                  next: (res: any) => {
+                    this.user = res.data.user;
+                  },
+                  error: (err: Error) => {
+                    console.log(err);
+                  },
+                  complete: () => {
+                    this.configLocal.userInfo = this.user;
+                    localStorage.setItem(
+                      'configLocal',
+                      JSON.stringify(this.configLocal)
+                    );
+                  },
+                });
+            }
+          }
+        );
+    }
   }
   ngOnDestroy(): void {
     // Unsubscribe khi component được hủy

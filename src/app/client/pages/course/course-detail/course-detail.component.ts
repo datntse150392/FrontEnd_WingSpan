@@ -54,17 +54,19 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.shareService.showLoading();
     // Lấy giá trị của tham số 'id' từ URL
     const courseId = this.route.snapshot.params['id'];
 
     // Scroll in the head page
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Lưu courseId vào configCourse và lưu vào localStorage
-    localStorage.setItem('courseId', courseId);
-    this.configLocal.userInfo = this.parseData().userInfo;
-    this.getUserByUserId(this.configLocal.userInfo._id);
+    // Kiểm tra xem có đăng nhập hay chưa ?
+    if (localStorage.getItem('isLogin') === 'true') {
+      // Lưu courseId vào configCourse và lưu vào localStorage
+      localStorage.setItem('courseId', courseId);
+      this.configLocal.userInfo = this.parseData().userInfo;
+      this.getUserByUserId(this.configLocal.userInfo._id);
+    }
 
     const courseById$ = this.APIservice.getCoursebyId(courseId).pipe(
       takeUntil(this.destroy$)
@@ -85,9 +87,7 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.error('Error fetching data:', error);
       },
-      complete: () => {
-        this.shareService.hideLoading();
-      },
+      complete: () => {},
     });
   }
 

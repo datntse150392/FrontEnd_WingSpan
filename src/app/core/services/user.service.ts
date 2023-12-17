@@ -17,7 +17,7 @@ export class UserAPIService {
       this.headers = this.authService.getHeaders(token);
     } else {
       // Handle the case when 'configLocal' is null.
-      console.error('Config data not found in local storage.');
+      console.log('Config data not found in local storage.');
     }
   }
 

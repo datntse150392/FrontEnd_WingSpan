@@ -47,7 +47,6 @@ export class SignInComponent implements OnInit {
         })
       )
       .subscribe((res: any) => {
-        console.log(res);
         if (res && res.status === 200 && res.message === 'Not Found') {
           this.authService
 
@@ -63,6 +62,7 @@ export class SignInComponent implements OnInit {
                   'configLocal',
                   JSON.stringify(this.configLocal)
                 );
+                localStorage.setItem('isLogin', 'true');
                 this.toastService.setToastIsLogin(true);
                 this.shareService.hideLoading();
                 this.router.navigate(['/']);
@@ -84,6 +84,7 @@ export class SignInComponent implements OnInit {
                   'configLocal',
                   JSON.stringify(this.configLocal)
                 );
+                localStorage.setItem('isLogin', 'true');
                 this.toastService.setToastIsLogin(true);
                 this.shareService.hideLoading();
                 this.router.navigate(['/']);
