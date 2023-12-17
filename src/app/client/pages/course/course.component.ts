@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, forkJoin, takeUntil } from 'rxjs';
 import { BillBoard, Course } from 'src/app/core/models';
 import { APIService, ShareService } from 'src/app/core/services';
@@ -7,7 +7,7 @@ import { APIService, ShareService } from 'src/app/core/services';
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss'],
 })
-export class CourseComponent implements OnInit, OnDestroy {
+export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
   hover: boolean = false;
 
   listCourses: Course[] = []; // Danh sách gốc
@@ -53,7 +53,7 @@ export class CourseComponent implements OnInit, OnDestroy {
       error: (err: Error) => {
         console.log(err);
       },
-      complete: () => this.shareService.hideLoading(),
+      complete: () => {},
     });
 
     this.responsiveOptions = [
@@ -73,6 +73,10 @@ export class CourseComponent implements OnInit, OnDestroy {
         numScroll: 1,
       },
     ];
+  }
+
+  ngAfterViewInit(): void {
+    this.shareService.hideLoading();
   }
 
   ngOnDestroy(): void {
