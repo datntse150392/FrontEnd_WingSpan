@@ -9,6 +9,7 @@ import {
   ProfileComponent,
   SettingComponent,
   SignInComponent,
+  TransactionComponent,
 } from './pages';
 import { SignInGuard } from '../guards/signIn.guard';
 import { AuthGuard } from '../guards/auth.guard';
@@ -36,12 +37,17 @@ const routes: Routes = [
       {
         path: 'myCart',
         component: CartComponent,
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
       },
       {
         path: 'learning/lessons-for-newbie/:courseId/:videoId',
         component: CourseLearningContentComponent,
         canActivate: [CanLearnCourseGuard],
+      },
+      {
+        path: 'myTransaction',
+        component: TransactionComponent,
+        canActivate: [AuthGuard],
       },
     ],
   },

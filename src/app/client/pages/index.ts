@@ -9,3 +9,4 @@ export * from './landing/landing.component';
 export * from '../../page-not-found/page-not-found.component';
 export * from './profile/profile.component';
 export * from './sign-in/sign-in.component';
+export * from './transaction/transaction.component';

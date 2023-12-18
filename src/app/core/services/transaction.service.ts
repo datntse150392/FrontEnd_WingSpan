@@ -39,4 +39,16 @@ export class TransactionService {
       }
     );
   }
+
+  /**
+   * Logic API Service: Get Transaction by UserID
+   */
+  getTransactionByUserId(userId: any): Observable<any> {
+    const body = { userId };
+    return this.httpClient.post(
+      `${environment.apiUrl}transaction/getTransaction`,
+      body,
+      { headers: this.header }
+    );
+  }
 }

@@ -131,9 +131,12 @@
         </p>
       </ng-container>
       <ng-template #loginForm>
-        <div class="flex flex-row align-items-center">
+        <div
+          [routerLink]="['/auth/login/']"
+          class="flex flex-row align-items-center"
+        >
           <i class="pi pi-sign-in mr-3" style="font-size: 1rem"></i>
-          <p [routerLink]="['/auth/login/']">Đăng nhập</p>
+          <p>Đăng nhập</p>
         </div>
       </ng-template>
     </div>

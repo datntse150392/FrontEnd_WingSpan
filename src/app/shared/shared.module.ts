@@ -30,6 +30,7 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { TreeModule } from 'primeng/tree';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { FooterComponent, HeaderComponent, SidebarComponent } from './layout';
+import { TooltipModule } from 'primeng/tooltip';
 @NgModule({
   imports: [
     CommonModule,
@@ -63,6 +64,7 @@ import { FooterComponent, HeaderComponent, SidebarComponent } from './layout';
     NgxPayPalModule,
     GoogleSigninButtonModule,
     ConfirmPopupModule,
+    TooltipModule,
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent],
   exports: [
@@ -100,6 +102,7 @@ import { FooterComponent, HeaderComponent, SidebarComponent } from './layout';
     FooterComponent,
     SidebarComponent,
     ConfirmPopupModule,
+    TooltipModule,
   ],
 })
 export class SharedModule {}

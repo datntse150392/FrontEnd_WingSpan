@@ -15,6 +15,7 @@ import {
   SignInComponent,
 } from './pages';
 import { SettingComponent } from './pages/setting/setting.component';
+import { TransactionComponent } from './pages/transaction/transaction.component';
 
 @NgModule({
   imports: [ClientRoutingModule, SharedModule],
@@ -29,6 +30,7 @@ import { SettingComponent } from './pages/setting/setting.component';
     CartComponent,
     SignInComponent,
     SettingComponent,
+    TransactionComponent,
   ],
   providers: [
     {

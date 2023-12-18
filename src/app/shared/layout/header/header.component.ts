@@ -42,6 +42,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
             label: 'Giỏ hàng của tôi',
             routerLink: '/myCart',
           },
+          {
+            label: 'Lịch sử giao dịch',
+            routerLink: '/myTransaction',
+          },
         ],
       },
       {
