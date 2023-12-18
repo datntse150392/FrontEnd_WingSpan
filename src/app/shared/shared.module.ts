@@ -31,6 +31,7 @@ import { TreeModule } from 'primeng/tree';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { FooterComponent, HeaderComponent, SidebarComponent } from './layout';
 import { TooltipModule } from 'primeng/tooltip';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   imports: [
     CommonModule,
@@ -65,6 +66,7 @@ import { TooltipModule } from 'primeng/tooltip';
     GoogleSigninButtonModule,
     ConfirmPopupModule,
     TooltipModule,
+    DialogModule,
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent],
   exports: [
@@ -103,6 +105,7 @@ import { TooltipModule } from 'primeng/tooltip';
     SidebarComponent,
     ConfirmPopupModule,
     TooltipModule,
+    DialogModule,
   ],
 })
 export class SharedModule {}
