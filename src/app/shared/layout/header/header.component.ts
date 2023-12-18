@@ -1,8 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { ConfigLocal, UpdateEventCart, User } from 'src/app/core/models';
-import { AuthService, CartService, ShareService } from 'src/app/core/services';
+import {
+  AuthService,
+  CartService,
+  CodeService,
+  ShareService,
+  ToastService,
+} from 'src/app/core/services';
 import { UserAPIService } from 'src/app/core/services/user.service';
 @Component({
   selector: 'app-header',
@@ -10,6 +18,8 @@ import { UserAPIService } from 'src/app/core/services/user.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
+  // Declare variables
+  visible: boolean = false;
   sidebarVisible: boolean = false;
   items: MenuItem[] | undefined;
   configLocal: ConfigLocal = {
@@ -20,15 +30,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   // Khai báo subscription để theo dõi
   private configLocalUpdateSubscription: Subscription | undefined;
-
   private destroy$ = new Subject<void>();
 
   constructor(
     private userAPIService: UserAPIService,
     private authService: AuthService,
     private cartService: CartService,
-    private shareService: ShareService
+    private shareService: ShareService,
+    private toastService: ToastService,
+    private codeService: CodeService,
+    private router: Router
   ) {}
+
+  /**
+   * Declare activeForm to active Course
+   */
+  activeForm = new FormGroup({
+    code: new FormControl(''), // Default Value
+  });
+
   ngOnInit(): void {
     this.items = [
       {
@@ -51,6 +71,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
       {
         label: 'Cài đặt',
         items: [
+          {
+            label: 'Kích hoạt khóa học',
+            command: () => {
+              this.showDialogActiveCourse();
+            },
+          },
           {
             label: 'Cài đặt tài khoản',
             routerLink: '/settings/personal',
@@ -115,6 +141,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         );
     }
   }
+
   ngOnDestroy(): void {
     // Unsubscribe khi component được hủy
     if (this.configLocalUpdateSubscription) {
@@ -161,8 +188,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
-   *
-   *
+   * Login Func: Get Cart Item
    */
   getCartItems(userId: any) {
     this.cartService.getCartItems(userId).subscribe((res: any) => {
@@ -171,5 +197,59 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
       localStorage.setItem('configLocal', JSON.stringify(this.configLocal));
     });
+  }
+
+  /**
+   * Login Func:  Show Dialog Active Course
+   */
+  showDialogActiveCourse() {
+    this.visible = true;
+  }
+
+  /**
+   * Logic Code: Actvie Course
+   */
+  activeCourse(code: any) {
+    try {
+      if (this.configLocal.userInfo._id) {
+        this.codeService
+          .activeCourse(code, this.configLocal.userInfo._id)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe({
+            next: (res: any) => {
+              if (res && res.status === 200) {
+                this.toastService.setMessageToastActiveCourse({
+                  isActiveCourse: true,
+                  operationType: 'success',
+                });
+                this.router.navigate(['/']);
+              } else {
+                if (res.message == 'Code was Actived') {
+                  this.toastService.setMessageToastActiveCourse({
+                    isActiveCourse: false,
+                    operationType: 'Actived',
+                  });
+                } else if (res.message == 'Not Found Code') {
+                  this.toastService.setMessageToastActiveCourse({
+                    isActiveCourse: false,
+                    operationType: 'Not Found',
+                  });
+                } else {
+                  this.toastService.setMessageToastActiveCourse({
+                    isActiveCourse: false,
+                    operationType: 'Course was enrollmenteded',
+                  });
+                }
+              }
+            },
+            error: (err: Error) => {
+              console.log(err);
+            },
+            complete: () => {
+              this.visible = false;
+            },
+          });
+      }
+    } catch (error) {}
   }
 }

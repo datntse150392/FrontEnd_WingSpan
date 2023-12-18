@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
   constructor(private router: Router, private route: ActivatedRoute) {}
+
   isHomePage(): boolean {
     return this.router.url === '/'; // hoặc đường dẫn tương ứng với trang chủ
   }

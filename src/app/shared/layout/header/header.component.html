@@ -206,3 +206,36 @@
     </div>
   </div>
 </div>
+
+<p-dialog
+  header="Kích hoạt khóa học"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="flex flex-column gap-2">
+    <label class="font-bold" for="username">Mã CODE</label>
+    <form class="w-full" [formGroup]="activeForm">
+      <input
+        class="w-full"
+        formControlName="code"
+        pInputText
+        id="username"
+        aria-describedby="username-help"
+      />
+    </form>
+    <small class="font-italic" id="username-help"
+      >Mời bạn nhập mã <strong>CODE</strong> được cung cấp khi thanh toán tại hệ
+      thống.</small
+    >
+  </div>
+  <button
+    (click)="activeCourse(activeForm.value.code)"
+    pButton
+    pRipple
+    label="Kích hoạt ngay"
+    class="p-button-secondary mt-4"
+  ></button>
+</p-dialog>

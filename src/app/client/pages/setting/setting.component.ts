@@ -1,5 +1,5 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnChanges } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { ConfigLocal, OperationType, User } from 'src/app/core/models';
 import { CodeService, ShareService, ToastService } from 'src/app/core/services';
@@ -29,10 +29,6 @@ export class SettingComponent implements OnChanges {
   ) {
     this.configLocal = { userInfo: {} };
   }
-
-  activeForm = new FormGroup({
-    code: new FormControl(''), // <== default value
-  });
 
   ngOnInit(): void {
     this.configLocal.userInfo = this.parseData().userInfo;
@@ -93,52 +89,5 @@ export class SettingComponent implements OnChanges {
     } catch (error) {
       this.toastService.setToastIsEditinfo(false);
     }
-  }
-
-  /**
-   * Logic Code: Actvie Course
-   */
-  activeCourse(code: any) {
-    try {
-      if (this.configLocal.userInfo._id) {
-        this.codeService
-          .activeCourse(code, this.configLocal.userInfo._id)
-          .pipe(takeUntil(this.destroy$))
-          .subscribe({
-            next: (res: any) => {
-              console.log(res);
-
-              if (res && res.status === 200) {
-                this.toastService.setMessageToastActiveCourse({
-                  isActiveCourse: true,
-                  operationType: 'success',
-                });
-                this.router.navigate(['/']);
-              } else {
-                if (res.message == 'Code was Actived') {
-                  this.toastService.setMessageToastActiveCourse({
-                    isActiveCourse: false,
-                    operationType: 'Actived',
-                  });
-                } else if (res.message == 'Not Found Code') {
-                  this.toastService.setMessageToastActiveCourse({
-                    isActiveCourse: false,
-                    operationType: 'Not Found',
-                  });
-                } else {
-                  this.toastService.setMessageToastActiveCourse({
-                    isActiveCourse: false,
-                    operationType: 'Course was enrollmenteded',
-                  });
-                }
-              }
-            },
-            error: (err: Error) => {
-              console.log(err);
-            },
-            complete: () => {},
-          });
-      }
-    } catch (error) {}
   }
 }
