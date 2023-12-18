@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="pr-8 pl-8 mb-4 w-full">
+    <div class="p-4 custom-transaction-item-main">
+      <h3>Lịch sử giao dịch</h3>
+      <div class="flex flex-column p-4">
+        <ng-container *ngFor="let item of tranSaction">
+          <div class="flex flex-row gap-5 justify-content-between w-full">
+            <div
+              pTooltip="Xem chi tiết đơn hàng"
+              tooltipPosition="top"
+              class="flex flex-column"
+            >
+              <span>Mã đơn hàng</span>
+              <p class="font-bold w-25rem">{{ item._id }}</p>
+            </div>
+            <div class="flex flex-column">
+              <span>Ngày thanh toán</span>
+              <p class="font-bold">
+                {{ item.transactionDate | date : "dd/MM/yyyy" }}
+              </p>
+            </div>
+            <div class="flex flex-column">
+              <span>Loại giao dịch</span>
+              <p class="font-bold">Thanh toán khóa học</p>
+            </div>
+            <div class="flex flex-column">
+              <span>Số lượng</span>
+              <p class="font-bold">{{ item.count }}</p>
+            </div>
+          </div>
+          <p-divider></p-divider>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
