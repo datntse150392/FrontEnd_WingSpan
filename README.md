@@ -41,7 +41,7 @@
 ### Màn Hình Landing | Landing Page
 
 <div class="screenshot-container">
-  <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/ScreenIntroduce%2Floadingpage.png?alt=media&token=15a87ef3-244e-48cf-a84e-026e084e2dfb" alt="Landing Page">
+  <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/ScreenIntroduce%2FnewLadningPage.png?alt=media&token=22282da4-4db5-4f3d-9159-693be70e487d" alt="Landing Page">
 </div>
 Mô tả chi tiết về Màn Hình Landing.
 
