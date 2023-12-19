@@ -64,10 +64,11 @@
     <span class="p-tag">Khóa học thu phí</span>
   </p-divider>
   <!-- Khóa học Ôn Thi PE  -->
-
-  <div>
+  <div class="custom-course-border">
     <div class="flex flex-row align-items-center gap-2 custom-course-item">
-      <h2 class="font-bold">Khóa ôn thi PE cấp tốc</h2>
+      <h1 [ngStyle]="{ color: '#242424', 'font-weight': '900' }">
+        Khóa học PRO
+      </h1>
       <p-tag class="mb-3" value="Hot" severity="danger"></p-tag>
     </div>
     <div class="grid">
@@ -99,7 +100,7 @@
         <div
           class="flex flex-row align-items-center justify-content-start gap-2"
         >
-          <p>{{ course.title }}</p>
+          <p class="font-bold">{{ course.title }}</p>
           <p-tag
             icon="pi pi-user"
             severity="info"
@@ -113,9 +114,11 @@
     ><span class="p-tag">Khóa học miễn phí</span>
   </p-divider>
   <!-- Khóa học Miễn Phí -->
-  <div>
+  <div class="custom-course-border">
     <div class="flex flex-row align-items-center gap-2 custom-course-item">
-      <h2 class="font-bold">Khóa học miễn phí</h2>
+      <h1 [ngStyle]="{ color: '#242424', 'font-weight': '900' }">
+        Khóa học miễn phí
+      </h1>
     </div>
     <div class="grid">
       <div
@@ -145,7 +148,7 @@
         <div
           class="flex flex-row align-items-center justify-content-start gap-2"
         >
-          <p>{{ course.title }}</p>
+          <p class="font-bold">{{ course.title }}</p>
           <p-tag
             icon="pi pi-user"
             severity="info"
