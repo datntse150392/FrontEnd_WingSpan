@@ -16,6 +16,8 @@ export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
   filteredCoursesPE: Course[] = []; // Danh sách đã được lọc và sắp xếp PRO
   responsiveOptions: any[] | undefined;
 
+  skeleton: boolean = false;
+
   constructor(
     private APIservice: APIService,
     private shareService: ShareService
@@ -53,7 +55,10 @@ export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
       error: (err: Error) => {
         console.log(err);
       },
-      complete: () => {},
+      complete: () => {
+        // If when loading api success full display, so should set skeleton = true
+        this.skeleton = true;
+      },
     });
 
     this.responsiveOptions = [

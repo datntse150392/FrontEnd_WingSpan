@@ -1,136 +1,158 @@
-<div class="custom-carousel-item">
-  <p-carousel
-    [value]="listBillBoard"
-    [numVisible]="1"
-    [numScroll]="1"
-    [circular]="true"
-    [responsiveOptions]="responsiveOptions"
-    [showIndicators]="false"
-  >
-    <ng-template let-product pTemplate="item">
-      <div
-        flex
-        flex-column
-        justify-content-center
-        [style.background]="product.bgColor"
-        style="border-radius: 15px"
-        class="grid p-4 m-0 flex flex-row justify-content-center"
-      >
-        <div class="col-8 flex flex-column justify-content-center">
-          <h1 class="text-white">
-            {{ product.title }}
-          </h1>
-          <p class="text-white w-8">{{ product.subTitle }}</p>
-          <p-button class="text-white border-round-lg">{{
-            product.buttonDes
-          }}</p-button>
+<ng-container *ngIf="skeleton !== true; else dataTemplate">
+  <!-- Skeleton for billboard -->
+  <p-skeleton height="16rem"></p-skeleton>
+  <!-- Skeleton for titlle -->
+  <p-skeleton width="20rem" height="2rem" styleClass="mb-5 mt-5"></p-skeleton>
+  <!-- Skeleton for course  -->
+  <div class="flex flex-row gap-2 align-items-center justify-content-center">
+    <p-skeleton width="20rem" height="10rem"></p-skeleton>
+    <p-skeleton width="20rem" height="10rem"></p-skeleton>
+    <p-skeleton width="20rem" height="10rem"></p-skeleton>
+    <p-skeleton width="20rem" height="10rem"></p-skeleton>
+  </div>
+  <!-- Skeleton for titlle 2 -->
+  <p-skeleton width="20rem" height="2rem" styleClass="mb-5 mt-5"></p-skeleton>
+  <!-- Skeleton for course 2 -->
+  <div class="flex flex-row gap-2 align-items-center justify-content-center">
+    <p-skeleton width="20rem" height="10rem"></p-skeleton>
+    <p-skeleton width="20rem" height="10rem"></p-skeleton>
+    <p-skeleton width="20rem" height="10rem"></p-skeleton>
+    <p-skeleton width="20rem" height="10rem"></p-skeleton>
+  </div>
+</ng-container>
+
+<ng-template #dataTemplate>
+  <div class="custom-carousel-item">
+    <p-carousel
+      [value]="listBillBoard"
+      [numVisible]="1"
+      [numScroll]="1"
+      [circular]="true"
+      [responsiveOptions]="responsiveOptions"
+      [showIndicators]="false"
+    >
+      <!-- Skeleton for billboard -->
+      <ng-template let-product pTemplate="item">
+        <div
+          flex
+          flex-column
+          justify-content-center
+          [style.background]="product.bgColor"
+          style="border-radius: 15px"
+          class="grid p-4 m-0 flex flex-row justify-content-center"
+        >
+          <div class="col-8 flex flex-column justify-content-center">
+            <h1 class="text-white">
+              {{ product.title }}
+            </h1>
+            <p class="text-white w-8">{{ product.subTitle }}</p>
+            <p-button class="text-white border-round-lg">{{
+              product.buttonDes
+            }}</p-button>
+          </div>
+          <div class="col-4 flex flex-column justify-content-center">
+            <img
+              style="width: 100%; margin-left: 5%; mix-blend-mode: darken"
+              src="{{ product.rightImg }}"
+            />
+          </div>
         </div>
-        <div class="col-4 flex flex-column justify-content-center">
+      </ng-template>
+    </p-carousel>
+  </div>
+  <p-divider class="divider" align="center">
+    <span class="p-tag">Khóa học thu phí</span>
+  </p-divider>
+  <!-- Khóa học Ôn Thi PE  -->
+
+  <div>
+    <div class="flex flex-row align-items-center gap-2 custom-course-item">
+      <h2 class="font-bold">Khóa ôn thi PE cấp tốc</h2>
+      <p-tag class="mb-3" value="Hot" severity="danger"></p-tag>
+    </div>
+    <div class="grid">
+      <div
+        *ngFor="let course of filteredCoursesPE; index as i"
+        class="col-3 mb-2 custom-course-container"
+      >
+        <div
+          class="course-container flex flex-wrap align-items-center justify-content-center"
+        >
           <img
-            style="width: 100%; margin-left: 5%; mix-blend-mode: darken"
-            src="{{ product.rightImg }}"
+            class="img-hover border-round-3xl w-full"
+            alt="Card"
+            src="{{ course.image }}"
           />
+          <p-button
+            class="register-button flipup animation-duration-500"
+            [style]="{ background: '#fff', border: '2px solid #fff' }"
+          >
+            <span
+              [routerLink]="['/detail/', course._id]"
+              class="ml-2 font-bold"
+              [style]="{ color: '#000' }"
+              >Xem khóa học</span
+            ></p-button
+          >
+        </div>
+        <!-- Title -->
+        <div
+          class="flex flex-row align-items-center justify-content-start gap-2"
+        >
+          <p>{{ course.title }}</p>
+          <p-tag
+            icon="pi pi-user"
+            severity="info"
+            value="{{ course.enrollmentCount }}"
+          ></p-tag>
         </div>
       </div>
-    </ng-template>
-  </p-carousel>
-</div>
-<p-divider class="divider" align="center">
-  <span class="p-tag">Khóa học thu phí</span>
-</p-divider>
-<!-- Khóa học Ôn Thi PE  -->
-<div>
-  <div class="flex flex-row align-items-center gap-2 custom-course-item">
-    <h2 class="font-bold">Khóa ôn thi PE cấp tốc</h2>
-    <p-tag class="mb-3" value="Hot" severity="danger"></p-tag>
-  </div>
-  <div class="grid">
-    <div
-      *ngFor="let course of filteredCoursesPE; index as i"
-      class="col-3 mb-2 custom-course-container"
-    >
-      <div
-        class="course-container flex flex-wrap align-items-center justify-content-center"
-      >
-        <img
-          class="img-hover border-round-3xl w-full"
-          alt="Card"
-          src="{{ course.image }}"
-        />
-        <p-button
-          class="register-button flipup animation-duration-500"
-          [style]="{ background: '#fff', border: '2px solid #fff' }"
-        >
-          <span
-            [routerLink]="['/detail/', course._id]"
-            class="ml-2 font-bold"
-            [style]="{ color: '#000' }"
-            >Xem khóa học</span
-          ></p-button
-        >
-      </div>
-      <!-- Title -->
-      <div class="flex flex-row align-items-center justify-content-start gap-2">
-        <p>{{ course.title }}</p>
-        <p-tag
-          icon="pi pi-user"
-          severity="info"
-          value="{{ course.enrollmentCount }}"
-        ></p-tag>
-      </div>
-      <!-- Amout -->
-      <!-- <div class="flex flex-row align-items-center justify-content-start gap-2">
-        <p>{{ course.title }}</p>
-        <p-tag
-          icon="pi pi-user"
-          severity="info"
-          value="{{ course.enrollmentCount }}"
-        ></p-tag>
-      </div> -->
     </div>
   </div>
-</div>
-<p-divider class="divider" align="center"
-  ><span class="p-tag">Khóa học miễn phí</span>
-</p-divider>
-<!-- Khóa học Miễn Phí -->
-<div>
-  <div class="flex flex-row align-items-center gap-2 custom-course-item">
-    <h2 class="font-bold">Khóa học miễn phí</h2>
-  </div>
-  <div class="grid">
-    <div
-      *ngFor="let course of filteredCoursesFree; index as i"
-      class="col-3 mb-2 custom-course-container"
-    >
+  <p-divider class="divider" align="center"
+    ><span class="p-tag">Khóa học miễn phí</span>
+  </p-divider>
+  <!-- Khóa học Miễn Phí -->
+  <div>
+    <div class="flex flex-row align-items-center gap-2 custom-course-item">
+      <h2 class="font-bold">Khóa học miễn phí</h2>
+    </div>
+    <div class="grid">
       <div
-        class="course-container flex flex-wrap align-items-center justify-content-center"
+        *ngFor="let course of filteredCoursesFree; index as i"
+        class="col-3 mb-2 custom-course-container"
       >
-        <img
-          class="img-hover border-round-3xl w-full"
-          alt="Card"
-          src="{{ course.image }}"
-        />
-        <p-button
-          class="register-button flipup animation-duration-500"
-          [style]="{ background: '#fff', border: '2px solid #fff' }"
+        <div
+          class="course-container flex flex-wrap align-items-center justify-content-center"
         >
-          <span
-            [routerLink]="['/detail/', course._id]"
-            class="ml-2 font-bold"
-            [style]="{ color: '#000' }"
-            >Xem khóa học</span
-          ></p-button
+          <img
+            class="img-hover border-round-3xl w-full"
+            alt="Card"
+            src="{{ course.image }}"
+          />
+          <p-button
+            class="register-button flipup animation-duration-500"
+            [style]="{ background: '#fff', border: '2px solid #fff' }"
+          >
+            <span
+              [routerLink]="['/detail/', course._id]"
+              class="ml-2 font-bold"
+              [style]="{ color: '#000' }"
+              >Xem khóa học</span
+            ></p-button
+          >
+        </div>
+        <div
+          class="flex flex-row align-items-center justify-content-start gap-2"
         >
-      </div>
-      <div class="flex flex-row align-items-center justify-content-start gap-2">
-        <p>{{ course.title }}</p>
-        <p-tag
-          icon="pi pi-user"
-          severity="info"
-          value="{{ course.enrollmentCount }}"
-        ></p-tag>
+          <p>{{ course.title }}</p>
+          <p-tag
+            icon="pi pi-user"
+            severity="info"
+            value="{{ course.enrollmentCount }}"
+          ></p-tag>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>
