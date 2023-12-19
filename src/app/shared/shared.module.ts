@@ -32,6 +32,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { FooterComponent, HeaderComponent, SidebarComponent } from './layout';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
+import { SkeletonModule } from 'primeng/skeleton';
 @NgModule({
   imports: [
     CommonModule,
@@ -67,6 +68,7 @@ import { DialogModule } from 'primeng/dialog';
     ConfirmPopupModule,
     TooltipModule,
     DialogModule,
+    SkeletonModule,
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent],
   exports: [
@@ -106,6 +108,7 @@ import { DialogModule } from 'primeng/dialog';
     ConfirmPopupModule,
     TooltipModule,
     DialogModule,
+    SkeletonModule,
   ],
 })
 export class SharedModule {}
