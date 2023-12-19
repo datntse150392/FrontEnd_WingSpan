@@ -8,22 +8,20 @@ import { APIService, ShareService } from 'src/app/core/services';
   styleUrls: ['./course.component.scss'],
 })
 export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
-  hover: boolean = false;
-
-  listCourses: Course[] = []; // Danh sách gốc
-  listBillBoard: BillBoard[] = [];
   filteredCoursesFree: Course[] = []; // Danh sách đã được lọc và sắp xếp FREE
   filteredCoursesPE: Course[] = []; // Danh sách đã được lọc và sắp xếp PRO
+  hover: boolean = false;
+  listBillBoard: BillBoard[] = [];
+  listCourses: Course[] = []; // Danh sách gốc
   responsiveOptions: any[] | undefined;
-
   skeleton: boolean = false;
+
+  private destroy$ = new Subject<void>();
 
   constructor(
     private APIservice: APIService,
     private shareService: ShareService
   ) {}
-
-  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
     this.shareService.showLoading();
