@@ -21,23 +21,20 @@ import { takeUntil } from 'rxjs/operators';
   providers: [ConfirmationService],
 })
 export class CourseDetailComponent implements OnInit, OnDestroy {
-  constLesson!: number;
-  isExpand!: boolean;
-
+  blockedUI: boolean = true;
+  checkLog: boolean = false;
   configLocal: ConfigLocal = {
     userInfo: {},
   };
+  constLesson!: number;
   course!: Course;
-  mainCourse!: TreeNode[];
-  user!: User;
-
-  // Check state change or update
-  checkLog: boolean = false;
-
   DEFAULT: UpdateEventCart = {
     isUpdateConfigLocal: true,
     operationType: OperationType.Add,
   };
+  isExpand!: boolean;
+  mainCourse!: TreeNode[];
+  user!: User;
 
   private updateEventCart: UpdateEventCart = this.DEFAULT;
   private destroy$ = new Subject<void>();
@@ -87,7 +84,9 @@ export class CourseDetailComponent implements OnInit, OnDestroy {
       error: (error) => {
         console.error('Error fetching data:', error);
       },
-      complete: () => {},
+      complete: () => {
+        this.blockedUI = false;
+      },
     });
   }
 

@@ -63,7 +63,8 @@
   <p-divider class="divider" align="center">
     <span class="p-tag">Khóa học thu phí</span>
   </p-divider>
-  <!-- Khóa học Ôn Thi PE  -->
+
+  <!-- Khóa học Pro  -->
   <div class="custom-course-border">
     <div class="flex flex-row align-items-center gap-2 custom-course-item">
       <h1 [ngStyle]="{ color: '#242424', 'font-weight': '900' }">
@@ -97,15 +98,13 @@
           >
         </div>
         <!-- Title -->
-        <div
-          class="flex flex-row align-items-center justify-content-start gap-2"
-        >
-          <p class="font-bold">{{ course.title }}</p>
-          <p-tag
-            icon="pi pi-user"
-            severity="info"
-            value="{{ course.enrollmentCount }}"
-          ></p-tag>
+        <div class="flex flex-column justify-content-start">
+          <p class="font-bold mb-0">{{ course.title }}</p>
+          <div class="flex flex-row align-items-center gap-2">
+            <h3 [ngStyle]="{ color: 'red' }">
+              {{ course.amount | currency : "VND" }}
+            </h3>
+          </div>
         </div>
       </div>
     </div>
@@ -113,6 +112,7 @@
   <p-divider class="divider" align="center"
     ><span class="p-tag">Khóa học miễn phí</span>
   </p-divider>
+
   <!-- Khóa học Miễn Phí -->
   <div class="custom-course-border">
     <div class="flex flex-row align-items-center gap-2 custom-course-item">
@@ -145,15 +145,12 @@
             ></p-button
           >
         </div>
-        <div
-          class="flex flex-row align-items-center justify-content-start gap-2"
-        >
-          <p class="font-bold">{{ course.title }}</p>
-          <p-tag
-            icon="pi pi-user"
-            severity="info"
-            value="{{ course.enrollmentCount }}"
-          ></p-tag>
+        <div class="flex flex-column justify-content-start">
+          <p class="font-bold mb-0">{{ course.title }}</p>
+          <div class="flex flex-row align-items-center gap-2">
+            <i class="pi pi-users"></i>
+            <p>{{ course.enrollmentCount }} người khác đã học</p>
+          </div>
         </div>
       </div>
     </div>
