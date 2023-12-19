@@ -1,3 +1,8 @@
+.custom-course-border {
+  padding-left: 96px;
+  padding-right: 96px;
+}
+
 .register-button {
   display: none;
   position: absolute;
@@ -29,8 +34,15 @@
   display: none;
 }
 
+.custom-carousel-item {
+  margin-bottom: 48px;
+}
+
 /* Media query for screens 600px or smaller (typical mobile devices) */
 @media (max-width: 600px) {
+  body {
+    font-size: 10px !important;
+  }
   .divider {
     display: block;
   }
