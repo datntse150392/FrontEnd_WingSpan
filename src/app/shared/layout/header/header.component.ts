@@ -19,14 +19,14 @@ import { UserAPIService } from 'src/app/core/services/user.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   // Declare variables
-  visible: boolean = false;
-  sidebarVisible: boolean = false;
-  items: MenuItem[] | undefined;
   configLocal: ConfigLocal = {
     userInfo: {},
     cartItems: undefined,
   };
+  items: MenuItem[] | undefined;
+  sidebarVisible: boolean = false;
   user!: User;
+  visible: boolean = false;
 
   // Khai báo subscription để theo dõi
   private configLocalUpdateSubscription: Subscription | undefined;
@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         label: 'Tài khoản',
         items: [
           {
-            label: 'Thông tin cá nhân',
+            label: 'Trang cá nhân',
             routerLink: '/profile',
           },
           {
