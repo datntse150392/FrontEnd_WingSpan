@@ -51,4 +51,16 @@ export class TransactionService {
       { headers: this.header }
     );
   }
+
+  /**
+   * Logic API Service: Get Detail Transaction by transctionId
+   */
+  getDetailTransaction(transactionId: any): Observable<any> {
+    const body = { transactionId };
+    return this.httpClient.post(
+      `${environment.apiUrl}transaction/getDetailTransaction`,
+      body,
+      { headers: this.header }
+    );
+  }
 }

@@ -1,7 +1,9 @@
+import { Course } from './course';
+
 export interface Transaction {
   _id: String;
   userId: String;
-  items: [];
+  items: Course[];
   count: Number;
   amout: Number;
   payer: Object;
