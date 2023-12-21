@@ -156,7 +156,7 @@ export class CartComponent implements OnInit, OnDestroy {
           try {
             const cartId = this.cart._id;
             const customerEmail = this.configLocal.userInfo.email;
-            const amount = this.totalPrice;
+            const amount = amountInVND;
             const payer = details.payer;
             const transactionType = 'Register Course';
             const status = 'success';

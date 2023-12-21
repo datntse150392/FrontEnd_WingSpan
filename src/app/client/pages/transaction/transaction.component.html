@@ -6,6 +6,7 @@
         <ng-container *ngFor="let item of tranSaction">
           <div class="flex flex-row gap-5 justify-content-between w-full">
             <div
+              (click)="showDialog(item._id)"
               pTooltip="Xem chi tiết đơn hàng"
               tooltipPosition="top"
               class="flex flex-column"
@@ -34,3 +35,40 @@
     </div>
   </div>
 </div>
+
+<p-dialog
+  header="Chi tiết đơn hàng"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <ng-container *ngIf="this.detailTransaction">
+    <ng-container *ngFor="let item of this.detailTransaction.items">
+      <div class="p-2 flex flex-row align-items-center justify-content-between">
+        <div class="dialog-img flex flex-column">
+          <img src="{{ item.image }}" />
+          <p class="mb-0 text-center">{{ item.title }}</p>
+        </div>
+        <div class="flex align-items-center">
+          <p class="font-bold">{{ item.amount | currency : "VND" }}</p>
+        </div>
+        <div class="btn-detail">
+          <p
+            [ngStyle]="{ cursor: 'pointer' }"
+            [routerLink]="['/detail', item._id]"
+          >
+            Xem chi tiết
+          </p>
+        </div>
+      </div>
+      <p-divider></p-divider>
+    </ng-container>
+    <div>
+      <p>
+        Tổng đơn hàng <strong>{{ this.detailTransaction.amout }}</strong>
+      </p>
+    </div>
+  </ng-container>
+</p-dialog>
