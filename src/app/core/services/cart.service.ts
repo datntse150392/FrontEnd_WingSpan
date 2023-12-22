@@ -39,4 +39,16 @@ export class CartService {
       body,
     });
   }
+
+  /**
+   * Logic Call API: Get All Vouchers With Type Normal
+   */
+  getAllVouchersWithTypeNormal(): Observable<any[]> {
+    return this.httpClient.get<any[]>(
+      `${environment.apiUrl}voucher/getAllVouchers`,
+      {
+        headers: this.header,
+      }
+    );
+  }
 }

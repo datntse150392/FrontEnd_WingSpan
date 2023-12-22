@@ -6,6 +6,7 @@ import {
   ConfigLocal,
   OperationType,
   UpdateEventCart,
+  Voucher,
 } from 'src/app/core/models';
 import {
   CartService,
@@ -13,31 +14,29 @@ import {
   ToastService,
   TransactionService,
 } from 'src/app/core/services';
-import { Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, forkJoin, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit, OnDestroy {
-  cart!: Cart;
-  totalPrice: number | any = 0;
-  configLocal!: ConfigLocal;
   blockedUI: boolean = false;
-
+  cart!: Cart;
+  configLocal!: ConfigLocal;
   DEFAULT: UpdateEventCart = {
     isUpdateConfigLocal: true,
     operationType: OperationType.Add,
   };
-
-  private destroy$ = new Subject();
-
-  private isDeleteCart = new Subject<boolean>();
-  private updateEventCart: UpdateEventCart = this.DEFAULT;
-
-  public payPalConfig?: IPayPalConfig;
+  totalPrice: number | any = 0;
+  payPalConfig?: IPayPalConfig;
+  vouchersWithTypeNormal!: Voucher[];
+  selectedVoucher: Voucher | undefined;
 
   private deleteCartSubscription: Subscription | undefined;
+  private destroy$ = new Subject<void>();
+  private isDeleteCart = new Subject<boolean>();
+  private updateEventCart: UpdateEventCart = this.DEFAULT;
 
   constructor(
     private cartService: CartService,
@@ -57,19 +56,34 @@ export class CartComponent implements OnInit, OnDestroy {
     if (configLocalString) {
       this.configLocal = JSON.parse(configLocalString);
       const userId = JSON.parse(configLocalString).userInfo._id;
-      this.cartService.getCartItems(userId).subscribe((res) => {
-        if (res) {
-          this.cart = res.data.cartItem;
-          this.cart.items.map((item: any) => {
-            this.totalPrice += item.amount;
-            this.initConfig();
-          });
-        }
+
+      const getCartItems$ = this.cartService
+        .getCartItems(userId)
+        .pipe(takeUntil(this.destroy$));
+      const getAllVouchersNormal$ = this.cartService
+        .getAllVouchersWithTypeNormal()
+        .pipe(takeUntil(this.destroy$));
+
+      forkJoin([getCartItems$, getAllVouchersNormal$]).subscribe({
+        next: ([cartItesRes, vouchersNormalRes]: [any, any]) => {
+          if (cartItesRes) {
+            this.cart = cartItesRes.data.cartItem;
+            this.cart.items.map((item: any) => {
+              this.totalPrice += item.amount;
+              this.initConfig();
+            });
+          }
+          if (vouchersNormalRes) {
+            this.vouchersWithTypeNormal = vouchersNormalRes.data.vouchers;
+          }
+        },
       });
     }
   }
 
   ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
     this.deleteCartSubscription?.unsubscribe();
   }
 
