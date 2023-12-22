@@ -55,7 +55,30 @@
           <p-dropdown
             optionLabel="name"
             placeholder="Chọn mã khuyến mãi của bạn"
-          ></p-dropdown>
+            [options]="vouchersWithTypeNormal"
+            [(ngModel)]="selectedVoucher"
+          >
+            <ng-template let-voucher pTemplate="item">
+              <div
+                class="voucher-item flex align-items-center justify-content-around gap-2"
+              >
+                <img
+                  src="{{ voucher.image }}"
+                  style="width: 64px; height: 64px"
+                />
+                <div>
+                  <p class="font-bold mb-0">
+                    Giảm {{ voucher.discount | currency : "VND" }}
+                  </p>
+                  <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
+                  <span
+                    >HSD:
+                    {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span
+                  >
+                </div>
+              </div>
+            </ng-template>
+          </p-dropdown>
         </div>
         <div
           class="p-4 custom-cart-item-main col-4 flex flex-column gap-2 w-full"

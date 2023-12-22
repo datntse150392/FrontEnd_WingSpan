@@ -5,3 +5,4 @@ export * from './localState';
 export * from './user';
 export * from './transaction';
 export * from './shared';
+export * from './voucher';
