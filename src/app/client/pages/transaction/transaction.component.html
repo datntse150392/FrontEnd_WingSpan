@@ -17,7 +17,7 @@
             <div class="flex flex-column">
               <span>Ngày thanh toán</span>
               <p class="font-bold">
-                {{ item.transactionDate | date : "dd/MM/yyyy" }}
+                {{ item && (item.transactionDate | date : "dd/MM/yyyy") }}
               </p>
             </div>
             <div class="flex flex-column">
@@ -67,7 +67,10 @@
     </ng-container>
     <div>
       <p>
-        Tổng đơn hàng <strong>{{ this.detailTransaction.amout }}</strong>
+        Tổng đã thanh toán:
+        <strong>{{
+          detailTransaction.amount.toString() | currency : "VND"
+        }}</strong>
       </p>
     </div>
   </ng-container>
