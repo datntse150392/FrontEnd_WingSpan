@@ -21,7 +21,8 @@ export class TransactionService {
     payer: any,
     transactionType: any,
     status: any,
-    customerEmail: any
+    customerEmail: any,
+    voucherId?: any
   ): Observable<any> {
     const body = {
       cartId,
@@ -30,6 +31,7 @@ export class TransactionService {
       transactionType,
       status,
       customerEmail,
+      voucherId,
     };
     return this.httpClient.post(
       `${environment.apiUrl}transaction/processPaymentAndSaveTransaction`,

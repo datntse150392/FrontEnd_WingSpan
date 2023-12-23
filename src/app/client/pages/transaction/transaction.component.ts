@@ -10,7 +10,7 @@ import { ShareService, TransactionService } from 'src/app/core/services';
 })
 export class TransactionComponent implements OnInit, OnDestroy {
   // Declare variable
-  detailTransaction!: Transaction;
+  detailTransaction: Transaction | undefined;
   tranSaction!: Transaction[];
   visible: boolean = false;
   // Declare Subject

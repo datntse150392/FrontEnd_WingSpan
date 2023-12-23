@@ -52,33 +52,44 @@
           class="p-4 custom-cart-item-main col-4 flex flex-column gap-4 w-full mb-3"
         >
           <p class="m-0">Bạn có mã khuyến mãi ?</p>
-          <p-dropdown
-            optionLabel="name"
-            placeholder="Chọn mã khuyến mãi của bạn"
-            [options]="vouchersWithTypeNormal"
-            [(ngModel)]="selectedVoucher"
-          >
-            <ng-template let-voucher pTemplate="item">
+          <div class="card flex justify-content-center">
+            <p-dropdown
+              [options]="vouchersWithTypeNormal"
+              [(ngModel)]="selectedVoucher"
+              optionLabel="name"
+              [showClear]="true"
+              placeholder="{{
+                (selectedVoucher?.discount | currency : 'VND') ||
+                  'Chọn mã khuyến mãi'
+              }}"
+              (onChange)="onVoucherChange()"
+            >
               <div
-                class="voucher-item flex align-items-center justify-content-around gap-2"
+                class="flex align-items-center gap-2"
+                *ngIf="selectedVoucher"
               >
-                <img
-                  src="{{ voucher.image }}"
-                  style="width: 64px; height: 64px"
-                />
-                <div>
-                  <p class="font-bold mb-0">
-                    Giảm {{ voucher.discount | currency : "VND" }}
-                  </p>
-                  <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
-                  <span
-                    >HSD:
-                    {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span
-                  >
-                </div>
+                <div>{{ selectedVoucher.discount }}</div>
               </div>
-            </ng-template>
-          </p-dropdown>
+              <ng-template let-voucher pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                  <img
+                    src="{{ voucher.image }}"
+                    style="width: 64px; height: 64px"
+                  />
+                  <div>
+                    <p class="font-bold mb-0">
+                      Giảm {{ voucher.discount | currency : "VND" }}
+                    </p>
+                    <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
+                    <span
+                      >HSD:
+                      {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span
+                    >
+                  </div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+          </div>
         </div>
         <div
           class="p-4 custom-cart-item-main col-4 flex flex-column gap-2 w-full"
@@ -89,7 +100,12 @@
           </div>
           <div class="flex flex-row justify-content-between align-items-center">
             <p>Khuyến mãi</p>
-            <span>0</span>
+            <span>
+              {{
+                (selectedVoucher?.discount | currency : "VND") ||
+                  (0 | currency : "VND")
+              }}</span
+            >
           </div>
           <p-divider></p-divider>
           <div class="flex flex-row justify-content-between align-items-center">

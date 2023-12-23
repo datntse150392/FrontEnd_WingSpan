@@ -30,8 +30,9 @@ export class CartComponent implements OnInit, OnDestroy {
   };
   totalPrice: number | any = 0;
   payPalConfig?: IPayPalConfig;
-  vouchersWithTypeNormal!: Voucher[];
+  vouchersWithTypeNormal: Voucher[] | undefined;
   selectedVoucher: Voucher | undefined;
+  removeSelectedVoucher: number | undefined;
 
   private deleteCartSubscription: Subscription | undefined;
   private destroy$ = new Subject<void>();
@@ -174,6 +175,7 @@ export class CartComponent implements OnInit, OnDestroy {
             const payer = details.payer;
             const transactionType = 'Register Course';
             const status = 'success';
+            const voucherId = this.selectedVoucher?._id;
             this.transactionService
               .processPaymentAndSaveTransaction(
                 cartId,
@@ -181,7 +183,8 @@ export class CartComponent implements OnInit, OnDestroy {
                 payer,
                 transactionType,
                 status,
-                customerEmail
+                customerEmail,
+                voucherId
               )
               .subscribe((res: any) => {
                 if (res && res.status === 200) {
@@ -233,11 +236,17 @@ export class CartComponent implements OnInit, OnDestroy {
     } catch (error) {}
   }
 
-  private calculateTotalPrice(): number {
-    let newTotalPrice = 0;
-    this.configLocal.cartItems?.items.map(
-      (item) => (newTotalPrice = this.totalPrice - item.amount)
-    );
-    return newTotalPrice;
+  /**
+   * Logic Func: Selected Voucher
+   */
+  onVoucherChange() {
+    // Logic to handle the selected voucher
+    // You can access the selected voucher using the `selectedVoucher` property
+    if (this.selectedVoucher === null) {
+      this.totalPrice = this.totalPrice + this.removeSelectedVoucher;
+    } else if (this.selectedVoucher) {
+      this.totalPrice = this.totalPrice - (this.selectedVoucher?.discount || 0);
+      this.removeSelectedVoucher = this.selectedVoucher?.discount || 0;
+    }
   }
 }

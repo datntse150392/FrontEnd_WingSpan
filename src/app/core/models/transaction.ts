@@ -5,7 +5,7 @@ export interface Transaction {
   userId: String;
   items: Course[];
   count: Number;
-  amout: Number;
+  amount: Number;
   payer: Object;
   transactionType: String;
   transactionDate: Date;
