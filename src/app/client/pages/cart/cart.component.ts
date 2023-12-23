@@ -229,8 +229,12 @@ export class CartComponent implements OnInit, OnDestroy {
 
               // Update statue when complete func deleteCart()
               this.getCartAndCountAmount();
-              this.totalPrice -= amount;
-              this.totalPriceBeforeDiscount -= amount;
+
+              if (this.cart.items.length <= 1) {
+                this.selectedVoucher = undefined;
+                this.totalPriceBeforeDiscount = 0;
+                this.totalPrice = 0;
+              } else if (this.cart.items.length > 1) this.totalPrice -= amount;
             }
           },
           error: (err: Error) => {
@@ -247,13 +251,18 @@ export class CartComponent implements OnInit, OnDestroy {
   onVoucherChange() {
     // Logic to handle the selected voucher
     // You can access the selected voucher using the `selectedVoucher` property
-    if (this.selectedVoucher === null) {
-      this.totalPriceBeforeDiscount =
-        this.totalPriceBeforeDiscount + this.removeSelectedVoucher;
-    } else if (this.selectedVoucher) {
-      this.totalPriceBeforeDiscount =
-        this.totalPriceBeforeDiscount - (this.selectedVoucher?.discount || 0);
-      this.removeSelectedVoucher = this.selectedVoucher?.discount || 0;
+    if (this.cart.items.length > 0) {
+      if (this.selectedVoucher === null) {
+        this.totalPriceBeforeDiscount =
+          this.totalPriceBeforeDiscount + this.removeSelectedVoucher;
+      } else if (this.selectedVoucher) {
+        this.totalPriceBeforeDiscount =
+          this.totalPriceBeforeDiscount - (this.selectedVoucher?.discount || 0);
+        this.removeSelectedVoucher = this.selectedVoucher?.discount || 0;
+      }
+    } else if (this.cart.items.length <= 0) {
+      this.totalPriceBeforeDiscount = 0;
+      this.selectedVoucher = undefined;
     }
   }
 }
