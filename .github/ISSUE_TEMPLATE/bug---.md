@@ -7,21 +7,17 @@ assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Tình trạng**
+- 
+Các bước tái hiện lại bug
+1. 
+2. 
+3. 
+4. 
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**Mong muốn sau khi cải thiện**
+- 
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**Ảnh màn hình**
+-
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Additional context**
-Add any other context about the problem here.
