@@ -29,6 +29,7 @@ export class CartComponent implements OnInit, OnDestroy {
     operationType: OperationType.Add,
   };
   totalPrice: number | any = 0;
+  totalPriceBeforeDiscount: number | any = 0;
   payPalConfig?: IPayPalConfig;
   vouchersWithTypeNormal: Voucher[] | undefined;
   selectedVoucher: Voucher | undefined;
@@ -117,6 +118,9 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   private initConfig(): void {
+    // Saving totalPriceBeforeDiscount
+    this.totalPriceBeforeDiscount = this.totalPrice;
+
     const amountInVND = this.totalPrice; // Số tiền thanh toán trong VND
 
     const exchangeRate = 25000; // Tỉ giá hối đoái từ VND sang EUR (ví dụ)
@@ -226,6 +230,7 @@ export class CartComponent implements OnInit, OnDestroy {
               // Update statue when complete func deleteCart()
               this.getCartAndCountAmount();
               this.totalPrice -= amount;
+              this.totalPriceBeforeDiscount -= amount;
             }
           },
           error: (err: Error) => {
@@ -243,9 +248,11 @@ export class CartComponent implements OnInit, OnDestroy {
     // Logic to handle the selected voucher
     // You can access the selected voucher using the `selectedVoucher` property
     if (this.selectedVoucher === null) {
-      this.totalPrice = this.totalPrice + this.removeSelectedVoucher;
+      this.totalPriceBeforeDiscount =
+        this.totalPriceBeforeDiscount + this.removeSelectedVoucher;
     } else if (this.selectedVoucher) {
-      this.totalPrice = this.totalPrice - (this.selectedVoucher?.discount || 0);
+      this.totalPriceBeforeDiscount =
+        this.totalPriceBeforeDiscount - (this.selectedVoucher?.discount || 0);
       this.removeSelectedVoucher = this.selectedVoucher?.discount || 0;
     }
   }
