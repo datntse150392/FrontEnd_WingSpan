@@ -45,7 +45,13 @@
         />
         <p-overlayPanel #op>
           <ng-template pTemplate="content">
-            <ng-container *ngIf="this.configLocal.cartItems; else emptyCart">
+            <ng-container
+              *ngIf="
+                this.configLocal.cartItems &&
+                  this.configLocal.cartItems.items.length > 0;
+                else emptyCart
+              "
+            >
               <div
                 *ngFor="let item of configLocal.cartItems.items"
                 class="mb-3"
@@ -82,20 +88,20 @@
           </ng-template>
         </p-overlayPanel>
       </div>
-      <div class="mr-4" [ngStyle]="{ width: '150px' }">
-        <p
+      <div>
+        <p-avatar
+          image="{{ user.profileImage }}"
+          size="large"
+          shape="circle"
           (click)="menu.toggle($event)"
           [ngStyle]="{
             cursor: 'pointer',
             fontSize: '13px',
             fontWeight: 'bold'
           }"
-        >
-          {{ user.fullName }}
-        </p>
-
-        <p-menu #menu [model]="items" [popup]="true"> </p-menu>
+        ></p-avatar>
       </div>
+      <p-menu #menu [model]="items" [popup]="true"> </p-menu>
     </ng-container>
     <ng-template #isFailLogin>
       <button
