@@ -2,7 +2,7 @@
 name: 'BUG - '
 about: Create a report to help us improve
 title: "[BUG]"
-labels: bug
+labels: bug, enhancement
 assignees: ''
 
 ---
@@ -20,4 +20,3 @@ Các bước tái hiện lại bug
 
 **Ảnh màn hình**
 -
-
