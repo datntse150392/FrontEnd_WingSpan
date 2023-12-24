@@ -22,7 +22,7 @@ import { Subject, Subscription, forkJoin, takeUntil } from 'rxjs';
 })
 export class CartComponent implements OnInit, OnDestroy {
   blockedUI: boolean = false;
-  cart!: Cart;
+  cart: Cart | any = {};
   configLocal!: ConfigLocal;
   DEFAULT: UpdateEventCart = {
     isUpdateConfigLocal: true,
