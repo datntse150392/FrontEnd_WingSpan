@@ -6,3 +6,4 @@ export * from './user';
 export * from './transaction';
 export * from './shared';
 export * from './voucher';
+export * from './newFeed';

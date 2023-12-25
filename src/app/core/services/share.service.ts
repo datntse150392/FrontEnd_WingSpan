@@ -1,12 +1,17 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { ConfigLocal, OperationType, UpdateEventCart } from '../models';
 import { UserAPIService } from './user.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Injectable({ providedIn: 'root' })
 export class ShareService implements OnDestroy {
   configLocal: ConfigLocal;
 
-  constructor(private userAPIService: UserAPIService) {
+  constructor(
+    private userAPIService: UserAPIService,
+    private httpClient: HttpClient
+  ) {
     this.configLocal = this.parseData();
   }
 
@@ -63,5 +68,12 @@ export class ShareService implements OnDestroy {
       return configLocal;
     }
     return null;
+  }
+
+  /**
+   * Handle Logic Call API: Get New Feeds
+   */
+  getNewFeeds(): Observable<any> {
+    return this.httpClient.get(`${environment.apiUrl}newFeed/getNewFeeds`);
   }
 }
