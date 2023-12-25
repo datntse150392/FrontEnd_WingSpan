@@ -47,6 +47,15 @@ Mô tả chi tiết về Màn Hình Landing.
 
 ---
 
+### Màn Hình New Feeds | New Feeds Page
+
+<div class="screenshot-container">
+  <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/ScreenIntroduce%2Fnewfeeds.PNG?alt=media&token=ccf95283-a108-4320-a8ac-fcaeb2d80d01" alt="New Feeds Page">
+</div>
+Mô tả chi tiết về Màn Hình New Feeds
+
+---
+
 ### Màn Hình Đăng Nhập | Login Page
 
 <div class="screenshot-container">
