@@ -1,4 +1,4 @@
-<div>
+<div class="relative">
   <app-header></app-header>
   <!-- Danh sách quảng cảo billBoard -->
   <div class="pr-6 pl-6 pt-4">
@@ -7,4 +7,43 @@
   <!-- Footer -->
   <app-footer></app-footer>
   <p-scrollTop></p-scrollTop>
+  <!-- Icon New Feeds -->
+  <div
+    class="new-feed fixed p-2 ml-3 flex flex-row align-items-center justify-content-center"
+    pTooltip="Bản tin mới"
+    (click)="showDialogNewFeed()"
+  >
+    <img
+      width="30"
+      height="30"
+      src="https://img.icons8.com/sf-regular/48/commercial.png"
+      alt="commercial"
+    />
+  </div>
+  <!-- Diaglog New Feed -->
+  <p-dialog
+    header="WingSpan New Feeds"
+    [(visible)]="visibleNewFeed"
+    [modal]="true"
+    [style]="{ width: '50vw' }"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <ng-container *ngIf="newFeeds"></ng-container>
+    <div class="dialog-newfeed" *ngFor="let newFeed of newFeeds">
+      <h3 class="font-bold"># {{ newFeed.title }}</h3>
+      <p>{{ newFeed.description }}</p>
+      <img class="w-full" src="{{ newFeed.image }}" />
+      <span>{{ newFeed.footer }}</span>
+      <!-- Author -->
+      <div class="flex flex-row gap-2 align-items-center">
+        <p>
+          Đăng bởi <strong>{{ newFeed.author.fullName }}</strong>
+        </p>
+        -
+        <p>{{ newFeed.postDate | date : "dd/MM/yyy" }}</p>
+      </div>
+      <p-divider></p-divider>
+    </div>
+  </p-dialog>
 </div>
