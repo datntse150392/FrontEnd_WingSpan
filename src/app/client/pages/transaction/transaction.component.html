@@ -69,7 +69,8 @@
       <p>
         Tổng đã thanh toán:
         <strong>{{
-          detailTransaction.amount.toString() | currency : "VND"
+          detailTransaction.amount && detailTransaction.amount.toString()
+            | currency : "VND"
         }}</strong>
       </p>
     </div>

@@ -83,3 +83,19 @@
     font-weight: bold;
   }
 }
+
+.selected-voucher {
+  border: 1px solid #000;
+  border-radius: 5px;
+  span {
+    font-size: 12px;
+  }
+  .btn {
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .btn:hover {
+    color: red;
+    font-weight: bold;
+  }
+}

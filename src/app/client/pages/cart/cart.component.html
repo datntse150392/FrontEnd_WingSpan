@@ -1,5 +1,5 @@
 <h2 class="w-full">Giỏ hàng</h2>
-<ng-container *ngIf="cart.items.length > 0; else emptyCart">
+<ng-container *ngIf="cart.items && cart.items.length > 0; else emptyCart">
   <div class="card">
     <p-blockUI [blocked]="blockedUI"
       ><p-progressSpinner></p-progressSpinner>
@@ -82,54 +82,38 @@
                 Có thể chọn {{ vouchersWithTypeNormal?.length || 0 }}
               </p>
             </div>
-            <div
-              (click)="showDialogVoucher()"
-              class="card flex gap-2 btn-voucher align-items-center"
-            >
-              <img
-                width="48"
-                height="48"
-                src="https://img.icons8.com/color/48/ticket.png"
-                alt="ticket"
-              />
-              <p>Chọn hoặc nhập khuyến mãi khác</p>
-              <!-- <p-dropdown
-                [options]="vouchersWithTypeNormal"
-                [(ngModel)]="selectedVoucher"
-                optionLabel="name"
-                [showClear]="true"
-                placeholder="{{
-                  (selectedVoucher?.discount | currency : 'VND') ||
-                    'Chọn mã khuyến mãi'
-                }}"
-                (onChange)="onVoucherChange()"
+            <ng-container *ngIf="selectedVoucher; else emptySelectVoucher">
+              <div
+                class="selected-voucher flex flex-row justify-content-between p-2"
               >
-                <div
-                  class="flex align-items-center gap-2"
-                  *ngIf="selectedVoucher"
-                >
-                  <div>{{ selectedVoucher.discount }}</div>
+                <div class="flex flex-row gap-3">
+                  <img
+                    width="48"
+                    height="48"
+                    src="{{ selectedVoucher.image }}"
+                    alt="ticket"
+                  />
+                  <p class="font-bold mb-0">
+                    Giảm {{ selectedVoucher.discount | currency : "VND" }}
+                  </p>
                 </div>
-                <ng-template let-voucher pTemplate="item">
-                  <div class="flex align-items-center gap-2">
-                    <img
-                      src="{{ voucher.image }}"
-                      style="width: 64px; height: 64px"
-                    />
-                    <div>
-                      <p class="font-bold mb-0">
-                        Giảm {{ voucher.discount | currency : "VND" }}
-                      </p>
-                      <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
-                      <span
-                        >HSD:
-                        {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span
-                      >
-                    </div>
-                  </div>
-                </ng-template>
-              </p-dropdown> -->
-            </div>
+                <p class="btn" (click)="deleteVoucher()">Bỏ chọn</p>
+              </div>
+            </ng-container>
+            <ng-template #emptySelectVoucher>
+              <div
+                (click)="showDialogVoucher()"
+                class="card flex gap-2 btn-voucher align-items-center"
+              >
+                <img
+                  width="48"
+                  height="48"
+                  src="https://img.icons8.com/color/48/ticket.png"
+                  alt="ticket"
+                />
+                <p>Chọn hoặc nhập khuyến mãi khác</p>
+              </div>
+            </ng-template>
           </div>
           <div
             class="p-4 custom-cart-item-main col-4 flex flex-column gap-2 w-full"
@@ -244,7 +228,7 @@
             <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
             <span>HSD: {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span>
           </div>
-          <p class="btn">Chọn</p>
+          <p class="btn" (click)="setSelectedVoucher(voucher)">Chọn</p>
         </div>
       </div>
     </ng-container>
