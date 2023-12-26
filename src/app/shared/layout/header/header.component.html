@@ -10,39 +10,35 @@
     <app-sidebar></app-sidebar>
   </div>
 
-  <div class="flex align-items-center justify-content-start gap-4">
+  <div class="flex align-items-center justify-content-start">
     <ng-container *ngIf="this.user; else isFailLogin">
-      <div class="card flex justify-content-center align-items-center relative">
-        <p-badge
-          severity="danger"
-          class="absolute badge-infomation"
-          value="0"
-        ></p-badge>
-        <img
-          width="30"
-          height="30"
-          src="https://img.icons8.com/ios/50/bell.png"
-          alt="bell"
-        />
-      </div>
-      <div class="card flex justify-content-center align-items-center relative">
-        <p-badge
-          severity="danger"
-          class="absolute badge-infomation"
+      <div
+        class="card flex justify-content-center align-items-center relative gap-4"
+      >
+        <i
+          (click)="op.toggle($event)"
+          class="pi pi-shopping-cart p-text-secondary"
+          pBadge
           value="{{
             this.configLocal.cartItems?.count
               ? this.configLocal.cartItems?.count
               : 0
           }}"
-        ></p-badge>
-        <img
-          (click)="op.toggle($event)"
-          width="30"
-          height="30"
-          src="https://img.icons8.com/ios/50/shopping-cart--v1.png"
-          alt="shopping-cart--v1"
+          style="font-size: 1.5rem"
+          severity="danger"
           [ngStyle]="{ cursor: 'pointer' }"
-        />
+        ></i>
+        <p-avatar
+          image="{{ user.profileImage }}"
+          size="normal"
+          shape="circle"
+          (click)="menu.toggle($event)"
+          [ngStyle]="{
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: 'bold'
+          }"
+        ></p-avatar>
         <p-overlayPanel #op>
           <ng-template pTemplate="content">
             <ng-container
@@ -87,19 +83,6 @@
             </ng-template>
           </ng-template>
         </p-overlayPanel>
-      </div>
-      <div>
-        <p-avatar
-          image="{{ user.profileImage }}"
-          size="large"
-          shape="circle"
-          (click)="menu.toggle($event)"
-          [ngStyle]="{
-            cursor: 'pointer',
-            fontSize: '13px',
-            fontWeight: 'bold'
-          }"
-        ></p-avatar>
       </div>
       <p-menu #menu [model]="items" [popup]="true"> </p-menu>
     </ng-container>

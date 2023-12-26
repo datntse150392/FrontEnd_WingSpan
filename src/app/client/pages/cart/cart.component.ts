@@ -32,6 +32,7 @@ export class CartComponent implements OnInit, OnDestroy {
   totalPriceBeforeDiscount: number | any = 0;
   payPalConfig?: IPayPalConfig;
   vouchersWithTypeNormal: Voucher[] | undefined;
+  visibleDialogVoucher: boolean = false;
   selectedVoucher: Voucher | undefined;
   removeSelectedVoucher: number | undefined;
 
@@ -234,7 +235,10 @@ export class CartComponent implements OnInit, OnDestroy {
                 this.selectedVoucher = undefined;
                 this.totalPriceBeforeDiscount = 0;
                 this.totalPrice = 0;
-              } else if (this.cart.items.length > 1) this.totalPrice -= amount;
+              } else if (this.cart.items.length > 1) {
+                this.totalPrice -= amount;
+                this.totalPriceBeforeDiscount -= amount;
+              }
             }
           },
           error: (err: Error) => {
@@ -264,5 +268,36 @@ export class CartComponent implements OnInit, OnDestroy {
       this.totalPriceBeforeDiscount = 0;
       this.selectedVoucher = undefined;
     }
+  }
+
+  /**
+   * Logic Func: Open Dialog Voucher
+   */
+  showDialogVoucher() {
+    this.visibleDialogVoucher = true;
+  }
+
+  /**
+   * Logic Func: Selected Voucher
+   */
+  setSelectedVoucher(voucher: Voucher) {
+    this.visibleDialogVoucher = false;
+    this.selectedVoucher = voucher;
+    if (this.selectedVoucher === null) {
+      this.totalPriceBeforeDiscount =
+        this.totalPriceBeforeDiscount + this.removeSelectedVoucher;
+    } else if (this.selectedVoucher) {
+      this.totalPriceBeforeDiscount =
+        this.totalPriceBeforeDiscount - (this.selectedVoucher?.discount || 0);
+      this.removeSelectedVoucher = this.selectedVoucher?.discount || 0;
+    }
+  }
+
+  /**
+   * Logic Func: Delete Voucher
+   */
+  deleteVoucher() {
+    this.selectedVoucher = undefined;
+    this.totalPriceBeforeDiscount = this.totalPrice;
   }
 }

@@ -1,128 +1,236 @@
-<div class="card">
-  <p-blockUI [blocked]="blockedUI"
-    ><p-progressSpinner></p-progressSpinner>
-  </p-blockUI>
-  <div class="pr-8 pl-8 mb-4 w-full">
-    <div class="grid flex flex-row justify-content-center">
-      <div class="p-4 custom-cart-item-main col-8 flex flex-column gap-4">
-        <h3>Giỏ hàng của bạn</h3>
-
-        <div class="custom-cart-container flex flex-column gap-5">
-          <ng-container *ngFor="let item of cart.items">
-            <div
-              class="custom-cart-content flex flex-row gap-5 justify-content-between w-full"
-            >
-              <div class="flex flex-row gap-5">
-                <img
-                  class="img-item"
-                  width="120"
-                  height="80"
-                  src="{{ item.image }}"
-                  alt="product"
-                />
-                <div class="flex align-items-center w-15rem">
-                  <p>{{ item.title }}</p>
-                </div>
-              </div>
-              <div class="flex align-items-center">
-                <p>{{ item.amount | currency : "VND" }}</p>
-              </div>
-              <div class="flex flex-row align-items-center gap-4">
-                <button
-                  (click)="deleteCart(item._id, item.amount)"
-                  pButton
-                  pRipple
-                  label="Xóa sản phẩm"
-                  class="p-button-success"
-                ></button>
-              </div></div
-          ></ng-container>
-          <p-divider></p-divider>
-          <p class="note m-0">
-            * Lưu ý rằng, sau khi thanh toán hoàn tất, bộ phận chăm sóc khách
-            hàng sẽ gửi mã khoá học đến địa chỉ email bạn đã đăng nhập trước
-            đó.<br />
-            * Chúng tôi hy vọng rằng thông báo này sẽ giúp quá trình truy cập
-            khóa học của bạn trở nên thuận lợi hơn.
-          </p>
-        </div>
-      </div>
-      <div class="col-4 pl-4 pt-0 pr-0 pb-0">
-        <div
-          class="p-4 custom-cart-item-main col-4 flex flex-column gap-4 w-full mb-3"
-        >
-          <p class="m-0">Bạn có mã khuyến mãi ?</p>
-          <div class="card flex justify-content-center">
-            <p-dropdown
-              [options]="vouchersWithTypeNormal"
-              [(ngModel)]="selectedVoucher"
-              optionLabel="name"
-              [showClear]="true"
-              placeholder="{{
-                (selectedVoucher?.discount | currency : 'VND') ||
-                  'Chọn mã khuyến mãi'
-              }}"
-              (onChange)="onVoucherChange()"
-            >
-              <div
-                class="flex align-items-center gap-2"
-                *ngIf="selectedVoucher"
-              >
-                <div>{{ selectedVoucher.discount }}</div>
-              </div>
-              <ng-template let-voucher pTemplate="item">
-                <div class="flex align-items-center gap-2">
+<h2 class="w-full">Giỏ hàng</h2>
+<ng-container *ngIf="cart.items && cart.items.length > 0; else emptyCart">
+  <div class="card">
+    <p-blockUI [blocked]="blockedUI"
+      ><p-progressSpinner></p-progressSpinner>
+    </p-blockUI>
+    <div class="mr-2 ml-2 mb-4 w-full">
+      <div class="grid flex flex-row w-full">
+        <div class="col-8 flex flex-column gap-3 p-0">
+          <div
+            class="pr-5 pl-5 gird custom-cart-item-main flex flex-row w-full"
+          >
+            <div class="col-5">
+              <p>{{ configLocal.cartItems?.count }} khóa học</p>
+            </div>
+            <div class="col-2">
+              <p>Đơn giá</p>
+            </div>
+            <div class="col-2">
+              <p>Số lượng</p>
+            </div>
+            <div class="col-2">
+              <p>Thành tiền</p>
+            </div>
+            <div class="col-1 flex align-items-center">
+              <i class="pi pi-trash ml-2"></i>
+            </div>
+          </div>
+          <div
+            class="custom-cart-container custom-cart-item-main p-4 flex flex-column gap-5"
+          >
+            <ng-container *ngFor="let item of cart.items">
+              <div class="custom-cart-content gird flex flex-row w-full">
+                <div class="col-5 flex flex-column text-center">
                   <img
-                    src="{{ voucher.image }}"
-                    style="width: 64px; height: 64px"
+                    class="img-item"
+                    width="120"
+                    height="80"
+                    src="{{ item.image }}"
+                    alt="product"
                   />
-                  <div>
-                    <p class="font-bold mb-0">
-                      Giảm {{ voucher.discount | currency : "VND" }}
-                    </p>
-                    <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
-                    <span
-                      >HSD:
-                      {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span
-                    >
+                  <div class="flex align-items-center">
+                    <p>{{ item.title }}</p>
                   </div>
                 </div>
-              </ng-template>
-            </p-dropdown>
+                <div class="col-2 flex align-items-center">
+                  <p class="font-bold">{{ item.amount | currency : "VND" }}</p>
+                </div>
+                <div class="col-2 flex align-items-center">
+                  <p>1</p>
+                </div>
+                <div class="col-2 flex align-items-center">
+                  <p [ngStyle]="{ color: 'red', 'font-weight': 'bold' }">
+                    {{ item.amount | currency : "VND" }}
+                  </p>
+                </div>
+                <div class="col-1 flex flex-row align-items-center">
+                  <i
+                    (click)="deleteCart(item._id, item.amount)"
+                    [ngStyle]="{ cursor: 'pointer' }"
+                    class="pi pi-trash"
+                  ></i>
+                </div>
+              </div>
+            </ng-container>
+            <p class="note m-0">
+              * Lưu ý rằng, sau khi thanh toán hoàn tất, bộ phận chăm sóc khách
+              hàng sẽ gửi mã khoá học đến địa chỉ email bạn đã đăng nhập trước
+              đó.<br />
+              * Chúng tôi hy vọng rằng thông báo này sẽ giúp quá trình truy cập
+              khóa học của bạn trở nên thuận lợi hơn.
+            </p>
           </div>
         </div>
-        <div
-          class="p-4 custom-cart-item-main col-4 flex flex-column gap-2 w-full"
-        >
-          <div class="flex flex-row justify-content-between align-items-center">
-            <p>Tổng tiền</p>
-            <span>{{ this.totalPrice | currency : "VND" }}</span>
+        <div class="col-4 pl-4 pt-0 pr-0 pb-0">
+          <div
+            class="p-4 custom-cart-item-main col-4 flex flex-column gap-4 w-full mb-3"
+          >
+            <div class="flex flex-row justify-content-between">
+              <p class="m-0 font-bold">WingSpan khuyến mãi</p>
+              <p class="m-0">
+                Có thể chọn {{ vouchersWithTypeNormal?.length || 0 }}
+              </p>
+            </div>
+            <ng-container *ngIf="selectedVoucher; else emptySelectVoucher">
+              <div
+                class="selected-voucher flex flex-row justify-content-between p-2"
+              >
+                <div class="flex flex-row gap-3">
+                  <img
+                    width="48"
+                    height="48"
+                    src="{{ selectedVoucher.image }}"
+                    alt="ticket"
+                  />
+                  <p class="font-bold mb-0">
+                    Giảm {{ selectedVoucher.discount | currency : "VND" }}
+                  </p>
+                </div>
+                <p class="btn" (click)="deleteVoucher()">Bỏ chọn</p>
+              </div>
+            </ng-container>
+            <ng-template #emptySelectVoucher>
+              <div
+                (click)="showDialogVoucher()"
+                class="card flex gap-2 btn-voucher align-items-center"
+              >
+                <img
+                  width="48"
+                  height="48"
+                  src="https://img.icons8.com/color/48/ticket.png"
+                  alt="ticket"
+                />
+                <p>Chọn hoặc nhập khuyến mãi khác</p>
+              </div>
+            </ng-template>
           </div>
-          <div class="flex flex-row justify-content-between align-items-center">
-            <p>Khuyến mãi</p>
-            <span>
-              {{
-                (selectedVoucher?.discount | currency : "VND") ||
-                  (0 | currency : "VND")
-              }}</span
-            >
-          </div>
-          <p-divider></p-divider>
-          <div class="flex flex-row justify-content-between align-items-center">
-            <p>Thành tiền</p>
-            <span>{{ totalPriceBeforeDiscount | currency : "VND" }}</span>
-          </div>
-          <p-divider></p-divider>
-          <div>
-            <p>Hình thức thanh toán</p>
+          <div
+            class="p-4 custom-cart-item-main col-4 flex flex-column gap-2 w-full"
+          >
             <div
-              class="flex flex-row align-items-center justify-content-center gap-5"
+              class="flex flex-row justify-content-between align-items-center"
             >
-              <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+              <p>Tổng tiền</p>
+              <span>{{ this.totalPrice | currency : "VND" }}</span>
+            </div>
+            <div
+              class="flex flex-row justify-content-between align-items-center"
+            >
+              <p>Khuyến mãi</p>
+              <span>
+                {{
+                  (selectedVoucher?.discount | currency : "VND") ||
+                    (0 | currency : "VND")
+                }}</span
+              >
+            </div>
+            <p-divider></p-divider>
+            <div
+              class="flex flex-row justify-content-between align-items-center"
+            >
+              <p>Thành tiền</p>
+              <span>{{ totalPriceBeforeDiscount | currency : "VND" }}</span>
+            </div>
+            <p-divider></p-divider>
+            <div>
+              <p>Hình thức thanh toán</p>
+              <div
+                class="flex flex-row align-items-center justify-content-center gap-5"
+              >
+                <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-container>
+<ng-template #emptyCart>
+  <div
+    class="card flex flex-column justify-content-between align-items-center empty-card"
+  >
+    <img
+      width="100"
+      height="100"
+      src="https://img.icons8.com/clouds/100/shopping-cart-loaded.png"
+      alt="shopping-cart-loaded"
+    />
+    <h3 class="m-0">Giỏ hàng trống</h3>
+    <p>Bạn tham khảo các khóa học mà WingSpan gợi ý bên dưới nha!</p>
+  </div>
+</ng-template>
+
+<!-- Dialog Using Voucher -->
+<p-dialog
+  header="Header"
+  [(visible)]="visibleDialogVoucher"
+  [modal]="true"
+  [style]="{ width: '30rem' }"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+>
+  <ng-template pTemplate="header">
+    <div class="inline-flex align-items-center justify-content-center gap-2">
+      <span class="font-bold white-space-nowrap">WingSpan Khuyến Mãi</span>
+    </div>
+  </ng-template>
+  <!-- Input Voucher -->
+  <div class="flex flex-row align-items-center justify-content-between">
+    <img
+      width="48"
+      height="48"
+      src="https://img.icons8.com/color/48/ticket.png"
+      alt="ticket"
+    />
+    <input
+      type="text"
+      class="w-16rem"
+      placeholder="Nhập mã giảm giá"
+      pInputText
+    />
+    <p-button label="Áp dụng"></p-button>
+  </div>
+  <p-divider></p-divider>
+  <!-- Select Voucher -->
+  <div>
+    <div class="flex flex-row justify-content-between align-items-center">
+      <p>Mã giảm giá</p>
+      <p [ngStyle]="{ 'font-size': '12px', 'font-weight': '300' }">
+        Áp dụng tối đa: 1
+      </p>
+    </div>
+    <ng-container *ngIf="vouchersWithTypeNormal">
+      <div
+        class="voucher-detail p-2"
+        *ngFor="let voucher of vouchersWithTypeNormal"
+      >
+        <div class="pl-4 pr-4 grid flex align-items-center">
+          <img
+            class="mr-4 col-3"
+            src="{{ voucher.image }}"
+            style="width: 64px; height: 64px"
+          />
+          <div class="col-8 flex flex-column justify-content-center">
+            <p class="font-bold mb-0 mt-0">
+              Giảm {{ voucher.discount | currency : "VND" }}
+            </p>
+            <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
+            <span>HSD: {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span>
+          </div>
+          <p class="btn" (click)="setSelectedVoucher(voucher)">Chọn</p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</p-dialog>

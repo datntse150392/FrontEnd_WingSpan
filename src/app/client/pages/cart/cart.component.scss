@@ -24,12 +24,12 @@
 
 .custom-cart-item-main-2 {
   border: 1px solid #00000079;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .custom-cart-item-main-3 {
   border: 1px solid #00000079;
-  border-radius: 10px;
+  border-radius: 5px;
   p {
     font-size: 15px;
   }
@@ -44,7 +44,7 @@
 }
 
 .img-item {
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .voucher-item {
@@ -53,5 +53,49 @@
   }
   span {
     font-size: 12px;
+  }
+}
+
+.empty-card {
+  background-color: rgb(247, 241, 241);
+  border-radius: 5px;
+}
+
+.btn-voucher {
+  color: rgb(10, 104, 255);
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.voucher-detail {
+  border: 1px solid #000;
+  border-radius: 5px;
+  span {
+    font-size: 12px;
+  }
+  .btn {
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .btn:hover {
+    color: rgb(10, 104, 255);
+    font-weight: bold;
+  }
+}
+
+.selected-voucher {
+  border: 1px solid #000;
+  border-radius: 5px;
+  span {
+    font-size: 12px;
+  }
+  .btn {
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .btn:hover {
+    color: red;
+    font-weight: bold;
   }
 }
