@@ -226,5 +226,27 @@
         Áp dụng tối đa: 1
       </p>
     </div>
+    <ng-container *ngIf="vouchersWithTypeNormal">
+      <div
+        class="voucher-detail p-2"
+        *ngFor="let voucher of vouchersWithTypeNormal"
+      >
+        <div class="pl-4 pr-4 grid flex align-items-center">
+          <img
+            class="mr-4 col-3"
+            src="{{ voucher.image }}"
+            style="width: 64px; height: 64px"
+          />
+          <div class="col-8 flex flex-column justify-content-center">
+            <p class="font-bold mb-0 mt-0">
+              Giảm {{ voucher.discount | currency : "VND" }}
+            </p>
+            <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
+            <span>HSD: {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span>
+          </div>
+          <p class="btn">Chọn</p>
+        </div>
+      </div>
+    </ng-container>
   </div>
 </p-dialog>

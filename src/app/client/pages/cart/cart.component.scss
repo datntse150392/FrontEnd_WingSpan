@@ -67,3 +67,19 @@
   font-size: 12px;
   cursor: pointer;
 }
+
+.voucher-detail {
+  border: 1px solid #000;
+  border-radius: 5px;
+  span {
+    font-size: 12px;
+  }
+  .btn {
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .btn:hover {
+    color: rgb(10, 104, 255);
+    font-weight: bold;
+  }
+}
