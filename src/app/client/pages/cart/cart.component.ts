@@ -32,6 +32,7 @@ export class CartComponent implements OnInit, OnDestroy {
   totalPriceBeforeDiscount: number | any = 0;
   payPalConfig?: IPayPalConfig;
   vouchersWithTypeNormal: Voucher[] | undefined;
+  visibleDialogVoucher: boolean = false;
   selectedVoucher: Voucher | undefined;
   removeSelectedVoucher: number | undefined;
 
@@ -264,5 +265,12 @@ export class CartComponent implements OnInit, OnDestroy {
       this.totalPriceBeforeDiscount = 0;
       this.selectedVoucher = undefined;
     }
+  }
+
+  /**
+   * Logic Func: Open Dialog Voucher
+   */
+  showDialogVoucher() {
+    this.visibleDialogVoucher = true;
   }
 }
