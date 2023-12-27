@@ -1,0 +1,36 @@
+<div class="flex flex-column gap-2">
+  <label class="font-bold text-2xl" for="title">Tiêu đề</label>
+  <input
+    pInputText
+    id="title"
+    aria-describedby="username-help"
+    [(ngModel)]="title"
+    class="mb-3"
+    [style]="{ border: 'none' }"
+    placeholder="Nhập tiêu đề"
+  />
+</div>
+<div class="card grid">
+  <div class="col-6">
+    <p-editor [(ngModel)]="content" [style]="{ height: '100vh' }"></p-editor>
+  </div>
+  <p-divider layout="vertical"></p-divider>
+  <!-- Right column displaying the content entered in the editor as plain text -->
+  <div class="col-5">
+    <h2 *ngIf="title">{{ title }}</h2>
+    <div
+      class="w-full h-full"
+      *ngIf="content"
+      [innerHTML]="sanitizeContent(content)"
+    ></div>
+  </div>
+
+  <p-button
+    *ngIf="content"
+    [routerLink]="['/new-blog']"
+    class="p-button-secondary mt-2"
+    (click)="createBlog()"
+  >
+    <span>Đăng Blog</span>
+  </p-button>
+</div>

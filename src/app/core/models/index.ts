@@ -7,3 +7,4 @@ export * from './transaction';
 export * from './shared';
 export * from './voucher';
 export * from './newFeed';
+export * from './blog';

@@ -33,6 +33,9 @@ import { FooterComponent, HeaderComponent, SidebarComponent } from './layout';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { SkeletonModule } from 'primeng/skeleton';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { EditorModule } from 'primeng/editor';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -69,6 +72,8 @@ import { SkeletonModule } from 'primeng/skeleton';
     TooltipModule,
     DialogModule,
     SkeletonModule,
+    SpeedDialModule,
+    EditorModule,
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent],
   exports: [
@@ -109,6 +114,8 @@ import { SkeletonModule } from 'primeng/skeleton';
     TooltipModule,
     DialogModule,
     SkeletonModule,
+    SpeedDialModule,
+    EditorModule,
   ],
 })
 export class SharedModule {}
