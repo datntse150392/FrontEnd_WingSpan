@@ -24,6 +24,7 @@
 <ng-template #dataTemplate>
   <div class="custom-carousel-item">
     <p-carousel
+      [autoplayInterval]="5000"
       [value]="listBillBoard"
       [numVisible]="1"
       [numScroll]="1"

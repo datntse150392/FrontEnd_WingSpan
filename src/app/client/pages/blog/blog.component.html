@@ -15,14 +15,26 @@
     <!-- Blogs | with status === true -->
     <div class="blog p-4 mt-3" *ngFor="let blog of blogs">
       <ng-container *ngIf="blog.status === true">
-        <div class="flex flex-row align-items-center">
-          <p-avatar
-            image="{{ blog.author.profileImage }}"
-            styleClass="mr-2"
-            shape="circle"
-          ></p-avatar>
-          <span>{{ blog.author.fullName }}</span>
+        <div class="flex flex-row justify-content-between align-items-center">
+          <div class="flex flex-row align-items-center">
+            <p-avatar
+              image="{{ blog.author.profileImage }}"
+              styleClass="mr-2"
+              shape="circle"
+            ></p-avatar>
+            <span>{{ blog.author.fullName }}</span>
+          </div>
+          <div>
+            <button
+              class="p-panel-header-icon p-link mr-2"
+              (click)="menu.toggle($event)"
+            >
+              <span class="pi pi-ellipsis-h"></span>
+            </button>
+            <p-menu #menu id="config_menu" [model]="items" [popup]="true" />
+          </div>
         </div>
+
         <h3
           [ngStyle]="{ cursor: 'pointer' }"
           [routerLink]="['/blog', blog._id]"
