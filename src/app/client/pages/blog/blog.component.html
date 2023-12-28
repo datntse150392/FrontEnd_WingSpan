@@ -23,7 +23,12 @@
           ></p-avatar>
           <span>{{ blog.author.fullName }}</span>
         </div>
-        <h3>{{ blog.title }}</h3>
+        <h3
+          [ngStyle]="{ cursor: 'pointer' }"
+          [routerLink]="['/blog', blog._id]"
+        >
+          {{ blog.title }}
+        </h3>
         <p>{{ calculateTimeDifference(blog.createdAt) }}</p>
       </ng-container>
     </div>

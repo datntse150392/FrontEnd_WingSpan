@@ -1,0 +1,27 @@
+<div class="card grid h-full relative">
+  <div class="col-3"></div>
+  <div *ngIf="blog" class="col-6 detail-blog">
+    <h1 class="mt-0">{{ blog.title }}</h1>
+    <div class="p-2 flex flex-row align-items-center">
+      <p-avatar
+        image="{{ blog.author.profileImage }}"
+        styleClass="mr-2"
+        shape="circle"
+        size="large"
+      ></p-avatar>
+      <div class="flex flex-column gap-2">
+        <span>{{ blog.author.fullName }}</span>
+        <p class="m-0">
+          {{ calculateTimeDifference(blog.createdAt) }}
+        </p>
+      </div>
+    </div>
+    <!-- Content -->
+    <div
+      class="w-full"
+      *ngIf="blog.content"
+      [innerHTML]="sanitizeContent(blog.content)"
+    ></div>
+    <p-divider></p-divider>
+  </div>
+</div>

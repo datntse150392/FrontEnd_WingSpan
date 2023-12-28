@@ -12,6 +12,7 @@ import {
   TransactionComponent,
   BlogComponent,
   NewBlogComponent,
+  DetailBlogComponent,
 } from './pages';
 import { SignInGuard } from '../guards/signIn.guard';
 import { AuthGuard } from '../guards/auth.guard';
@@ -58,6 +59,10 @@ const routes: Routes = [
       {
         path: 'new-blog',
         component: NewBlogComponent,
+      },
+      {
+        path: 'blog/:id',
+        component: DetailBlogComponent,
       },
     ],
   },

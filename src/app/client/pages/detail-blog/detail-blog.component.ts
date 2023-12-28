@@ -1,32 +1,38 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { Blog } from 'src/app/core/models';
 import { BlogService } from 'src/app/core/services';
+import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss'],
+  selector: 'app-detail-blog',
+  templateUrl: './detail-blog.component.html',
+  styleUrls: ['./detail-blog.component.scss'],
 })
-export class BlogComponent implements OnInit, OnDestroy {
-  blogs: Blog[] | undefined;
+export class DetailBlogComponent implements OnInit, OnDestroy {
+  blog: Blog | undefined;
 
   private detroy$ = new Subject<void>();
 
-  constructor(private blogService: BlogService) {}
+  constructor(
+    private blogService: BlogService,
+    private router: ActivatedRoute,
+    private sanitizer: DomSanitizer
+  ) {}
+
   ngOnInit(): void {
+    const blogId = this.router.snapshot.params['id'];
+
     this.blogService
-      .getAllBlogs()
+      .getDetailBlog(blogId)
       .pipe(takeUntil(this.detroy$))
       .subscribe({
         next: (res: any) => {
           if (res) {
-            this.blogs = res.data.blogs;
+            this.blog = res.data.blog;
           }
         },
-        error: (err: Error) => {
-          console.log(err);
-        },
-        complete: () => {},
       });
   }
   ngOnDestroy(): void {
@@ -34,7 +40,16 @@ export class BlogComponent implements OnInit, OnDestroy {
     this.detroy$.complete();
   }
 
+  sanitizeContent(content: any): any {
+    return this.sanitizer.bypassSecurityTrustHtml(content);
+  }
+
   calculateTimeDifference(createdAt: any) {
+    // Check if createdAt is defined
+    if (!createdAt === undefined) {
+      return 'Invalid date'; // or some default value
+    }
+
     // Convert createdAt to a JavaScript Date object
     const createdAtDate = new Date(createdAt);
 

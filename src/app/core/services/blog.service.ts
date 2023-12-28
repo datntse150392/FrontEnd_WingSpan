@@ -29,4 +29,12 @@ export class BlogService {
       headers: this.header,
     });
   }
+
+  /**
+   * Logic Call API: Get Deatil Blog by Blog-ID
+   */
+  getDetailBlog(blogId: any): Observable<any> {
+    const body = { blogId };
+    return this.httpClient.post(`${environment.apiUrl}blog/getBlogById`, body);
+  }
 }
