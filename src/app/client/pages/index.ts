@@ -12,3 +12,4 @@ export * from './sign-in/sign-in.component';
 export * from './transaction/transaction.component';
 export * from './blog/blog.component';
 export * from './new-blog/new-blog.component';
+export * from './detail-blog/detail-blog.component';

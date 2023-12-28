@@ -18,6 +18,7 @@ import { SettingComponent } from './pages/setting/setting.component';
 import { TransactionComponent } from './pages/transaction/transaction.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { NewBlogComponent } from './pages/new-blog/new-blog.component';
+import { DetailBlogComponent } from './pages/detail-blog/detail-blog.component';
 
 @NgModule({
   imports: [ClientRoutingModule, SharedModule],
@@ -35,6 +36,7 @@ import { NewBlogComponent } from './pages/new-blog/new-blog.component';
     TransactionComponent,
     BlogComponent,
     NewBlogComponent,
+    DetailBlogComponent,
   ],
   providers: [
     {
