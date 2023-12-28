@@ -102,6 +102,9 @@ Mô tả chi tiết về Màn Hình Cart Page.
 │&nbsp;&nbsp;├── app \
 │&nbsp;&nbsp;│&nbsp;&nbsp;├── client \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── pages \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── blog \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── blog.component.ts \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── blog.component.html \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── cart \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── cart.component.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── cart.component.html \
@@ -121,9 +124,15 @@ Mô tả chi tiết về Màn Hình Cart Page.
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── course-leanring-sidebar \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── course-leanring-sidebar.component.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── course-leanring-sidebar.component.html \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── detail-blog \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── detail-blog.component.ts \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── detail-blog.component.html \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── landing \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── landing.component.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── landing.component.html \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── new-blog \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── new-blog.component.ts \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── new-blog.component.html \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── profile \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── profile.component.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── profile.component.html \
@@ -143,15 +152,18 @@ Mô tả chi tiết về Màn Hình Cart Page.
 │&nbsp;&nbsp;│&nbsp;&nbsp;├── core \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── models \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── billboard.ts \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── blog.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── cart.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── course.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── index.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── shared.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── localState.ts \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── newFeed.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── transaction.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── user.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── services \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── auth.service.ts \
+│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── blog.service.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── cart.service.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── code.service.ts \
 │&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── course.service.ts \
@@ -220,10 +232,10 @@ Mô tả chi tiết về Màn Hình Cart Page.
 - Frontend: Angular
 - Backend: NodeJS, express
 - Database: MongoDB
-- Real-Time Interactions: Pusher, Firebase
+- Real-Time Interactions: Socket.io, Firebase
 - Containerization: Docker
 - Send mail with Nodemailer
-- Payment: Paypal, momo, zalopay
+- Payment: Paypal
 - GG Cloud: Login, Gmail API
      <table align="center">
               <tr>
@@ -274,10 +286,6 @@ Mô tả chi tiết về Màn Hình Cart Page.
           <td align="center" width="96">
              <img src="https://img.icons8.com/color/48/paypal.png" width="48" height="48" alt="TypeScript" />
            <br />Paypal
-         </td>
-          <td align="center" width="96">
-             <img src="https://homepage.momocdn.net/jk/momo2020/img/sud/mascot-shadow.png" width="48" height="48" alt="TypeScript" />
-           <br />Momo
          </td>
        </tr>
        <tr>
