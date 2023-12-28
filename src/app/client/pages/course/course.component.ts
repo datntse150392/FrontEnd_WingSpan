@@ -30,7 +30,6 @@ export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
     // Scroll in the head page
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    this.visibleNewFeed = true;
     /**
      * Call API Get New Feeds
      */
