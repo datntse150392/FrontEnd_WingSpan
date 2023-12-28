@@ -12,4 +12,8 @@ export class SidebarComponent {
   isHomePage(): boolean {
     return this.router.url === '/'; // hoặc đường dẫn tương ứng với trang chủ
   }
+
+  isBlogPage(): boolean {
+    return this.router.url === '/blog'; // hoặc đường dẫn tương ứng với trang chủ
+  }
 }

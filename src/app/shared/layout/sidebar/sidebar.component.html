@@ -10,7 +10,7 @@
       >Trang chủ</a
     >
   </div>
-  <div
+  <!-- <div
     class="flex flex-column align-items-center justify-content-around p-3 border-round-lg cursor-pointer hover:surface-400"
   >
     <a
@@ -18,8 +18,10 @@
       [ngStyle]="{ 'text-decoration': 'none', color: '#000' }"
       >Lộ trình</a
     >
-  </div>
+  </div> -->
   <div
+    [routerLink]="['/blog']"
+    [ngClass]="{ active: isBlogPage() }"
     class="flex flex-column align-items-center justify-content-around p-3 border-round-lg cursor-pointer hover:surface-400"
   >
     <a
@@ -28,7 +30,7 @@
       >Bài viết</a
     >
   </div>
-  <div
+  <!-- <div
     class="flex flex-column align-items-center justify-content-around p-3 border-round-lg cursor-pointer hover:surface-400"
   >
     <a
@@ -36,5 +38,5 @@
       [ngStyle]="{ 'text-decoration': 'none', color: '#000' }"
       >Chuyên ngành
     </a>
-  </div>
+  </div> -->
 </div>

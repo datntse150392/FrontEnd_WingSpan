@@ -6,3 +6,4 @@ export * from './share.service';
 export * from './temp.service';
 export * from './toast.service';
 export * from './code.service';
+export * from './blog.service';

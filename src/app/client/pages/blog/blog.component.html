@@ -1,0 +1,32 @@
+<div class="pr-8 pl-8 blog-item">
+  <div class="col-8 blog-container">
+    <!-- Heading -->
+    <div>
+      <h2 class="m-0">Bài viết nổi bật</h2>
+      <p>
+        Tổng hợp các bài viết chia sẻ về kinh nghiệm tự học lập trình online và
+        các kỹ thuật lập trình web.
+      </p>
+      <p-button [routerLink]="['/new-blog']" class="p-button-secondary">
+        <span>Viết Blog nào!</span>
+      </p-button>
+    </div>
+    <p-divider></p-divider>
+    <!-- Blogs | with status === true -->
+    <div class="blog p-4 mt-3" *ngFor="let blog of blogs">
+      <ng-container *ngIf="blog.status === true">
+        <div class="flex flex-row align-items-center">
+          <p-avatar
+            image="{{ blog.author.profileImage }}"
+            styleClass="mr-2"
+            shape="circle"
+          ></p-avatar>
+          <span>{{ blog.author.fullName }}</span>
+        </div>
+        <h3>{{ blog.title }}</h3>
+        <p>{{ calculateTimeDifference(blog.createdAt) }}</p>
+      </ng-container>
+    </div>
+  </div>
+  <div class="col-4"></div>
+</div>

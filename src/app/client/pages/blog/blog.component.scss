@@ -1,0 +1,25 @@
+.blog-item {
+  height: 100vh;
+  .blog-container {
+    h2 {
+      color: #242424;
+      font-size: 28px;
+      font-weight: 900;
+    }
+    span {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+  .blog {
+    border: 2px solid #e8e8e8;
+    border-radius: 16px;
+    span {
+      font-size: 12px;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}

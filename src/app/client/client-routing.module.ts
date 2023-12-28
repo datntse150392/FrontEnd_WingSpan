@@ -10,6 +10,8 @@ import {
   SettingComponent,
   SignInComponent,
   TransactionComponent,
+  BlogComponent,
+  NewBlogComponent,
 } from './pages';
 import { SignInGuard } from '../guards/signIn.guard';
 import { AuthGuard } from '../guards/auth.guard';
@@ -48,6 +50,14 @@ const routes: Routes = [
         path: 'myTransaction',
         component: TransactionComponent,
         canActivate: [AuthGuard],
+      },
+      {
+        path: 'blog',
+        component: BlogComponent,
+      },
+      {
+        path: 'new-blog',
+        component: NewBlogComponent,
       },
     ],
   },
