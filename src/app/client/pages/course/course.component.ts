@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, forkJoin, takeUntil } from 'rxjs';
-import { BillBoard, Course } from 'src/app/core/models';
+import { BillBoard, Course, NewFeed } from 'src/app/core/models';
 import { APIService, ShareService } from 'src/app/core/services';
 @Component({
   selector: 'app-course',
@@ -15,6 +15,8 @@ export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
   listCourses: Course[] = []; // Danh sách gốc
   responsiveOptions: any[] | undefined;
   skeleton: boolean = false;
+  newFeeds: NewFeed[] | any = {};
+  visibleNewFeed: boolean = false;
 
   private destroy$ = new Subject<void>();
 
@@ -27,6 +29,21 @@ export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.shareService.showLoading();
     // Scroll in the head page
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    this.visibleNewFeed = true;
+    /**
+     * Call API Get New Feeds
+     */
+    const getNewFeed = this.shareService
+      .getNewFeeds()
+      .pipe(takeUntil(this.destroy$));
+    getNewFeed.subscribe({
+      next: (res: any) => {
+        if (res) {
+          this.newFeeds = res.data.newFeeds;
+        }
+      },
+    });
 
     const filterCouse$ = this.APIservice.getAllCourses().pipe(
       takeUntil(this.destroy$)
@@ -85,5 +102,9 @@ export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  showDialogNewFeed() {
+    this.visibleNewFeed = true;
   }
 }
