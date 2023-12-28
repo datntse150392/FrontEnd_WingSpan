@@ -5,7 +5,7 @@ export interface Blog {
   title: String;
   content: String;
   author: User;
-  createAt: Date;
+  createdAt: Date;
   likes: Array<User>;
   comments: Array<{
     user: User;

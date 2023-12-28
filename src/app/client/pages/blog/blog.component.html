@@ -12,6 +12,21 @@
       </p-button>
     </div>
     <p-divider></p-divider>
+    <!-- Blogs | with status === true -->
+    <div class="blog p-4 mt-3" *ngFor="let blog of blogs">
+      <ng-container *ngIf="blog.status === true">
+        <div class="flex flex-row align-items-center">
+          <p-avatar
+            image="{{ blog.author.profileImage }}"
+            styleClass="mr-2"
+            shape="circle"
+          ></p-avatar>
+          <span>{{ blog.author.fullName }}</span>
+        </div>
+        <h3>{{ blog.title }}</h3>
+        <p>{{ calculateTimeDifference(blog.createdAt) }}</p>
+      </ng-container>
+    </div>
   </div>
   <div class="col-4"></div>
 </div>

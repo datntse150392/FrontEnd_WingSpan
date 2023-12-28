@@ -17,7 +17,7 @@ export class BlogService {
    * Logic Call API: Get All Blogs
    */
   getAllBlogs(): Observable<any[]> {
-    return this.httpClient.get<any[]>(`${environment.apiUrl}getBlogs`);
+    return this.httpClient.get<any[]>(`${environment.apiUrl}blog/getBlogs`);
   }
 
   /**
