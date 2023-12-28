@@ -13,6 +13,7 @@ export class NewBlogComponent implements OnDestroy {
   content: string | undefined;
   configLocal: ConfigLocal;
   title: string | undefined;
+  preview: Boolean = false;
 
   private detroy$ = new Subject<void>();
   constructor(
@@ -48,5 +49,12 @@ export class NewBlogComponent implements OnDestroy {
         },
         error: (err: Error) => console.log(err),
       });
+  };
+
+  /**
+   * Logic Toggle Preview
+   */
+  togglePreview = () => {
+    this.preview = !this.preview;
   };
 }

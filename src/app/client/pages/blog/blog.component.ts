@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { Blog } from 'src/app/core/models';
 import { BlogService } from 'src/app/core/services';
@@ -9,11 +10,21 @@ import { BlogService } from 'src/app/core/services';
 })
 export class BlogComponent implements OnInit, OnDestroy {
   blogs: Blog[] | undefined;
+  items: MenuItem[] | undefined;
 
   private detroy$ = new Subject<void>();
 
   constructor(private blogService: BlogService) {}
   ngOnInit(): void {
+    // Config items menu
+    this.items = [
+      {
+        label: '<span class="text-sm">Báo cáo bài viết</span>',
+        escape: false,
+        icon: 'pi pi-flag-fill',
+        iconClass: 'text-sm',
+      },
+    ];
     this.blogService
       .getAllBlogs()
       .pipe(takeUntil(this.detroy$))

@@ -1,37 +1,63 @@
-<div class="flex flex-column gap-2">
-  <div class="flex flex-row justify-content-between">
-    <label class="font-bold text-2xl" for="title">Tiêu đề</label>
+<ng-container *ngIf="!preview; else preViewBlog">
+  <div class="flex flex-column gap-2">
+    <div class="flex flex-row justify-content-between">
+      <label class="font-bold text-2xl" for="title">Tiêu đề</label>
+      <div class="flex flex-row gap-2">
+        <p-button
+          *ngIf="content && title"
+          [routerLink]="['/new-blog']"
+          class="p-button-secondary mt-2"
+          (click)="createBlog()"
+        >
+          <span>Xuất bản</span>
+        </p-button>
+
+        <p-button
+          *ngIf="content && title"
+          class="p-button-secondary mt-2"
+          (click)="togglePreview()"
+        >
+          <span>Xem trước</span>
+        </p-button>
+      </div>
+    </div>
+    <input
+      pInputText
+      id="title"
+      aria-describedby="username-help"
+      [(ngModel)]="title"
+      class="mb-3"
+      [style]="{ border: 'none' }"
+      placeholder="Nhập tiêu đề"
+    />
+  </div>
+  <div class="card">
+    <div>
+      <p-editor [(ngModel)]="content" [style]="{ height: '100vh' }"></p-editor>
+    </div>
+  </div>
+</ng-container>
+<ng-template #preViewBlog>
+  <div class="flex flex-row justify-content-end">
     <p-button
-      *ngIf="content"
+      *ngIf="preview"
       [routerLink]="['/new-blog']"
       class="p-button-secondary mt-2"
-      (click)="createBlog()"
+      (click)="togglePreview()"
     >
-      <span>Đăng Blog</span>
+      <span>Chỉnh sửa</span>
     </p-button>
   </div>
-  <input
-    pInputText
-    id="title"
-    aria-describedby="username-help"
-    [(ngModel)]="title"
-    class="mb-3"
-    [style]="{ border: 'none' }"
-    placeholder="Nhập tiêu đề"
-  />
-</div>
-<div class="card grid">
-  <div class="col-6">
-    <p-editor [(ngModel)]="content" [style]="{ height: '100vh' }"></p-editor>
+
+  <div class="grid">
+    <div class="col-3"></div>
+    <div class="col-6 preview-blog-container">
+      <h1 class="mb-0" *ngIf="title">{{ title }}</h1>
+      <div
+        class="w-full h-full"
+        *ngIf="content"
+        [innerHTML]="sanitizeContent(content)"
+      ></div>
+    </div>
   </div>
-  <p-divider layout="vertical"></p-divider>
-  <!-- Right column displaying the content entered in the editor as plain text -->
-  <div class="col-5">
-    <h2 *ngIf="title">{{ title }}</h2>
-    <div
-      class="w-full h-full"
-      *ngIf="content"
-      [innerHTML]="sanitizeContent(content)"
-    ></div>
-  </div>
-</div>
+</ng-template>
