@@ -8,3 +8,4 @@ export * from './shared';
 export * from './voucher';
 export * from './newFeed';
 export * from './blog';
+export * from './video';
