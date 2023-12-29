@@ -41,7 +41,7 @@
 ### Màn Hình Landing | Landing Page
 
 <div class="screenshot-container">
-  <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/ScreenIntroduce%2FnewLadningPage.png?alt=media&token=22282da4-4db5-4f3d-9159-693be70e487d" alt="Landing Page">
+  <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/ScreenIntroduce%2Fnew_landing_page.png?alt=media&token=7292cea8-256c-489a-a686-aa757b9793cb" alt="Landing Page">
 </div>
 Mô tả chi tiết về Màn Hình Landing.
 
@@ -89,7 +89,7 @@ Mô tả chi tiết về Màn Hình Video Bài Học.
 ### Màn Hình Giỏ hàng | Cart Page
 
 <div class="screenshot-container">
-  <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/ScreenIntroduce%2Fcart.png?alt=media&token=bb6d7fd0-7236-4b86-9e3e-f870d8f9ecf0" alt="Cart Page">
+  <img src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/ScreenIntroduce%2Fnew_cart_page.png?alt=media&token=20e67ec8-1422-45ae-bf8f-f1318904b482" alt="Cart Page">
 </div>
 
 Mô tả chi tiết về Màn Hình Cart Page.
