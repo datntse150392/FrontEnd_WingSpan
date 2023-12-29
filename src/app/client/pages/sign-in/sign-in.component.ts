@@ -49,7 +49,6 @@ export class SignInComponent implements OnInit {
       .subscribe((res: any) => {
         if (res && res.status === 200 && res.message === 'Not Found') {
           this.authService
-
             .signUp(this.userGG.email, this.userGG.name, this.userGG.photoUrl)
             .subscribe((res: any) => {
               try {
