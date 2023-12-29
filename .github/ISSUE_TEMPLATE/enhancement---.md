@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-**Nâng cấp mong muốni**
+**Nâng cấp mong muốn**
 [Mô tả ngắn và rõ ràng về tính năng mới hoặc cải tiến bạn muốn]
 
 **Tình trạng hiện tại**
