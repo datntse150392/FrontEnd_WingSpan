@@ -1,7 +1,11 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, forkJoin, takeUntil } from 'rxjs';
-import { BillBoard, Course, NewFeed } from 'src/app/core/models';
-import { APIService, ShareService } from 'src/app/core/services';
+import { BillBoard, Course, NewFeed, Video } from 'src/app/core/models';
+import {
+  APIService,
+  CourseAPIService,
+  ShareService,
+} from 'src/app/core/services';
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
@@ -17,12 +21,14 @@ export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
   skeleton: boolean = false;
   newFeeds: NewFeed[] | any = {};
   visibleNewFeed: boolean = false;
+  videos: Video[] | undefined;
 
   private destroy$ = new Subject<void>();
 
   constructor(
     private APIservice: APIService,
-    private shareService: ShareService
+    private shareService: ShareService,
+    private courseService: CourseAPIService
   ) {}
 
   ngOnInit(): void {
@@ -52,9 +58,17 @@ export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
       takeUntil(this.destroy$)
     );
 
+    const getVideo$ = this.courseService
+      .getVideos()
+      .pipe(takeUntil(this.destroy$));
+
     // Using forkJoin to get parallel api
-    forkJoin([filterCouse$, getAllBillBoard$]).subscribe({
-      next: ([filterCouseRes, getAllBillBoardRes]: [any, any]) => {
+    forkJoin([filterCouse$, getAllBillBoard$, getVideo$]).subscribe({
+      next: ([filterCouseRes, getAllBillBoardRes, getVideoRes]: [
+        any,
+        any,
+        any
+      ]) => {
         this.listCourses = filterCouseRes.data;
         this.filteredCoursesPE = this.listCourses
           .filter((course) => course.type === 'PE')
@@ -64,8 +78,8 @@ export class CourseComponent implements OnInit, OnDestroy, AfterViewInit {
           .sort((a, b) => a.enrollmentCount - b.enrollmentCount);
 
         this.listBillBoard = getAllBillBoardRes.data;
+        this.videos = getVideoRes.data.videos;
       },
-
       error: (err: Error) => {
         console.log(err);
       },

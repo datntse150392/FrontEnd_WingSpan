@@ -23,6 +23,15 @@ export class CourseAPIService {
       .pipe(catchError(this.handleError<any>()));
   }
 
+  /**
+   * Service Handle Call API Get Videos
+   */
+  getVideos(): Observable<any> {
+    return this.httpClient
+      .get(`${environment.apiUrl}video/getVideos`)
+      .pipe(catchError(this.handleError<any>()));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);

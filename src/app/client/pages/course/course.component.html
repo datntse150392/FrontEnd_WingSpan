@@ -156,6 +156,46 @@
       </div>
     </div>
   </div>
+
+  <!-- Các Videos nổi bật -->
+  <div class="custom-course-border">
+    <div class="flex flex-row align-items-center gap-2 custom-course-item">
+      <h1 [ngStyle]="{ color: '#242424', 'font-weight': '900' }">
+        Videos nổi bật
+      </h1>
+    </div>
+    <div class="grid">
+      <div
+        *ngFor="let video of videos; index as i"
+        class="col-3 mb-2 custom-course-container"
+      >
+        <div
+          class="course-container flex flex-wrap align-items-center justify-content-center"
+        >
+          <img
+            class="img-hover border-round-xl w-full"
+            alt="Card"
+            src="{{ video.image }}"
+          />
+          <p-button
+            class="register-button flipup animation-duration-500"
+            [style]="{ background: '#fff', border: '2px solid #fff' }"
+          >
+            <a
+              [href]="'https://youtu.be/' + video.video"
+              class="ml-2 font-bold"
+              target="_blank"
+              [style]="{ color: '#000' }"
+              >Xem Video</a
+            ></p-button
+          >
+        </div>
+        <div class="flex flex-column justify-content-start">
+          <p class="font-bold mb-0">{{ video.title }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </ng-template>
 
 <!-- Icon New Feeds -->
