@@ -7,4 +7,8 @@ export interface User {
   dateOfBirth?: string;
   enrolledCourses?: [];
   createAt?: Date;
+  is_admin?: Boolean;
+  is_teacher?: Boolean;
+  is_comment_blocked?: Boolean;
+  is_blocked?: Boolean;
 }
