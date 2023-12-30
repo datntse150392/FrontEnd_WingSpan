@@ -34,7 +34,6 @@
             <p-menu #menu id="config_menu" [model]="items" [popup]="true" />
           </div>
         </div>
-
         <h3
           [ngStyle]="{ cursor: 'pointer' }"
           [routerLink]="['/blog', blog._id]"
@@ -43,6 +42,16 @@
         </h3>
         <p>{{ calculateTimeDifference(blog.createdAt) }}</p>
       </ng-container>
+    </div>
+    <div class="card flex justify-content-center">
+      <div class="card flex justify-content-center">
+        <p-paginator
+          (onPageChange)="onPageChange($event)"
+          [first]="currentPage"
+          [rows]="limit"
+          [totalRecords]="totalBlogs"
+        ></p-paginator>
+      </div>
     </div>
   </div>
   <div class="col-4"></div>

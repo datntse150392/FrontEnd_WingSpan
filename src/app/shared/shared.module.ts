@@ -36,6 +36,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { EditorModule } from 'primeng/editor';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
   imports: [
     CommonModule,
@@ -75,6 +76,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     SpeedDialModule,
     EditorModule,
     SplitButtonModule,
+    PaginatorModule,
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent],
   exports: [
@@ -118,6 +120,7 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     SpeedDialModule,
     EditorModule,
     SplitButtonModule,
+    PaginatorModule,
   ],
 })
 export class SharedModule {}
