@@ -21,6 +21,7 @@
   </div> -->
   <div
     [routerLink]="['/blog']"
+    [queryParams]="{ page: 1 }"
     [ngClass]="{ active: isBlogPage() }"
     class="flex flex-column align-items-center justify-content-around p-3 border-round-lg cursor-pointer hover:surface-400"
   >

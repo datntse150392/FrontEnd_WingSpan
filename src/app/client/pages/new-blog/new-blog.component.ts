@@ -44,7 +44,7 @@ export class NewBlogComponent implements OnDestroy {
       .subscribe({
         next: (res) => {
           if (res) {
-            this.router.navigate(['/blog']);
+            this.router.navigate(['/blog'], { queryParams: { page: 1 } });
           }
         },
         error: (err: Error) => console.log(err),

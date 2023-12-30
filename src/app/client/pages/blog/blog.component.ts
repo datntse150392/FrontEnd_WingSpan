@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 import { Blog } from 'src/app/core/models';
@@ -10,12 +11,25 @@ import { BlogService } from 'src/app/core/services';
 })
 export class BlogComponent implements OnInit, OnDestroy {
   blogs: Blog[] | undefined;
+  currentPage!: number;
+  // Limit data per page
+  limit: number = 5;
+  totalBlogs!: number;
   items: MenuItem[] | undefined;
 
   private detroy$ = new Subject<void>();
 
-  constructor(private blogService: BlogService) {}
+  constructor(
+    private blogService: BlogService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) {}
   ngOnInit(): void {
+    // Scroll in the head page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Get Current Page
+    this.currentPage = +this.activatedRoute.snapshot.queryParams['page'];
+
     // Config items menu
     this.items = [
       {
@@ -25,13 +39,27 @@ export class BlogComponent implements OnInit, OnDestroy {
         iconClass: 'text-sm',
       },
     ];
+
+    // Get Blogs
+    this.getBlogs(this.currentPage);
+  }
+  ngOnDestroy(): void {
+    this.detroy$.next();
+    this.detroy$.complete();
+  }
+
+  /**
+   * Logic Call API: Get Blogs
+   */
+  getBlogs(currentPage: number) {
     this.blogService
-      .getAllBlogs()
+      .getAllBlogs(currentPage)
       .pipe(takeUntil(this.detroy$))
       .subscribe({
         next: (res: any) => {
-          if (res) {
+          if (res.status === 200) {
             this.blogs = res.data.blogs;
+            this.totalBlogs = res.pageInfo.totalBlogs;
           }
         },
         error: (err: Error) => {
@@ -40,11 +68,10 @@ export class BlogComponent implements OnInit, OnDestroy {
         complete: () => {},
       });
   }
-  ngOnDestroy(): void {
-    this.detroy$.next();
-    this.detroy$.complete();
-  }
 
+  /**
+   * Logic: Calculate the time difference between the current time and the time the blog was created
+   */
   calculateTimeDifference(createdAt: any) {
     // Convert createdAt to a JavaScript Date object
     const createdAtDate = new Date(createdAt);
@@ -82,5 +109,16 @@ export class BlogComponent implements OnInit, OnDestroy {
     } else {
       return seconds === 1 ? '1 giây trước' : seconds + ' giây trước';
     }
+  }
+
+  /**
+   * Logic Func: On Page Change [Pagination]
+   */
+  onPageChange(event: any) {
+    const currentPage = event.page + 1;
+    this.router.navigate(['/blog'], { queryParams: { page: currentPage } });
+    this.getBlogs(currentPage);
+    // Scroll in the head page
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
