@@ -1,0 +1,20 @@
+.custom-chat-room-border {
+  padding-left: 96px;
+  padding-right: 96px;
+}
+
+.register-button {
+  display: none;
+  position: absolute;
+  /* Các thuộc tính khác */
+}
+.chat-room-container:hover {
+  .register-button {
+    display: block;
+  }
+  img {
+    opacity: 0.4; /* Điều chỉnh độ trong suốt của hình ảnh */
+  }
+}
+
+/* Media query for screens 600px or smaller (typical mobile devices) */

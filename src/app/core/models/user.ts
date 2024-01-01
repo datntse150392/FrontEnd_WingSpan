@@ -11,4 +11,5 @@ export interface User {
   is_teacher?: Boolean;
   is_comment_blocked?: Boolean;
   is_blocked?: Boolean;
+  room?: [];
 }
