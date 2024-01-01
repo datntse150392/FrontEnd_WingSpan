@@ -1,0 +1,33 @@
+.room-item {
+  height: 100vh;
+  background: rgba(128, 128, 128, 0.206);
+  .room-sidebar {
+    background: #fff;
+    .logo {
+      display: flex;
+      justify-content: center;
+      img {
+        width: 10rem;
+      }
+    }
+  }
+  .room-box-chat {
+    height: 100%;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    .rom-box-input {
+      bottom: 0;
+    }
+    .rom-box-detail {
+      p {
+        font-size: 12px;
+      }
+      .chat-box-person {
+        background: #ccc;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    }
+  }
+}

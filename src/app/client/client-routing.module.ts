@@ -13,10 +13,12 @@ import {
   BlogComponent,
   NewBlogComponent,
   DetailBlogComponent,
+  RoomComponent,
 } from './pages';
 import { SignInGuard } from '../guards/signIn.guard';
 import { AuthGuard } from '../guards/auth.guard';
 import { CanLearnCourseGuard } from '../guards/can-learn-course.guard';
+import { ChatRoomComponent } from './pages/chat-room/chat-room.component';
 const routes: Routes = [
   {
     path: '',
@@ -65,12 +67,20 @@ const routes: Routes = [
         path: 'blog/:id',
         component: DetailBlogComponent,
       },
+      {
+        path: 'chatRoom',
+        component: ChatRoomComponent,
+      },
     ],
   },
   {
     path: 'auth/signIn',
     component: SignInComponent,
     canActivate: [SignInGuard],
+  },
+  {
+    path: 'chatRoom/:chatRoomId',
+    component: RoomComponent,
   },
 ];
 

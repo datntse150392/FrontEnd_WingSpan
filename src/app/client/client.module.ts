@@ -19,6 +19,8 @@ import { TransactionComponent } from './pages/transaction/transaction.component'
 import { BlogComponent } from './pages/blog/blog.component';
 import { NewBlogComponent } from './pages/new-blog/new-blog.component';
 import { DetailBlogComponent } from './pages/detail-blog/detail-blog.component';
+import { ChatRoomComponent } from './pages/chat-room/chat-room.component';
+import { RoomComponent } from './pages/room/room.component';
 
 @NgModule({
   imports: [ClientRoutingModule, SharedModule],
@@ -37,6 +39,8 @@ import { DetailBlogComponent } from './pages/detail-blog/detail-blog.component';
     BlogComponent,
     NewBlogComponent,
     DetailBlogComponent,
+    ChatRoomComponent,
+    RoomComponent,
   ],
   providers: [
     {
