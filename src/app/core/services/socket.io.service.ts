@@ -11,6 +11,7 @@ export class SocketService {
 
   constructor(private httpClient: HttpClient) {
     this.socket = io('https://ongbutdicodev1.onrender.com');
+    // this.socket = io('http://localhost:5000');
   }
 
   joinRoom(roomId: number, userId: any) {
