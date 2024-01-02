@@ -1,44 +1,62 @@
+$white-color: #fff;
+$light-gray-color: #ccc;
+$chat-background: rgba(128, 128, 128, 0.206);
+$sidebar-background: $white-color;
+$chat-box-background: $white-color;
+$font-small: 12px;
+$border-radius-general: 5px;
+
 .room-item {
   height: 100vh;
-  background: rgba(128, 128, 128, 0.206);
+  background: $chat-background;
+
   .room-sidebar {
-    background: #fff;
+    background: $sidebar-background;
+
     .logo {
       display: flex;
       justify-content: center;
+
       img {
         width: 10rem;
       }
     }
   }
+
   .room-box-chat {
     height: 95%;
-    background: #fff;
-    border: 1px solid #fff;
-    border-radius: 5px;
+    // background: $chat-box-background;
+    border: 1px solid $white-color;
+    border-radius: $border-radius-general;
+
     .rom-box-input {
       bottom: 0;
     }
+
     .rom-box-detail {
       width: 100%;
       height: 100%;
+
       p {
-        font-size: 12px;
+        font-size: $font-small;
       }
+
       .room-box-container {
         overflow-y: scroll;
         width: 100%;
         height: 100%;
       }
+
       .chat-box-person {
         width: auto;
-        background: #ccc;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        background: $light-gray-color;
+        border: 1px solid $light-gray-color;
+        border-radius: $border-radius-general;
       }
     }
   }
 }
+
 .room-chat {
   height: 100%;
 }

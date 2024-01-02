@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfigLocal } from 'src/app/core/models';
 import { ShareService } from 'src/app/core/services';
@@ -10,6 +10,8 @@ import { SocketService } from 'src/app/core/services/socket.io.service';
   styleUrls: ['./room.component.scss'],
 })
 export class RoomComponent implements OnInit {
+  @ViewChild('chatContainer') private chatContainer!: ElementRef;
+
   configLocal!: ConfigLocal;
   userId: String | undefined;
   messages: any[] = [];
@@ -76,7 +78,7 @@ export class RoomComponent implements OnInit {
     this.chatService.getMessagesHistory(roomId).subscribe((res: any) => {
       if (res.status === 200) {
         this.messagesHistory = res.data;
-        console.log(this.messagesHistory);
+        this.scrollToBottom();
       }
     });
   }
@@ -92,5 +94,15 @@ export class RoomComponent implements OnInit {
           console.log(res.data);
         }
       });
+  }
+
+  /**
+   *
+   */
+  scrollToBottom(): void {
+    try {
+      this.chatContainer.nativeElement.scrollTop =
+        this.chatContainer.nativeElement.scrollHeight;
+    } catch (err) {}
   }
 }
