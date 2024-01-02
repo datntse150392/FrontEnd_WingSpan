@@ -9,7 +9,9 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ConfigLocal } from 'src/app/core/models';
+import { ChatRoom } from 'src/app/core/models/chatRoom';
 import { ShareService } from 'src/app/core/services';
+import { ChatService } from 'src/app/core/services/chat.service';
 import { SocketService } from 'src/app/core/services/socket.io.service';
 
 @Component({
@@ -21,6 +23,7 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
 
   configLocal!: ConfigLocal;
+  chatRoom: ChatRoom[] = [];
   userId: String | undefined;
   messages: any[] = [];
   newMessage = '';
@@ -32,15 +35,17 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
   private subscriptions = new Subscription();
   private shouldScrollToBottom = false;
   constructor(
-    private chatService: SocketService,
+    private socketService: SocketService,
     private shareService: ShareService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private chatService: ChatService
   ) {}
 
   ngOnInit(): void {
     this.setupRoom();
     this.setupUser();
     this.listenForMessages();
+    this.getRooms();
   }
 
   ngOnDestroy(): void {
@@ -55,11 +60,20 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
 
+  private getRooms() {
+    const getRoomsSub = this.chatService.getRooms().subscribe((res: any) => {
+      if (res.status === 200) {
+        this.chatRoom = res.data;
+      }
+    });
+    this.subscriptions.add(getRoomsSub);
+  }
+
   private setupRoom(): void {
     const routeSub = this.activeRoute.params.subscribe((params) => {
       this.roomId = +params['chatRoomId'];
       if (this.roomId) {
-        this.chatService.joinRoom(this.roomId, this.userName);
+        this.socketService.joinRoom(this.roomId, this.userName);
         this.inRoom = true;
         this.getMessagesHistory(this.roomId);
       }
@@ -73,7 +87,7 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   private listenForMessages(): void {
-    const msgSub = this.chatService.getMessages().subscribe((data: any) => {
+    const msgSub = this.socketService.getMessages().subscribe((data: any) => {
       if (data.userId === this.userId) {
         this.saveMessages(
           this.roomId,
@@ -93,14 +107,14 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   joinRoom() {
     if (this.roomId && this.userName) {
-      this.chatService.joinRoom(this.roomId, this.userName);
+      this.socketService.joinRoom(this.roomId, this.userName);
       this.inRoom = true;
     }
   }
 
   sendMessage() {
     if (this.inRoom) {
-      this.chatService.sendMessage(this.roomId, this.userId, this.newMessage);
+      this.socketService.sendMessage(this.roomId, this.userId, this.newMessage);
       this.newMessage = '';
     }
   }
@@ -109,7 +123,7 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
    * Logic Call API: Get Messages History
    */
   getMessagesHistory(roomId: number) {
-    this.chatService.getMessagesHistory(roomId).subscribe((res: any) => {
+    this.socketService.getMessagesHistory(roomId).subscribe((res: any) => {
       if (res.status === 200) {
         this.messagesHistory = res.data;
         this.shouldScrollToBottom = true; // Set the flag to scroll after view checks
@@ -121,7 +135,7 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
    * Logic Call API: Save messages
    */
   saveMessages(roomId: number, userId: any, timestamp: any, message: string) {
-    this.chatService
+    this.socketService
       .saveMessages(roomId, userId, timestamp, message)
       .subscribe((res: any) => {
         if (res.status === 200) {
@@ -137,6 +151,8 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
     try {
       this.chatContainer.nativeElement.scrollTop =
         this.chatContainer.nativeElement.scrollHeight;
-    } catch (err) {}
+    } catch (err) {
+      console.error(err);
+    }
   }
 }
