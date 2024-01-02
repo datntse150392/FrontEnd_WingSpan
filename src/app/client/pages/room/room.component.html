@@ -1,83 +1,121 @@
-<div *ngIf="inRoom">
-  <div class="grid room-item">
-    <!-- Sidebar -->
-    <div class="col-2 p-4 flex flex-column align-items-center room-sidebar">
-      <!-- Logo -->
-      <div [routerLink]="['/']" class="logo">
+<div *ngIf="inRoom" class="grid m-0 p-0 room-item">
+  <!-- Sidebar -->
+  <div class="col-3 p-4 flex flex-column align-items-center room-sidebar">
+    <!-- Logo -->
+    <div
+      [ngStyle]="{
+      cursor: 'pointer',
+    }"
+      [routerLink]="['/']"
+      class="logo mb-2"
+    >
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2FThi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn.svg?alt=media&token=e1e5cb09-f411-400d-bbdf-720f7eee1a70"
+      />
+    </div>
+    <div class="flex flex-row align-items-center gap-2">
+      <p-avatar
+        image="{{ configLocal.userInfo.profileImage }}"
+        size="normal"
+        shape="circle"
+        [ngStyle]="{
+          cursor: 'pointer',
+          fontSize: '13px',
+          fontWeight: 'bold'
+        }"
+      ></p-avatar>
+      <p>{{ configLocal.userInfo.fullName }}</p>
+    </div>
+    <p-divider class="w-full"></p-divider>
+    <!-- Another Room -->
+    <ng-container *ngFor="let room of chatRoom">
+      <div
+        class="w-full flex flex-row gap-2 mt-2 mb-2 align-items-center another-chat-room"
+        [routerLink]="['/chatRoom', room._id]"
+        [ngStyle]="{
+          cursor: 'pointer',
+        }"
+      >
         <img
-          src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2FThi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn.svg?alt=media&token=e1e5cb09-f411-400d-bbdf-720f7eee1a70"
+          width="50"
+          height="50"
+          src="https://img.icons8.com/bubbles/50/chat.png"
+          alt="chat"
         />
+        <div>
+          <h4 class="m-0">{{ room.name }}</h4>
+          <div class="flex flex-row gap-2 align-items-center">
+            <i class="pi pi-circle-fill" style="color: green; size: 10px"></i>
+            <span>Đang hoạt động</span>
+          </div>
+        </div>
       </div>
-      <h3 class="mb-0">Phòng Chuyên Ngành 1</h3>
-      <p-divider class="w-full"></p-divider>
-      <!-- Menu -->
-      <div>
-        <div class="flex flex-row align-items-center gap-2">
-          <p-avatar
-            image="{{ configLocal.userInfo.profileImage }}"
-            size="large"
-            shape="circle"
-            [ngStyle]="{
-              cursor: 'pointer',
-              fontSize: '13px',
-              fontWeight: 'bold'
-            }"
-          ></p-avatar>
-          <p>{{ configLocal.userInfo.fullName }}</p>
+    </ng-container>
+  </div>
+
+  <!-- Box Chat Detail -->
+  <div class="col-9 p-5 room-chat">
+    <!-- Title -->
+    <div class="pb-2">
+      <h2 class="m-0">Phòng Chuyên Ngành {{ roomId }}</h2>
+      <div class="flex flex-row gap-2 align-items-center">
+        <i class="pi pi-circle-fill" style="color: green"></i>
+        <span>Đang hoạt động</span>
+      </div>
+    </div>
+
+    <!-- Detail -->
+    <div class="room-box-chat flex flex-column">
+      <div class="flex gap-2 rom-box-detail">
+        <div
+          class="p-2 flex flex-column gap-2 room-box-container"
+          #chatContainer
+        >
+          <ng-container *ngFor="let mes of messagesHistory">
+            <ng-container *ngIf="mes.user._id === userId; else everyone">
+              <div
+                class="flex flex-row justify-content-end"
+                [ngStyle]="{ 'padding-left': '80%' }"
+              >
+                <!-- Message -->
+                <p class="mb-0 chat-box-person-right">
+                  {{ mes.message }}
+                </p>
+              </div>
+            </ng-container>
+            <ng-template #everyone>
+              <div class="flex flex-row gap-2">
+                <p-avatar
+                  image="{{ mes.user.profileImage }}"
+                  size="large"
+                  shape="circle"
+                ></p-avatar>
+                <div class="flex flex-column">
+                  <p class="title">{{ mes.user.fullName }}</p>
+                  <!-- Message -->
+                  <div class="flex flex-column gap-2">
+                    <p class="m-0 chat-box-person">
+                      {{ mes.message }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
         </div>
       </div>
     </div>
 
-    <!-- Box Chat Detail -->
-
-    <div class="col-10 p-6 room-chat">
-      <div class="room-box-chat flex flex-column">
-        <div class="p-3 flex gap-2 rom-box-detail">
-          <div class="p-2 flex flex-column room-box-container" #chatContainer>
-            <ng-container *ngFor="let mes of messagesHistory">
-              <ng-container *ngIf="mes.user._id === userId; else everyone">
-                <div
-                  class="flex flex-row gap-2 justify-content-end"
-                  [ngStyle]="{ 'padding-left': '80%' }"
-                >
-                  <!-- Message -->
-                  <p class="p-2 mb-0 chat-box-person">
-                    {{ mes.message }}
-                  </p>
-                </div>
-              </ng-container>
-              <ng-template #everyone>
-                <div class="flex flex-row gap-2">
-                  <p-avatar
-                    image="{{ mes.user.profileImage }}"
-                    size="large"
-                    shape="circle"
-                  ></p-avatar>
-                  <div class="flex flex-column">
-                    <p>{{ mes.user.fullName }}</p>
-                    <!-- Message -->
-                    <div class="flex flex-column gap-2">
-                      <p class="m-0 p-2 chat-box-person">
-                        {{ mes.message }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </ng-template>
-            </ng-container>
-          </div>
-        </div>
-        <div class="pt-3 rom-box-input w-full">
-          <input
-            (keyup.enter)="sendMessage()"
-            [(ngModel)]="newMessage"
-            pInputText
-            type="text"
-            class="p-inputtext-sm w-full"
-            placeholder="Aa"
-          />
-        </div>
-      </div>
+    <!-- Input Form -->
+    <div class="rom-box-input w-full p-2">
+      <input
+        (keyup.enter)="sendMessage()"
+        [(ngModel)]="newMessage"
+        pInputText
+        type="text"
+        class="p-inputtext-sm w-full"
+        placeholder="Aa"
+      />
     </div>
   </div>
 </div>

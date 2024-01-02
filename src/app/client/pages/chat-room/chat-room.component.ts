@@ -33,7 +33,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     this.chatService.getRooms().subscribe((res: any) => {
       if (res.status === 200) {
         this.chatRoom = res.data;
-        console.log(this.chatRoom);
       }
     });
   }
@@ -42,6 +41,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     this.detroy$.next();
     this.detroy$.complete();
   }
+
   joinRoom(roomId: any, userId: any) {
     if (roomId && userId) {
       this.chatService.joinRoom(roomId, userId);

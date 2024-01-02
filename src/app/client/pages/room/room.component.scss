@@ -1,62 +1,91 @@
 $white-color: #fff;
+$dark-background-color: #1c1e21;
 $light-gray-color: #ccc;
 $chat-background: rgba(128, 128, 128, 0.206);
 $sidebar-background: $white-color;
 $chat-box-background: $white-color;
 $font-small: 12px;
-$border-radius-general: 5px;
+$border-radius-general: 18px;
 
 .room-item {
   height: 100vh;
-  background: $chat-background;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  background: $dark-background-color;
 
   .room-sidebar {
-    background: $sidebar-background;
+    background: $dark-background-color;
+    p {
+      color: #e4e6eb;
+    }
 
     .logo {
       display: flex;
       justify-content: center;
-
       img {
         width: 10rem;
       }
     }
+    .another-chat-room {
+      h4 {
+        color: #e4e6eb;
+        font-size: 18px;
+      }
+      span {
+        color: #b0b3b8;
+      }
+    }
   }
 
-  .room-box-chat {
-    height: 95%;
-    // background: $chat-box-background;
-    border: 1px solid $white-color;
-    border-radius: $border-radius-general;
-
-    .rom-box-input {
-      bottom: 0;
+  .room-chat {
+    border-left: 1px solid #3f41427e;
+    height: 100% !important;
+    h2 {
+      color: #e4e6eb;
+    }
+    span {
+      color: #b0b3b8;
     }
 
-    .rom-box-detail {
-      width: 100%;
-      height: 100%;
+    .room-box-chat {
+      height: 88%;
 
-      p {
-        font-size: $font-small;
+      .rom-box-input {
+        bottom: 0;
       }
 
-      .room-box-container {
-        overflow-y: scroll;
+      .rom-box-detail {
         width: 100%;
         height: 100%;
-      }
+        p {
+          font-size: $font-small;
+        }
 
-      .chat-box-person {
-        width: auto;
-        background: $light-gray-color;
-        border: 1px solid $light-gray-color;
-        border-radius: $border-radius-general;
+        .room-box-container {
+          overflow-y: scroll;
+          width: 100%;
+          height: 100%;
+          .title {
+            color: #b0b3b8;
+          }
+        }
+
+        .chat-box-person {
+          width: auto;
+          background: #303030;
+          color: #ffffff;
+          border-radius: $border-radius-general;
+          font-size: 14px;
+          padding: 8px 12px;
+        }
+        .chat-box-person-right {
+          width: auto;
+          background: #0099ff;
+          color: #ffffff;
+          border-radius: $border-radius-general;
+          font-size: 14px;
+          padding: 8px 12px;
+        }
       }
     }
   }
-}
-
-.room-chat {
-  height: 100%;
 }
