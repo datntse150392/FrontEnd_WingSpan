@@ -1,23 +1,39 @@
 <div *ngIf="inRoom">
   <div class="grid room-item">
     <!-- Sidebar -->
-    <div class="col-2 p-4 room-sidebar">
+    <div class="col-2 p-4 flex flex-column align-items-center room-sidebar">
       <!-- Logo -->
       <div [routerLink]="['/']" class="logo">
         <img
           src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2FThi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn.svg?alt=media&token=e1e5cb09-f411-400d-bbdf-720f7eee1a70"
         />
       </div>
-      <h3>Phòng Chuyên Ngành 1</h3>
-      <p-divider></p-divider>
+      <h3 class="mb-0">Phòng Chuyên Ngành 1</h3>
+      <p-divider class="w-full"></p-divider>
       <!-- Menu -->
-      <div></div>
+      <div>
+        <div class="flex flex-row align-items-center gap-2">
+          <p-avatar
+            image="{{ configLocal.userInfo.profileImage }}"
+            size="large"
+            shape="circle"
+            [ngStyle]="{
+              cursor: 'pointer',
+              fontSize: '13px',
+              fontWeight: 'bold'
+            }"
+          ></p-avatar>
+          <p>{{ configLocal.userInfo.fullName }}</p>
+        </div>
+      </div>
     </div>
+
     <!-- Box Chat Detail -->
+
     <div class="col-10 p-6 room-chat">
       <div class="room-box-chat flex flex-column">
         <div class="p-3 flex gap-2 rom-box-detail">
-          <div class="p-6 flex flex-column room-box-container">
+          <div class="p-2 flex flex-column room-box-container" #chatContainer>
             <ng-container *ngFor="let mes of messagesHistory">
               <ng-container *ngIf="mes.user._id === userId; else everyone">
                 <div
