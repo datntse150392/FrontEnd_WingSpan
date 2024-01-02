@@ -14,33 +14,44 @@
       <div></div>
     </div>
     <!-- Box Chat Detail -->
-    <div class="col-10 p-6">
-      <div class="room-box-chat flex relative">
+    <div class="col-10 p-6 room-chat">
+      <div class="room-box-chat flex flex-column">
         <div class="p-3 flex gap-2 rom-box-detail">
-          <div class="flex flex-column">
+          <div class="p-6 flex flex-column room-box-container">
             <ng-container *ngFor="let mes of messagesHistory">
-              <div
-                class="flex flex-row gap-2 justify-content-center rom-box-detail-left"
-              >
-                <p-avatar
-                  image="{{ mes.user.profileImage }}"
-                  size="large"
-                  shape="circle"
-                ></p-avatar>
-                <div class="flex flex-column">
-                  <p>{{ mes.user.fullName }}</p>
+              <ng-container *ngIf="mes.user._id === userId; else everyone">
+                <div
+                  class="flex flex-row gap-2 justify-content-end"
+                  [ngStyle]="{ 'padding-left': '80%' }"
+                >
                   <!-- Message -->
-                  <div class="flex flex-column gap-2">
-                    <p class="m-0 p-2 chat-box-person">
-                      {{ mes.message }}
-                    </p>
+                  <p class="p-2 mb-0 chat-box-person">
+                    {{ mes.message }}
+                  </p>
+                </div>
+              </ng-container>
+              <ng-template #everyone>
+                <div class="flex flex-row gap-2">
+                  <p-avatar
+                    image="{{ mes.user.profileImage }}"
+                    size="large"
+                    shape="circle"
+                  ></p-avatar>
+                  <div class="flex flex-column">
+                    <p>{{ mes.user.fullName }}</p>
+                    <!-- Message -->
+                    <div class="flex flex-column gap-2">
+                      <p class="m-0 p-2 chat-box-person">
+                        {{ mes.message }}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ng-template>
             </ng-container>
           </div>
         </div>
-        <div class="p-3 absolute w-full rom-box-input">
+        <div class="pt-3 rom-box-input w-full">
           <input
             (keyup.enter)="sendMessage()"
             [(ngModel)]="newMessage"
