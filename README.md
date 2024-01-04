@@ -206,7 +206,7 @@ Mô tả chi tiết về Màn Hình Cart Page.
 
 ## 4. Tính Năng Chính | Key Features
 
-<p>TÍNH NĂNG MỚI</p>
+## TÍNH NĂNG MỚI
 
 ### Tính năng này được xây dựng sử dụng Socket.IO cho truyền tải dữ liệu mượt mà và nhanh chóng, Node.js ở phía server, Angular cho giao diện người dùng tinh tế và MongoDB để lưu trữ dữ liệu an toàn và bền vững.
 
