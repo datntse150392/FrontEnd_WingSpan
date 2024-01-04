@@ -16,6 +16,9 @@
         *ngFor="let room of chatRoom; index as i"
         class="col-3 mb-2 custom-chat-room-container"
       >
+        <div
+          class="chat-room-container flex flex-wrap align-items-center justify-content-center"
+        >
           <img
             class="img-hover border-round-xl w-full"
             alt="Card"
@@ -25,9 +28,7 @@
           <p-button
             class="register-button flipup animation-duration-500"
             [style]="{ background: '#fff', border: '2px solid #fff' }"
-            (click)="
-              configLocal ? joinRoom(room._id, configLocal.userInfo._id) : requireLogin()
-            "
+            [routerLink]="['/chatRoom', room._id]"
           >
             <span class="ml-2 font-bold" [style]="{ color: '#000' }"
               >Tham Gia Ngay</span
