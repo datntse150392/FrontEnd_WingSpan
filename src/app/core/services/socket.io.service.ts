@@ -29,6 +29,7 @@ export class SocketService {
       });
     });
   }
+
   /**
    * Logic Serivce: Get Messages History
    */

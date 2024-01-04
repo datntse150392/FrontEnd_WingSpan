@@ -42,8 +42,8 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
   ) {}
 
   ngOnInit(): void {
-    this.setupRoom();
     this.setupUser();
+    this.setupRoom();
     this.listenForMessages();
     this.getRooms();
   }
@@ -73,7 +73,7 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
     const routeSub = this.activeRoute.params.subscribe((params) => {
       this.roomId = +params['chatRoomId'];
       if (this.roomId) {
-        this.socketService.joinRoom(this.roomId, this.userName);
+        this.socketService.joinRoom(this.roomId, this.userId);
         this.inRoom = true;
         this.getMessagesHistory(this.roomId);
       }
@@ -84,23 +84,17 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
   private setupUser(): void {
     this.configLocal = this.shareService.parseData();
     this.userId = this.configLocal.userInfo._id;
+    console.log(this.userId);
   }
 
   private listenForMessages(): void {
     const msgSub = this.socketService.getMessages().subscribe((data: any) => {
-      if (data.userId === this.userId) {
-        this.saveMessages(
-          this.roomId,
-          data.userId,
-          data.timestamp,
-          data.message
-        );
-      }
+      console.log(data);
 
       // Fetch new messages after a delay to allow time for the DOM to update
       setTimeout(() => {
         this.getMessagesHistory(this.roomId);
-      }, 500);
+      }, 1000);
     });
     this.subscriptions.add(msgSub);
   }
@@ -114,6 +108,7 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   sendMessage() {
     if (this.inRoom) {
+      this.saveMessages(this.roomId, this.userId, Date.now(), this.newMessage);
       this.socketService.sendMessage(this.roomId, this.userId, this.newMessage);
       this.newMessage = '';
     }
@@ -134,12 +129,17 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
   /**
    * Logic Call API: Save messages
    */
-  saveMessages(roomId: number, userId: any, timestamp: any, message: string) {
+  saveMessages(
+    roomId: number,
+    userId: any,
+    timestamp: any = Date.now(),
+    message: string
+  ) {
     this.socketService
       .saveMessages(roomId, userId, timestamp, message)
       .subscribe((res: any) => {
         if (res.status === 200) {
-          console.log(res.data);
+          console.log(res.message, '->', message);
         }
       });
   }

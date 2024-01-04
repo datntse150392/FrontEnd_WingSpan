@@ -42,10 +42,10 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     this.detroy$.complete();
   }
 
-  joinRoom(roomId: any, userId: any) {
-    if (roomId && userId) {
-      this.chatService.joinRoom(roomId, userId);
-      this.router.navigate(['chatRoom', roomId]);
-    }
+  /**
+   * Logic Func: Require Login
+   */
+  requireLogin() {
+    this.router.navigate(['/auth/signIn']);
   }
 }

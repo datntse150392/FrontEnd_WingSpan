@@ -19,11 +19,11 @@
           alt="Card"
           src="{{ room.thumbnail }}"
         />
-        <!-- [routerLink]="['/chatRoom', room._id]" -->
+
         <p-button
           class="register-button flipup animation-duration-500"
           [style]="{ background: '#fff', border: '2px solid #fff' }"
-          (click)="joinRoom(room._id, configLocal.userInfo._id)"
+          [routerLink]="['/chatRoom', room._id]"
         >
           <span class="ml-2 font-bold" [style]="{ color: '#000' }"
             >Tham Gia Ngay</span
