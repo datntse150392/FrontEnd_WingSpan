@@ -1,34 +1,39 @@
-<div
-  class="flex flex-row align-items-center justify-content-center w-full mb-4"
->
-  <h1 [ngStyle]="{ color: '#242424', 'font-weight': '700' }">
-    CỘNG ĐỒNG HỌC VẤN WINGSPAN - NƠI TẦM NHÌN KHÔNG CÓ GIỚI HẠN
-  </h1>
-</div>
-<div class="custom-chat-room-border">
-  <div class="grid">
-    <div
-      *ngFor="let room of chatRoom; index as i"
-      class="col-3 mb-2 custom-chat-room-container"
-    >
-      <div
-        class="chat-room-container flex flex-wrap align-items-center justify-content-center"
-      >
-        <img
-          class="img-hover border-round-xl w-full"
-          alt="Card"
-          src="{{ room.thumbnail }}"
-        />
+<div>
+  <p-blockUI [blocked]="blockedUI"
+    ><p-progressSpinner></p-progressSpinner>
+  </p-blockUI>
 
-        <p-button
-          class="register-button flipup animation-duration-500"
-          [style]="{ background: '#fff', border: '2px solid #fff' }"
-          [routerLink]="['/chatRoom', room._id]"
-        >
-          <span class="ml-2 font-bold" [style]="{ color: '#000' }"
-            >Tham Gia Ngay</span
-          ></p-button
-        >
+  <div
+    class="flex flex-row align-items-center justify-content-center w-full mb-4"
+  >
+    <h1 [ngStyle]="{ color: '#242424', 'font-weight': '700' }">
+      CỘNG ĐỒNG HỌC VẤN WINGSPAN - NƠI TẦM NHÌN KHÔNG CÓ GIỚI HẠN
+    </h1>
+  </div>
+  <div class="custom-chat-room-border">
+    <div class="grid">
+      <div
+        *ngFor="let room of chatRoom; index as i"
+        class="col-3 mb-2 custom-chat-room-container"
+      >
+          <img
+            class="img-hover border-round-xl w-full"
+            alt="Card"
+            src="{{ room.thumbnail }}"
+          />
+
+          <p-button
+            class="register-button flipup animation-duration-500"
+            [style]="{ background: '#fff', border: '2px solid #fff' }"
+            (click)="
+              configLocal ? joinRoom(room._id, configLocal.userInfo._id) : requireLogin()
+            "
+          >
+            <span class="ml-2 font-bold" [style]="{ color: '#000' }"
+              >Tham Gia Ngay</span
+            ></p-button
+          >
+        </div>
       </div>
     </div>
   </div>

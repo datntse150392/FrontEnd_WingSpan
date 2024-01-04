@@ -11,6 +11,7 @@ import { ChatService } from 'src/app/core/services/chat.service';
   styleUrls: ['./chat-room.component.scss'],
 })
 export class ChatRoomComponent implements OnInit, OnDestroy {
+  blockedUI: boolean = false;
   messages: any[] = [];
   newMessage = '';
   roomId!: number;
@@ -28,13 +29,25 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.blockedUI = true;
     this.configLocal = this.shareService.parseData();
 
-    this.chatService.getRooms().subscribe((res: any) => {
-      if (res.status === 200) {
-        this.chatRoom = res.data;
-      }
-    });
+    this.chatService
+      .getRooms()
+      .pipe(takeUntil(this.detroy$))
+      .subscribe({
+        next: (res: any) => {
+          if (res.status === 200) {
+            this.chatRoom = res.data;
+          }
+        },
+        error: (err: Error) => {
+          console.log(err);
+        },
+        complete: () => {
+          this.blockedUI = false;
+        },
+      });
   }
 
   ngOnDestroy(): void {

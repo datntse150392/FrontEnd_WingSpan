@@ -109,6 +109,7 @@
     <!-- Input Form -->
     <div class="rom-box-input w-full p-2">
       <input
+        [disabled]="configLocal.userInfo.is_comment_blocked || false"
         (keyup.enter)="sendMessage()"
         [(ngModel)]="newMessage"
         pInputText

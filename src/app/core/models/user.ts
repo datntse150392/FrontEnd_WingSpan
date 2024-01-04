@@ -9,7 +9,7 @@ export interface User {
   createAt?: Date;
   is_admin?: Boolean;
   is_teacher?: Boolean;
-  is_comment_blocked?: Boolean;
+  is_comment_blocked?: boolean;
   is_blocked?: Boolean;
   room?: [];
 }

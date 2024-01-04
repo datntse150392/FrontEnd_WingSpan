@@ -206,6 +206,13 @@ Mô tả chi tiết về Màn Hình Cart Page.
 
 ## 4. Tính Năng Chính | Key Features
 
+## TÍNH NĂNG MỚI
+
+### Tính năng này được xây dựng sử dụng Socket.IO cho truyền tải dữ liệu mượt mà và nhanh chóng, Node.js ở phía server, Angular cho giao diện người dùng tinh tế và MongoDB để lưu trữ dữ liệu an toàn và bền vững.
+
+- Hệ thống bao gồm 9 phòng chat, mỗi phòng ứng với một chuyên ngành khác nhau, cho phép sinh viên dễ dàng tham gia và tương tác với các phòng học phù hợp. Trong mỗi phòng, sinh viên có thể tham gia thảo luận, chia sẻ thông tin và tài liệu học tập. 
+- Tính năng này không chỉ giúp cải thiện trải nghiệm học tập trực tuyến của sinh viên mà còn tạo điều kiện để họ kết nối và hỗ trợ lẫn nhau trong môi trường học thuật. Với khả năng quản lý thông tin và tương tác trong từng nhóm chuyên ngành, quản trị viên có thể theo dõi và điều chỉnh hệ thống một cách hiệu quả, đảm bảo môi trường học tập chất lượng và an toàn.
+
 <p>Khóa Học Đa Dạng | Diverse Courses</p>
 
 - Cung cấp nhiều khóa học lập trình web app, từ cơ bản đến nâng cao

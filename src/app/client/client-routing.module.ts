@@ -81,6 +81,7 @@ const routes: Routes = [
   {
     path: 'chatRoom/:chatRoomId',
     component: RoomComponent,
+    canActivate: [AuthGuard],
   },
 ];
 
