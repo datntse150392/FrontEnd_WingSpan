@@ -6,25 +6,48 @@ $sidebar-background: $white-color;
 $chat-box-background: $white-color;
 $font-small: 12px;
 $border-radius-general: 18px;
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 .room-item {
   height: 100vh;
   overflow-y: hidden; /* Hide vertical scrollbar */
   background: $dark-background-color;
 
-  .room-sidebar {
-    background: $dark-background-color;
-    p {
-      color: #e4e6eb;
-    }
-
+  .romm-sidebar-logo {
     .logo {
       display: flex;
       justify-content: center;
       img {
-        width: 10rem;
+        width: 8rem;
+      }
+      p {
+        color: #e4e6eb;
       }
     }
+  }
+  .room-sidebar-content {
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+
+    background: $dark-background-color;
     .another-chat-room {
       h4 {
         color: #e4e6eb;
@@ -32,7 +55,7 @@ $border-radius-general: 18px;
       }
       span {
         color: #b0b3b8;
-        font-size: 10px;
+        font-size: 12px;
       }
     }
   }
@@ -48,7 +71,7 @@ $border-radius-general: 18px;
     }
 
     .room-box-chat {
-      height: 88%;
+      height: 85%;
       .rom-box-input {
         bottom: 0;
       }

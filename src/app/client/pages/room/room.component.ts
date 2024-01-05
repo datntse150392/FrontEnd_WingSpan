@@ -111,10 +111,21 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   sendMessage() {
-    if (this.inRoom) {
-      this.saveMessages(this.roomId, this.userId, Date.now(), this.newMessage);
-      this.socketService.sendMessage(this.roomId, this.userId, this.newMessage);
-      this.newMessage = '';
+    if (this.newMessage !== '') {
+      if (this.inRoom) {
+        this.saveMessages(
+          this.roomId,
+          this.userId,
+          Date.now(),
+          this.newMessage
+        );
+        this.socketService.sendMessage(
+          this.roomId,
+          this.userId,
+          this.newMessage
+        );
+        this.newMessage = '';
+      }
     }
     this.isTyping = false;
   }
