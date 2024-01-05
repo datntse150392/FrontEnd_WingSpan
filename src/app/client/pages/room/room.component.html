@@ -1,70 +1,74 @@
 <div *ngIf="inRoom" class="grid m-0 p-0 room-item">
   <!-- Sidebar -->
-  <div class="col-2 p-4 flex flex-column align-items-center room-sidebar">
+  <div class="col-3 p-4 h-full flex flex-column align-items-center">
     <!-- Logo -->
-    <div
-      [ngStyle]="{
+    <div class="flex flex-column align-items-center romm-sidebar-logo">
+      <div
+        [ngStyle]="{
       cursor: 'pointer',
     }"
-      [routerLink]="['/']"
-      class="logo mb-2"
-    >
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2FThi%E1%BA%BFt%20k%E1%BA%BF%20ch%C6%B0a%20c%C3%B3%20t%C3%AAn.svg?alt=media&token=e1e5cb09-f411-400d-bbdf-720f7eee1a70"
-      />
-    </div>
-    <div class="flex flex-row align-items-center gap-2">
-      <p-avatar
-        image="{{ configLocal.userInfo.profileImage }}"
-        size="normal"
-        shape="circle"
-        [ngStyle]="{
-          cursor: 'pointer',
-          fontSize: '13px',
-          fontWeight: 'bold'
-        }"
-      ></p-avatar>
-      <p>{{ configLocal.userInfo.fullName }}</p>
-    </div>
-    <p-divider class="w-full"></p-divider>
-    <!-- Another Room -->
-    <ng-container *ngFor="let room of chatRoom">
-      <div
-        class="w-full flex flex-row gap-2 mt-2 mb-2 align-items-center another-chat-room"
-        [routerLink]="['/chatRoom', room._id]"
-        [ngStyle]="{
-          cursor: 'pointer',
-        }"
+        [routerLink]="['/']"
+        class="logo mb-2"
       >
         <img
-          width="50"
-          height="50"
-          src="https://img.icons8.com/bubbles/50/chat.png"
-          alt="chat"
+          src="https://firebasestorage.googleapis.com/v0/b/ongbutdicode.appspot.com/o/Logo%2FFooter%20(1).svg?alt=media&token=79d7c3e1-51e1-4896-b76d-82a0a7cbc276"
         />
-        <div>
-          <h4 class="m-0">{{ room.name }}</h4>
-          <div class="flex flex-row gap-1 align-items-center">
-            <i
-              style="font-size: 0.5rem"
-              class="pi pi-circle-fill"
-              style="color: green; size: 8px"
-            ></i>
-            <span>Đang hoạt động</span>
+      </div>
+    </div>
+    <!-- Another Room -->
+    <div class="flex flex-column align-items-center room-sidebar-content">
+      <ng-container class="chat-room-container" *ngFor="let room of chatRoom">
+        <div
+          class="w-full flex flex-row gap-1 mt-1 mb-1 align-items-center another-chat-room"
+          [routerLink]="['/chatRoom', room._id]"
+          [ngStyle]="{
+            cursor: 'pointer',
+          }"
+        >
+          <img
+            width="70"
+            height="70"
+            src="https://img.icons8.com/bubbles/70/chat.png"
+            alt="chat"
+          />
+          <div>
+            <h4 class="m-0">{{ room.name }}</h4>
+            <div class="flex flex-row gap-1 align-items-center">
+              <i
+                style="font-size: 0.5rem"
+                class="pi pi-circle-fill"
+                style="color: green; size: 8px"
+              ></i>
+              <span>Đang hoạt động</span>
+            </div>
           </div>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+    </div>
   </div>
 
   <!-- Box Chat Detail -->
-  <div class="col-10 p-5 room-chat">
+  <div class="col-9 p-4 room-chat">
     <!-- Title -->
-    <div class="pb-2">
-      <h2 class="m-0">Phòng Chuyên Ngành {{ roomId }}</h2>
-      <div class="flex flex-row gap-2 align-items-center">
-        <i class="pi pi-circle-fill" style="color: green"></i>
-        <span>Đang hoạt động</span>
+    <div class="pb-3 flex flex-row justify-content-between align-items-center">
+      <div>
+        <h2 class="m-0">Phòng Chuyên Ngành {{ roomId }}</h2>
+        <div class="flex flex-row gap-2 align-items-center">
+          <i class="pi pi-circle-fill" style="color: green"></i>
+          <span>Đang hoạt động</span>
+        </div>
+      </div>
+      <div>
+        <p-avatar
+          image="{{ configLocal.userInfo.profileImage }}"
+          size="normal"
+          shape="circle"
+          [ngStyle]="{
+            cursor: 'pointer',
+            fontSize: '13px',
+            fontWeight: 'bold'
+          }"
+        ></p-avatar>
       </div>
     </div>
 
@@ -82,7 +86,7 @@
                 [ngStyle]="{ 'padding-left': '80%' }"
               >
                 <!-- Message -->
-                <p class="mb-0 chat-box-person-right">
+                <p class="m-0 chat-box-person-right">
                   {{ mes.message }}
                 </p>
               </div>
@@ -91,13 +95,12 @@
               <div class="flex flex-row gap-2">
                 <p-avatar
                   image="{{ mes.user.profileImage }}"
-                  size="large"
+                  size="normal"
                   shape="circle"
                 ></p-avatar>
                 <div class="flex flex-column">
-                  <p class="title">{{ mes.user.fullName }}</p>
                   <!-- Message -->
-                  <div class="flex flex-column gap-2">
+                  <div class="flex flex-column">
                     <p class="m-0 chat-box-person">
                       {{ mes.message }}
                     </p>
