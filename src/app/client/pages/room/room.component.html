@@ -1,6 +1,6 @@
 <div *ngIf="inRoom" class="grid m-0 p-0 room-item">
   <!-- Sidebar -->
-  <div class="col-3 p-4 flex flex-column align-items-center room-sidebar">
+  <div class="col-2 p-4 flex flex-column align-items-center room-sidebar">
     <!-- Logo -->
     <div
       [ngStyle]="{
@@ -44,8 +44,12 @@
         />
         <div>
           <h4 class="m-0">{{ room.name }}</h4>
-          <div class="flex flex-row gap-2 align-items-center">
-            <i class="pi pi-circle-fill" style="color: green; size: 10px"></i>
+          <div class="flex flex-row gap-1 align-items-center">
+            <i
+              style="font-size: 0.5rem"
+              class="pi pi-circle-fill"
+              style="color: green; size: 8px"
+            ></i>
             <span>Đang hoạt động</span>
           </div>
         </div>
@@ -54,7 +58,7 @@
   </div>
 
   <!-- Box Chat Detail -->
-  <div class="col-9 p-5 room-chat">
+  <div class="col-10 p-5 room-chat">
     <!-- Title -->
     <div class="pb-2">
       <h2 class="m-0">Phòng Chuyên Ngành {{ roomId }}</h2>
@@ -107,11 +111,18 @@
     </div>
 
     <!-- Input Form -->
-    <div class="rom-box-input w-full p-2">
+
+    <div class="rom-box-input w-full p-2 flex relative">
+      <ng-container *ngIf="isTyping">
+        <span class="absolute" [ngStyle]="{ top: '-25%' }"
+          >Có người đang soạn tin nhắn</span
+        >
+      </ng-container>
       <input
         [disabled]="configLocal.userInfo.is_comment_blocked || false"
         (keyup.enter)="sendMessage()"
         [(ngModel)]="newMessage"
+        (input)="typingMessage()"
         pInputText
         type="text"
         class="p-inputtext-sm w-full"

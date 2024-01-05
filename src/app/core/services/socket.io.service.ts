@@ -10,8 +10,7 @@ export class SocketService {
   private socket;
 
   constructor(private httpClient: HttpClient) {
-    this.socket = io('https://ongbutdicodev1.onrender.com');
-    // this.socket = io('http://localhost:5000');
+    this.socket = io(environment.socketURL);
   }
 
   joinRoom(roomId: number, userId: any) {
@@ -26,6 +25,18 @@ export class SocketService {
     return new Observable((observer) => {
       this.socket.on('newMessage', (message) => {
         observer.next(message);
+      });
+    });
+  }
+
+  typingMessage(roomId: number, userId: any, message: string) {
+    this.socket.emit('typing', { roomId, userId, message });
+  }
+
+  getTyping() {
+    return new Observable((observer) => {
+      this.socket.on('typing', (data) => {
+        observer.next(data);
       });
     });
   }

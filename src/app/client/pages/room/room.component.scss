@@ -28,10 +28,11 @@ $border-radius-general: 18px;
     .another-chat-room {
       h4 {
         color: #e4e6eb;
-        font-size: 18px;
+        font-size: 14px;
       }
       span {
         color: #b0b3b8;
+        font-size: 10px;
       }
     }
   }
@@ -48,14 +49,13 @@ $border-radius-general: 18px;
 
     .room-box-chat {
       height: 88%;
-
       .rom-box-input {
         bottom: 0;
       }
 
       .rom-box-detail {
         width: 100%;
-        height: 100%;
+        height: 95%;
         p {
           font-size: $font-small;
         }
