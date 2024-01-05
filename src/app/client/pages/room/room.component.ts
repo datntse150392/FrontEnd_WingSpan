@@ -32,6 +32,9 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
   inRoom = false;
   messagesHistory: any[] = [];
 
+  isTyping: boolean = false;
+  isUserTyping: boolean = false;
+
   private subscriptions = new Subscription();
   private shouldScrollToBottom = false;
   constructor(
@@ -44,6 +47,7 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
   ngOnInit(): void {
     this.setupUser();
     this.setupRoom();
+    this.listenForTyping();
     this.listenForMessages();
     this.getRooms();
   }
@@ -89,7 +93,7 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   private listenForMessages(): void {
     const msgSub = this.socketService.getMessages().subscribe((data: any) => {
-      console.log(data);
+      this.isTyping = false;
 
       // Fetch new messages after a delay to allow time for the DOM to update
       setTimeout(() => {
@@ -112,9 +116,34 @@ export class RoomComponent implements OnInit, OnDestroy, AfterViewChecked {
       this.socketService.sendMessage(this.roomId, this.userId, this.newMessage);
       this.newMessage = '';
     }
+    this.isTyping = false;
   }
 
-  /**
+  private listenForTyping(): void {
+    const typingSub = this.socketService.getTyping().subscribe((data: any) => {
+      if (data.userId === this.configLocal.userInfo._id) {
+        this.isUserTyping = true;
+        this.isTyping = false;
+      } else {
+        this.isUserTyping = false;
+        this.isTyping = true;
+      }
+    });
+
+    this.subscriptions.add(typingSub);
+  }
+
+  typingMessage() {
+    if (this.inRoom) {
+      this.socketService.typingMessage(
+        this.roomId,
+        this.userId,
+        this.newMessage
+      );
+    }
+  }
+
+  /*
    * Logic Call API: Get Messages History
    */
   getMessagesHistory(roomId: number) {
