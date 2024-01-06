@@ -31,7 +31,7 @@ export class CartComponent implements OnInit, OnDestroy {
   totalPrice: number | any = 0;
   totalPriceBeforeDiscount: number | any = 0;
   payPalConfig?: IPayPalConfig;
-  vouchersWithTypeNormal: Voucher[] | undefined;
+  vouchersWithTypeNormal!: Voucher[];
   visibleDialogVoucher: boolean = false;
   selectedVoucher: Voucher | undefined;
   removeSelectedVoucher: number | undefined;

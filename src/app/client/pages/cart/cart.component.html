@@ -78,9 +78,7 @@
           >
             <div class="flex flex-row justify-content-between">
               <p class="m-0 font-bold">WingSpan khuyến mãi</p>
-              <p class="m-0">
-                Có thể chọn {{ vouchersWithTypeNormal?.length || 0 }}
-              </p>
+              <p class="m-0">Có thể chọn 1</p>
             </div>
             <ng-container *ngIf="selectedVoucher; else emptySelectVoucher">
               <div
@@ -210,47 +208,40 @@
         Áp dụng tối đa: 1
       </p>
     </div>
-    <ng-container *ngIf="vouchersWithTypeNormal">
+    <ng-container *ngIf="vouchersWithTypeNormal.length > 0; else emptyVoucher">
       <div
         class="voucher-detail p-2"
         *ngFor="let voucher of vouchersWithTypeNormal"
       >
-        <ng-container
-          *ngIf="isExpirationDate(voucher.expirationDate); else emptyVoucher"
-        >
-          <div class="pl-4 pr-4 grid flex align-items-center">
-            <img
-              class="mr-4 col-3"
-              src="{{ voucher.image }}"
-              style="width: 64px; height: 64px"
-            />
-            <div class="col-8 flex flex-column justify-content-center">
-              <p class="font-bold mb-0 mt-0">
-                Giảm {{ voucher.discount | currency : "VND" }}
-              </p>
-              <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
-              <span
-                >HSD: {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span
-              >
-            </div>
-            <p class="btn" (click)="setSelectedVoucher(voucher)">Chọn</p>
+        <div class="pl-4 pr-4 grid flex align-items-center">
+          <img
+            class="mr-4 col-3"
+            src="{{ voucher.image }}"
+            style="width: 64px; height: 64px"
+          />
+          <div class="col-8 flex flex-column justify-content-center">
+            <p class="font-bold mb-0 mt-0">
+              Giảm {{ voucher.discount | currency : "VND" }}
+            </p>
+            <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
+            <span>HSD: {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span>
           </div>
-        </ng-container>
-        <ng-template #emptyVoucher>
-          <div
-            class="empty-voucher flex flex-column align-items-center justify-content-center"
-          >
-            <img
-              src="https://salt.tikicdn.com/ts/upload/f5/6d/bb/edb1181a970ad3d39a5af4726429878a.png"
-            />
-            <p class="mb-0 font-bold">Chưa có mã khuyến mãi nào</p>
-            <span
-              >Nếu bạn có mã khuyến mãi của WingSpan, hãy nhập vào thanh bên
-              trên
-            </span>
-          </div>
-        </ng-template>
+          <p class="btn" (click)="setSelectedVoucher(voucher)">Chọn</p>
+        </div>
       </div>
     </ng-container>
+    <ng-template #emptyVoucher>
+      <div
+        class="empty-voucher flex flex-column align-items-center justify-content-center"
+      >
+        <img
+          src="https://salt.tikicdn.com/ts/upload/f5/6d/bb/edb1181a970ad3d39a5af4726429878a.png"
+        />
+        <p class="mb-0 font-bold">Chưa có mã khuyến mãi nào</p>
+        <span
+          >Nếu bạn có mã khuyến mãi của WingSpan, hãy nhập vào thanh bên trên
+        </span>
+      </div>
+    </ng-template>
   </div>
 </p-dialog>

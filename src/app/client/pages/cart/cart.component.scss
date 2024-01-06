@@ -1,5 +1,5 @@
 .custom-cart-item-main {
-  border: 1px solid #00000079;
+  border: 1px solid #78787869;
   border-radius: 5px;
 }
 
@@ -23,12 +23,12 @@
 }
 
 .custom-cart-item-main-2 {
-  border: 1px solid #00000079;
+  border: 1px solid #78787869;
   border-radius: 5px;
 }
 
 .custom-cart-item-main-3 {
-  border: 1px solid #00000079;
+  border: 1px solid #78787869;
   border-radius: 5px;
   p {
     font-size: 15px;
@@ -69,6 +69,8 @@
 }
 
 .voucher-detail {
+  border: 1px solid #78787869;
+
   border-radius: 5px;
   span {
     font-size: 12px;
@@ -84,7 +86,7 @@
 }
 
 .selected-voucher {
-  border: 1px solid #000;
+  border: 1px solid #78787869;
   border-radius: 5px;
   span {
     font-size: 12px;
@@ -102,5 +104,11 @@
 .empty-voucher {
   img {
     width: 50%;
+  }
+  p {
+    font-size: 14px;
+  }
+  span {
+    font-size: 12px;
   }
 }
