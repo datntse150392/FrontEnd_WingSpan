@@ -69,7 +69,6 @@
 }
 
 .voucher-detail {
-  border: 1px solid #000;
   border-radius: 5px;
   span {
     font-size: 12px;
@@ -97,5 +96,11 @@
   .btn:hover {
     color: red;
     font-weight: bold;
+  }
+}
+
+.empty-voucher {
+  img {
+    width: 50%;
   }
 }

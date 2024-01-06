@@ -215,21 +215,41 @@
         class="voucher-detail p-2"
         *ngFor="let voucher of vouchersWithTypeNormal"
       >
-        <div class="pl-4 pr-4 grid flex align-items-center">
-          <img
-            class="mr-4 col-3"
-            src="{{ voucher.image }}"
-            style="width: 64px; height: 64px"
-          />
-          <div class="col-8 flex flex-column justify-content-center">
-            <p class="font-bold mb-0 mt-0">
-              Giảm {{ voucher.discount | currency : "VND" }}
-            </p>
-            <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
-            <span>HSD: {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span>
+        <ng-container
+          *ngIf="isExpirationDate(voucher.expirationDate); else emptyVoucher"
+        >
+          <div class="pl-4 pr-4 grid flex align-items-center">
+            <img
+              class="mr-4 col-3"
+              src="{{ voucher.image }}"
+              style="width: 64px; height: 64px"
+            />
+            <div class="col-8 flex flex-column justify-content-center">
+              <p class="font-bold mb-0 mt-0">
+                Giảm {{ voucher.discount | currency : "VND" }}
+              </p>
+              <p class="mt-0">Số lượng {{ voucher.maxUses }}</p>
+              <span
+                >HSD: {{ voucher.expirationDate | date : "dd/MM/yyyy" }}</span
+              >
+            </div>
+            <p class="btn" (click)="setSelectedVoucher(voucher)">Chọn</p>
           </div>
-          <p class="btn" (click)="setSelectedVoucher(voucher)">Chọn</p>
-        </div>
+        </ng-container>
+        <ng-template #emptyVoucher>
+          <div
+            class="empty-voucher flex flex-column align-items-center justify-content-center"
+          >
+            <img
+              src="https://salt.tikicdn.com/ts/upload/f5/6d/bb/edb1181a970ad3d39a5af4726429878a.png"
+            />
+            <p class="mb-0 font-bold">Chưa có mã khuyến mãi nào</p>
+            <span
+              >Nếu bạn có mã khuyến mãi của WingSpan, hãy nhập vào thanh bên
+              trên
+            </span>
+          </div>
+        </ng-template>
       </div>
     </ng-container>
   </div>
