@@ -32,6 +32,7 @@ export class CartComponent implements OnInit, OnDestroy {
   totalPriceBeforeDiscount: number | any = 0;
   payPalConfig?: IPayPalConfig;
   vouchersWithTypeNormal!: Voucher[];
+  voucherCode: any;
   visibleDialogVoucher: boolean = false;
   selectedVoucher: Voucher | undefined;
   removeSelectedVoucher: number | undefined;
@@ -312,5 +313,29 @@ export class CartComponent implements OnInit, OnDestroy {
       return true;
     }
     return false;
+  }
+
+  /**
+   * Login Func: Apply Voucher By Code
+   */
+  applyVoucherByCode() {
+    if (this.voucherCode !== '') {
+      this.cartService
+        .getVoucherByCode(this.voucherCode)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (res: any) => {
+            if (res && res.status === 200) {
+              this.selectedVoucher = res.data;
+              this.totalPriceBeforeDiscount =
+                this.totalPrice - (this.selectedVoucher?.discount || 0);
+              this.removeSelectedVoucher = this.selectedVoucher?.discount || 0;
+              this.voucherCode = '';
+              this.visibleDialogVoucher = false;
+            }
+          },
+          error: (err: Error) => {},
+        });
+    }
   }
 }

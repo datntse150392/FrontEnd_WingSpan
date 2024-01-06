@@ -51,4 +51,18 @@ export class CartService {
       }
     );
   }
+
+  /**
+   * Logic Sẻvice: Get Voucher by Code
+   */
+  getVoucherByCode(code: any): Observable<any> {
+    const body = { code };
+    return this.httpClient.post(
+      `${environment.apiUrl}voucher/getVoucherByCode`,
+      body,
+      {
+        headers: this.header,
+      }
+    );
+  }
 }
