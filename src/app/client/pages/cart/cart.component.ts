@@ -215,6 +215,7 @@ export class CartComponent implements OnInit, OnDestroy {
       onClick: (data, actions) => {},
     };
   }
+
   /**
    * Logic Func: Delete Cart by cartId
    */
@@ -299,5 +300,17 @@ export class CartComponent implements OnInit, OnDestroy {
   deleteVoucher() {
     this.selectedVoucher = undefined;
     this.totalPriceBeforeDiscount = this.totalPrice;
+  }
+
+  /**
+   * Login Func: isExpirationDate
+   */
+  isExpirationDate(expirationDate: any) {
+    const now = new Date();
+    const expirationDateConvert = new Date(expirationDate);
+    if (now.getTime() < expirationDateConvert.getTime()) {
+      return true;
+    }
+    return false;
   }
 }
